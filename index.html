@@ -1,38 +1,108 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Defend Dad</title>
+  <meta charset="utf-8" />
+  <title>Defend Dad — Coming Soon</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Defend Dad equips fathers with practical tools, legal guidance, and community support to secure fair parenting time and due process." />
   <style>
-    body {
-      margin: 0;
-      background-color: #0e1117;
-      color: #e6edf3;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 40px;
+    :root{
+      --bg:#0e1117; --panel:#161b22; --line:#30363d;
+      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
     }
-    img {
-      max-width: 220px;
-      height: auto;
-    }
-    h1 {
-      font-size: 2.5em;
-      margin-top: 20px;
-      color: gold;
-    }
-    p {
-      font-size: 1.2em;
-      max-width: 600px;
-      margin: 10px auto;
-      opacity: 0.85;
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    .center{text-align:center}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    h1,h2{margin:0 0 10px 0}
+    h1{font-size:2rem;color:var(--gold)}
+    h2{font-size:1.05rem;color:var(--gold);letter-spacing:.3px;text-transform:uppercase}
+    p{margin:8px 0;line-height:1.6}
+    .muted{color:var(--muted)}
+    .logo{max-width:200px;height:auto}
+    .shield{max-width:150px;height:auto;opacity:.95}
+    .badge{display:inline-block;border:1px solid var(--line);border-radius:10px;padding:8px 12px;margin-top:12px}
+    .grid{display:grid;gap:14px}
+    @media(min-width:720px){.grid-2{grid-template-columns:1fr 1fr}}
+    .card{background:var(--panel);border:1px solid var(--gold);border-radius:12px;padding:16px;text-align:center}
+    .card .num{color:var(--gold);font-weight:800;font-size:1.8rem;display:block;margin-bottom:6px}
+    .hr{height:1px;background:var(--line);margin:18px 0;border:0}
+    a{color:#86b7ff;text-decoration:none}
   </style>
 </head>
 <body>
-  <img src="/assets/defend-dad-logo2.png" alt="Defend Dad Logo">
-  <h1>Defend Dad</h1>
-  <p>Don’t worry dads — stay strong. We will join your fight soon.</p>
+  <div class="wrap">
+
+    <!-- 1) LOGO (circle) -->
+    <div class="center">
+      <img class="logo" src="/assets/defend-dad-logo-circle.png" alt="Defend Dad circle logo" />
+      <div class="badge">We’re building in the open — nonprofit filing in progress. Features rolling out soon.</div>
+    </div>
+
+    <!-- 2) MISSION -->
+    <div class="panel">
+      <h1>Defend Dad</h1>
+      <p>Defend Dad equips fathers with practical tools, plain-language legal guidance, and community support to secure fair parenting time, child-support outcomes, and due process.</p>
+      <p class="muted">Roadmap: 1) AI self-help motions &amp; checklists • 2) Filing-fee microgrants (no income gate) • 3) Reduced-rate attorney network.</p>
+    </div>
+
+    <!-- 3) THE NUMBERS — CUSTODY -->
+    <div class="panel">
+      <h2>Custody by the Numbers</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="num">~80%</span>
+          Mothers are custodial parents (2018)
+        </div>
+        <div class="card">
+          <span class="num">~20%</span>
+          Fathers are custodial parents (2018)
+        </div>
+        <div class="card">
+          <span class="num">~65%</span>
+          Average time awarded to mothers
+        </div>
+        <div class="card">
+          <span class="num">~35%</span>
+          Average time awarded to fathers
+        </div>
+      </div>
+      <p class="muted center" style="margin-top:12px;">Nationally, dads receive ~54% as much parenting time as mothers.</p>
+    </div>
+
+    <!-- 4) THE NUMBERS — CHILD SUPPORT -->
+    <div class="panel">
+      <h2>Child Support Reality</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <span class="num">$400–$500</span>
+          Typical monthly child support (national averages)
+        </div>
+        <div class="card">
+          <span class="num">50/50</span>
+          Still often requires payments if income differs
+        </div>
+      </div>
+      <p class="muted center" style="margin-top:12px;">Even in equal-time cases, many states order support based on income formulas—often requiring the higher earner to pay.</p>
+    </div>
+
+    <!-- 5) 50/50 STANCE -->
+    <div class="panel">
+      <h2>Our 50/50 Stance</h2>
+      <p><strong>50/50 should be the default</strong> unless clear, proven cause shows otherwise. In true equal-time arrangements, <strong>no parent should pay child support to the other</strong>. Each parent fully supports their child during their own parenting time—covering housing, food, clothing, and activities—without subsidizing an ex-partner’s household.</p>
+    </div>
+
+    <!-- 6) LOGO (shield) -->
+    <div class="center">
+      <img class="shield" src="/assets/defend-dad-logo-shield.png" alt="Defend Dad shield logo" />
+    </div>
+
+    <hr class="hr" />
+    <div class="center muted">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web: <a href="https://defenddad.org">defenddad.org</a> • Shortcut: <a href="https://defend.dad">defend.dad</a>
+    </div>
+
+  </div>
 </body>
 </html>
