@@ -29,9 +29,27 @@
     .card .num{color:var(--gold);font-weight:800;font-size:1.8rem;display:block;margin-bottom:6px}
     .hr{height:1px;background:var(--line);margin:18px 0;border:0}
     a{color:#86b7ff;text-decoration:none}
+    /* Nav bar */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
+    .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color 0.2s ease}
+    .topnav a:hover{color:var(--text)}
   </style>
 </head>
 <body>
+
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+    </div>
+  </nav>
+
   <div class="wrap">
 
     <!-- 1) LOGO (circle) -->
