@@ -2,26 +2,30 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Defend Dad — Resources</title>
+  <title>Defend Dad — Resources by State</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root{
-      --bg:#0e1117; --panel:#161b22; --line:#30363d;
-      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
-    }
+    :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+    *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    a{color:#86b7ff;text-decoration:none}
+    h1,h2{color:var(--gold);margin:0 0 10px}
+    p{line-height:1.6;margin:8px 0}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
-    /* Nav bar */
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    .hr{height:1px;background:var(--line);margin:18px 0;border:0}
+    .muted{color:var(--muted)}
+
+    /* Top nav */
     .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
     .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color 0.2s ease}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s ease}
     .topnav a:hover{color:var(--text)}
-    /* Panels & content */
-    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
-    h1,h2{color:var(--gold);margin-top:0}
-    .states{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:20px}
-    .state{padding:6px 10px;border:1px solid var(--line);border-radius:8px;text-align:center}
-    .muted{color:var(--muted)}
+
+    /* State grid */
+    .states{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
+    .state{display:block;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);background:#131820}
+    .state:hover{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
   </style>
 </head>
 <body>
@@ -38,86 +42,86 @@
     </div>
   </nav>
 
-  <!-- Page Content -->
   <div class="wrap">
     <div class="panel">
       <h1>Resources by State</h1>
-      <p><strong>Sorry Dads</strong> — we’re not there yet to join your fight, but we want to be. Know that we are rooting for you and working to join your fight as soon as we can.</p>
-      <p class="muted">Select your state below — in the future, each will link to relevant custody, child support, and fathers’ rights information.</p>
+      <p class="muted">Choose your state to see official courts, child support, forms, and self-help links. (Nationwide resources are automatically included on each state page.)</p>
 
       <div class="states">
-        <div class="state">Alabama</div>
-        <div class="state">Alaska</div>
-        <div class="state">Arizona</div>
-        <div class="state">Arkansas</div>
-        <div class="state">California</div>
-        <div class="state">Colorado</div>
-        <div class="state">Connecticut</div>
-        <div class="state">Delaware</div>
-        <div class="state">Florida</div>
-        <div class="state">Georgia</div>
-        <div class="state">Hawaii</div>
-        <div class="state">Idaho</div>
-        <div class="state">Illinois</div>
-        <div class="state">Indiana</div>
-        <div class="state">Iowa</div>
-        <div class="state">Kansas</div>
-        <div class="state">Kentucky</div>
-        <div class="state">Louisiana</div>
-        <div class="state">Maine</div>
-        <div class="state">Maryland</div>
-        <div class="state">Massachusetts</div>
-        <div class="state">Michigan</div>
-        <div class="state">Minnesota</div>
-        <div class="state">Mississippi</div>
-        <div class="state">Missouri</div>
-        <div class="state">Montana</div>
-        <div class="state">Nebraska</div>
-        <div class="state">Nevada</div>
-        <div class="state">New Hampshire</div>
-        <div class="state">New Jersey</div>
-        <div class="state">New Mexico</div>
-        <div class="state">New York</div>
-        <div class="state">North Carolina</div>
-        <div class="state">North Dakota</div>
-        <div class="state">Ohio</div>
-        <div class="state">Oklahoma</div>
-        <div class="state">Oregon</div>
-        <div class="state">Pennsylvania</div>
-        <div class="state">Rhode Island</div>
-        <div class="state">South Carolina</div>
-        <div class="state">South Dakota</div>
-        <div class="state">Tennessee</div>
-        <div class="state">Texas</div>
-        <div class="state">Utah</div>
-        <div class="state">Vermont</div>
-        <div class="state">Virginia</div>
-        <div class="state">Washington</div>
-        <div class="state">West Virginia</div>
-        <div class="state">Wisconsin</div>
-        <div class="state">Wyoming</div>
+        <a class="state" href="/resources/state.html?state=alabama">Alabama</a>
+        <a class="state" href="/resources/state.html?state=alaska">Alaska</a>
+        <a class="state" href="/resources/state.html?state=arizona">Arizona</a>
+        <a class="state" href="/resources/state.html?state=arkansas">Arkansas</a>
+        <a class="state" href="/resources/state.html?state=california">California</a>
+        <a class="state" href="/resources/state.html?state=colorado">Colorado</a>
+        <a class="state" href="/resources/state.html?state=connecticut">Connecticut</a>
+        <a class="state" href="/resources/state.html?state=delaware">Delaware</a>
+        <a class="state" href="/resources/state.html?state=florida">Florida</a>
+        <a class="state" href="/resources/state.html?state=georgia">Georgia</a>
+        <a class="state" href="/resources/state.html?state=hawaii">Hawaii</a>
+        <a class="state" href="/resources/state.html?state=idaho">Idaho</a>
+        <a class="state" href="/resources/state.html?state=illinois">Illinois</a>
+        <a class="state" href="/resources/state.html?state=indiana">Indiana</a>
+        <a class="state" href="/resources/state.html?state=iowa">Iowa</a>
+        <a class="state" href="/resources/state.html?state=kansas">Kansas</a>
+        <a class="state" href="/resources/state.html?state=kentucky">Kentucky</a>
+        <a class="state" href="/resources/state.html?state=louisiana">Louisiana</a>
+        <a class="state" href="/resources/state.html?state=maine">Maine</a>
+        <a class="state" href="/resources/state.html?state=maryland">Maryland</a>
+        <a class="state" href="/resources/state.html?state=massachusetts">Massachusetts</a>
+        <a class="state" href="/resources/state.html?state=michigan">Michigan</a>
+        <a class="state" href="/resources/state.html?state=minnesota">Minnesota</a>
+        <a class="state" href="/resources/state.html?state=mississippi">Mississippi</a>
+        <a class="state" href="/resources/state.html?state=missouri">Missouri</a>
+        <a class="state" href="/resources/state.html?state=montana">Montana</a>
+        <a class="state" href="/resources/state.html?state=nebraska">Nebraska</a>
+        <a class="state" href="/resources/state.html?state=nevada">Nevada</a>
+        <a class="state" href="/resources/state.html?state=new_hampshire">New Hampshire</a>
+        <a class="state" href="/resources/state.html?state=new_jersey">New Jersey</a>
+        <a class="state" href="/resources/state.html?state=new_mexico">New Mexico</a>
+        <a class="state" href="/resources/state.html?state=new_york">New York</a>
+        <a class="state" href="/resources/state.html?state=north_carolina">North Carolina</a>
+        <a class="state" href="/resources/state.html?state=north_dakota">North Dakota</a>
+        <a class="state" href="/resources/state.html?state=ohio">Ohio</a>
+        <a class="state" href="/resources/state.html?state=oklahoma">Oklahoma</a>
+        <a class="state" href="/resources/state.html?state=oregon">Oregon</a>
+        <a class="state" href="/resources/state.html?state=pennsylvania">Pennsylvania</a>
+        <a class="state" href="/resources/state.html?state=rhode_island">Rhode Island</a>
+        <a class="state" href="/resources/state.html?state=south_carolina">South Carolina</a>
+        <a class="state" href="/resources/state.html?state=south_dakota">South Dakota</a>
+        <a class="state" href="/resources/state.html?state=tennessee">Tennessee</a>
+        <a class="state" href="/resources/state.html?state=texas">Texas</a>
+        <a class="state" href="/resources/state.html?state=utah">Utah</a>
+        <a class="state" href="/resources/state.html?state=vermont">Vermont</a>
+        <a class="state" href="/resources/state.html?state=virginia">Virginia</a>
+        <a class="state" href="/resources/state.html?state=washington">Washington</a>
+        <a class="state" href="/resources/state.html?state=west_virginia">West Virginia</a>
+        <a class="state" href="/resources/state.html?state=wisconsin">Wisconsin</a>
+        <a class="state" href="/resources/state.html?state=wyoming">Wyoming</a>
       </div>
     </div>
-  </div>
-<!-- Site-wide AI Goal + Microgrants widget -->
-<div id="ai-goal-widget"></div>
-<script src="/assets/ai-goal.js"></script>
-<script>
-  window.DEFEND_DAD_CONFIG = {
-    csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
-    goalTotal: 350000,
-    minGrantsToOpen: 500
-  };
-</script>
 
-  <div id="ai-goal-widget"></div>
-<script src="/assets/ai-goal.js"></script>
-<script>
-  window.DEFEND_DAD_CONFIG = {
-    csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
-    goalTotal: 350000,
-    minGrantsToOpen: 500
-  };
-</script>
+    <!-- AI Goal widget -->
+    <div class="panel" id="ai-goal-panel">
+      <div id="ai-goal-widget"></div>
+    </div>
+
+    <hr class="hr" />
+    <div class="muted" style="text-align:center">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
+      <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
+      <a href="https://defend.dad">defend.dad</a>
+    </div>
+  </div>
+
+  <!-- AI Goal widget config -->
+  <script src="/assets/ai-goal.js"></script>
+  <script>
+    window.DEFEND_DAD_CONFIG = {
+      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
+      goalTotal: 350000,
+      minGrantsToOpen: 500
+    };
+  </script>
 </body>
 </html>
