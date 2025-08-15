@@ -41,66 +41,74 @@
   </div>
 
   <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
+    // Normalize: spaces or hyphens -> underscores
+    const p = new URLSearchParams(location.search);
+    const raw = decodeURIComponent(p.get('state') || '').trim();
+    const stateKey = raw.toLowerCase().replace(/[\s-]+/g, '_');
+
+    const titleEl = document.getElementById('state-title');
+    const container = document.getElementById('resources-container');
 
     if (!stateKey) {
-      document.getElementById('state-title').textContent = "No state selected";
+      titleEl.textContent = "No state selected";
     } else {
       fetch('/assets/states.json')
         .then(res => res.json())
         .then(data => {
-          if (!data[stateKey]) {
-            document.getElementById('state-title').textContent = "State not found";
+          const stateData = data[stateKey];
+          const nationalData = data.national;
+
+          if (!stateData) {
+            titleEl.textContent = "State not found";
+            container.innerHTML = '<div class="panel"><p class="muted">Try the <a href="/resources/">state list</a>.</p></div>';
             return;
           }
 
-          const stateData = data[stateKey];
-          const nationalData = data.national;
-          document.getElementById('state-title').textContent = `${stateData.name} Resources`;
-
-          const container = document.getElementById('resources-container');
-
-          function renderSection(title, items, isLinks = true) {
+          // Renderer that accepts strings or {label,url} objects
+          function renderMixedSection(title, items) {
             if (!items || items.length === 0) return '';
             let html = `<div class="section-title"><h2>${title}</h2><ul>`;
-            items.forEach(item => {
-              if (isLinks) {
-                html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
-              } else {
-                html += `<li>${item}</li>`;
+            for (const it of items) {
+              if (typeof it === 'string') {
+                html += `<li>${it}</li>`;
+              } else if (it && typeof it === 'object') {
+                const label = it.label || it.url || 'Link';
+                if (it.url) {
+                  html += `<li><a href="${it.url}" target="_blank" rel="noopener">${label}</a></li>`;
+                } else {
+                  html += `<li>${label}</li>`;
+                }
               }
-            });
+            }
             html += '</ul></div>';
             return html;
           }
 
+          const pretty = stateData.name || stateKey.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+          titleEl.textContent = `${pretty} Resources`;
+
           let html = `<div class="panel">`;
 
-          // National Section
+          // National first
           html += `<h2>National Resources</h2>`;
-          html += renderSection("Agencies & Help Centers", nationalData.agencies);
-          html += renderSection("Forms & Templates", nationalData.forms);
-          html += renderSection("Statutes & Laws", nationalData.statutes, false);
-          if (nationalData.notes) {
-            html += `<div class="section-title"><h2>Notes</h2><p>${nationalData.notes}</p></div>`;
-          }
+          html += renderMixedSection("Agencies & Help Centers", nationalData.agencies);
+          html += renderMixedSection("Forms & Templates",     nationalData.forms);
+          html += renderMixedSection("Statutes & Laws",        nationalData.statutes);
+          if (nationalData.notes) html += `<div class="section-title"><h2>Notes</h2><p>${nationalData.notes}</p></div>`;
 
-          // State Section
-          html += `<h2 style="margin-top:30px;">${stateData.name} Resources</h2>`;
-          html += renderSection("Agencies & Help Centers", stateData.agencies);
-          html += renderSection("Forms & Templates", stateData.forms);
-          html += renderSection("Statutes & Laws", stateData.statutes, false);
-          if (stateData.notes) {
-            html += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
-          }
+          // State next
+          html += `<h2 style="margin-top:30px;">${pretty} Resources</h2>`;
+          html += renderMixedSection("Agencies & Help Centers", stateData.agencies);
+          html += renderMixedSection("Forms & Templates",       stateData.forms);
+          html += renderMixedSection("Statutes & Laws",          stateData.statutes);
+          if (stateData.notes) html += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
 
           html += `</div>`;
           container.innerHTML = html;
         })
-        .catch(err => {
-          document.getElementById('state-title').textContent = "Error loading resources";
-          console.error(err);
+        .catch(() => {
+          titleEl.textContent = "Error loading resources";
+          container.innerHTML = '<div class="panel"><p class="muted">Please refresh or try again later.</p></div>';
         });
     }
   </script>
