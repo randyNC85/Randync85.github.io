@@ -23,8 +23,8 @@
     .donate-btn{background:var(--gold);color:var(--bg)!important;padding:6px 12px;border-radius:6px;font-weight:700}
     .donate-btn:hover{background:#f5d36f;color:var(--bg)!important}
 
-    /* Donorbox embed */
-    .dbox-form iframe{width:100%;border:0;overflow:hidden;}
+    /* Donorbox iframe */
+    .dbox-form iframe{width:100%;border:0;overflow:auto;}
   </style>
 </head>
 <body>
@@ -47,17 +47,25 @@
     <div class="panel">
       <h1>Support Defend Dad</h1>
       <p>Your gift funds free self-help resources, our AI assistant for motion drafting and case prep, and micro-grants for filing fees. Thank you for helping dads fight for 50/50 custody, fair child support, and due process.</p>
+      <p class="muted">If the form below doesn’t load fully, use the hosted page:
+        <a href="https://donorbox.org/launch-defend-dad-s-resources-ai" target="_blank" rel="noopener">Open Donorbox</a>.
+      </p>
     </div>
 
-    <!-- Donorbox Form -->
+    <!-- Donorbox Form (reCAPTCHA fix: scrolling + taller height) -->
     <div id="donate" class="panel dbox-form">
       <script src="https://donorbox.org/widget.js" paypalExpress="false"></script>
-      <iframe src="https://donorbox.org/embed/launch-defend-dad-s-resources-ai?"
-              name="donorbox" allowpaymentrequest="allowpaymentrequest"
-              seamless="seamless" frameborder="0" scrolling="no"
-              height="900px" width="100%"
-              style="max-width: 500px; min-width: 250px; max-height:none!important"
-              allow="payment"></iframe>
+      <iframe
+        src="https://donorbox.org/embed/launch-defend-dad-s-resources-ai?"
+        name="donorbox"
+        allowpaymentrequest="allowpaymentrequest"
+        frameborder="0"
+        scrolling="yes"
+        height="1800px"
+        width="100%"
+        style="max-width: 640px; min-width: 260px; max-height:none!important"
+        allow="payment">
+      </iframe>
     </div>
 
     <!-- AI Goal widget -->
