@@ -1,1 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Defend Dad — State Resources</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="/assets/style.css" />
+  <style>
+    body { background:#0e1117; color:#e6edf3; font-family:system-ui,sans-serif; margin:0; }
+    .wrap { max-width:980px; margin:0 auto; padding:28px 18px; }
+    h1,h2 { color:#d4af37; }
+    a { color:#86b7ff; text-decoration:none; }
+    .panel { background:#161b22; border:1px solid #30363d; border-radius:14px; padding:20px; margin:18px 0; }
+    .section-title { margin-top:20px; }
+    ul { padding-left:18px; }
+    .muted { color:#9aa4b2; }
+    /* Nav bar */
+    .topnav { background:#161b22; border-bottom:1px solid #30363d; padding:10px 0; position:sticky; top:0; z-index:1000; }
+    .nav-container { max-width:980px; margin:0 auto; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+    .topnav a { color:#d4af37; font-weight:600; }
+    .topnav a:hover { color:#e6edf3; }
+  </style>
+</head>
+<body>
 
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <h1 id="state-title">Loading...</h1>
+    <div id="resources-container"></div>
+  </div>
+
+  <script>
+    // Get ?state= from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
+
+    if (!stateKey) {
+      document.getElementById('state-title').textContent = "No state selected";
+    } else {
+      fetch('/assets/states.json')
+        .then(res => res.json())
+        .then(data => {
+          if (!data[stateKey]) {
+            document.getElementById('state-title').textContent = "State not found";
+            return;
+          }
+
+          const stateData = data[stateKey];
+          document.getElementById('state-title').textContent = `${stateData.name} Resources`;
+
+          const container = document.getElementById('resources-container');
+
+          // Helper to render sections
+          function renderSection(title, items, isLinks = true) {
+            if (!items || items.length === 0) return '';
+            let html = `<div class="section-title"><h2>${title}</h2><ul>`;
+            items.forEach(item => {
+              if (isLinks) {
+                html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
+              } else {
+                html += `<li>${item}</li>`;
+              }
+            });
+            html += '</ul></div>';
+            return html;
+          }
+
+          // Merge National + State
+          const merged = {
+            agencies: [...(data.national.agencies || []), ...(stateData.agencies || [])],
+            forms:    [...(data.national.forms || []), ...(stateData.forms || [])],
+            statutes: [...(data.national.statutes || []), ...(stateData.statutes || [])],
+            notes:    [data.national.notes, stateData.notes].filter(Boolean).join(" ")
+          };
+
+          let html = '';
+          html += renderSection("Agencies & Help Centers", merged.agencies);
+          html += renderSection("Forms & Templates", merged.forms);
+          html += renderSection("Statutes & Laws", merged.statutes, false);
+          if (merged.notes) {
+            html += `<div class="section-title"><h2>Notes</h2><p>${merged.notes}</p></div>`;
+          }
+
+          container.innerHTML = `<div class="panel">${html}</div>`;
+        })
+        .catch(err => {
+          document.getElementById('state-title').textContent = "Error loading resources";
+          console.error(err);
+        });
+    }
+  </script>
+
+</body>
+</html>
