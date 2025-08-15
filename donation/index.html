@@ -1,1 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Defend Dad — Donate</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    .hr{height:1px;background:var(--line);margin:18px 0;border:0}
+    h1,h2{color:var(--gold);margin:0 0 10px}
+    p{line-height:1.6;margin:8px 0}
+    .muted{color:var(--muted)}
+    a{color:#86b7ff;text-decoration:none}
 
+    /* Nav bar */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
+    .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;align-items:center;flex-wrap:wrap}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s ease}
+    .topnav a:hover{color:var(--text)}
+    .donate-btn{background:var(--gold);color:var(--bg)!important;padding:6px 12px;border-radius:6px;font-weight:700}
+    .donate-btn:hover{background:#f5d36f;color:var(--bg)!important}
+
+    /* Donorbox embed */
+    .dbox-form iframe{width:100%;border:0;overflow:hidden;}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+      <a href="#donate" class="donate-btn">Donate</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <!-- Intro -->
+    <div class="panel">
+      <h1>Support Defend Dad</h1>
+      <p>Your gift funds free self-help resources, our AI assistant for motion drafting and case prep, and micro-grants for filing fees. Thank you for helping dads fight for 50/50 custody, fair child support, and due process.</p>
+    </div>
+
+    <!-- Donorbox Form -->
+    <div id="donate" class="panel dbox-form">
+      <script src="https://donorbox.org/widget.js" paypalExpress="false"></script>
+      <iframe src="https://donorbox.org/embed/launch-defend-dad-s-resources-ai?"
+              name="donorbox" allowpaymentrequest="allowpaymentrequest"
+              seamless="seamless" frameborder="0" scrolling="no"
+              height="900px" width="100%"
+              style="max-width: 500px; min-width: 250px; max-height:none!important"
+              allow="payment"></iframe>
+    </div>
+
+    <!-- AI Goal widget -->
+    <div class="panel" id="ai-goal-panel">
+      <div id="ai-goal-widget"></div>
+    </div>
+
+    <hr class="hr" />
+    <div class="muted" style="text-align:center">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
+      <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
+      <a href="https://defend.dad">defend.dad</a>
+    </div>
+  </div>
+
+  <!-- AI Goal widget config -->
+  <script src="/assets/ai-goal.js"></script>
+  <script>
+    window.DEFEND_DAD_CONFIG = {
+      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
+      goalTotal: 350000,
+      minGrantsToOpen: 500
+    };
+  </script>
+</body>
+</html>
