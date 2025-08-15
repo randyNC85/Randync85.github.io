@@ -23,8 +23,12 @@
     .donate-btn{background:var(--gold);color:var(--bg)!important;padding:6px 12px;border-radius:6px;font-weight:700}
     .donate-btn:hover{background:#f5d36f;color:var(--bg)!important}
 
-    /* Donorbox iframe */
-    .dbox-form iframe{width:100%;border:0;overflow:auto;}
+    /* Big donate button on page */
+    .cta{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:6px}
+    .cta .btn{display:inline-block;padding:12px 16px;border:1px solid var(--gold);border-radius:10px;color:var(--gold);text-decoration:none;font-weight:700}
+    .cta .btn.fill{background:var(--gold);color:var(--bg);border-color:var(--gold)}
+    .cta .btn:hover{background:rgba(212,175,55,.08)}
+    .cta .btn.fill:hover{background:#f5d36f}
   </style>
 </head>
 <body>
@@ -38,7 +42,7 @@
       <a href="/our-ai/">Our AI</a>
       <a href="/community/">Community</a>
       <a href="/donations/">Donations</a>
-      <a href="#donate" class="donate-btn">Donate</a>
+      <a href="#donate" class="donate-btn" id="donate-nav">Donate</a>
     </div>
   </nav>
 
@@ -47,26 +51,28 @@
     <div class="panel">
       <h1>Support Defend Dad</h1>
       <p>Your gift funds free self-help resources, our AI assistant for motion drafting and case prep, and micro-grants for filing fees. Thank you for helping dads fight for 50/50 custody, fair child support, and due process.</p>
-      <p class="muted">If the form below doesn’t load fully, use the hosted page:
-        <a href="https://donorbox.org/launch-defend-dad-s-resources-ai" target="_blank" rel="noopener">Open Donorbox</a>.
+
+      <!-- Popup donate + fallback links -->
+      <div class="cta">
+        <a class="btn fill dbox-donation-button" href="https://donorbox.org/launch-defend-dad-s-resources-ai">Donate in Secure Popup</a>
+        <a class="btn" href="https://donorbox.org/launch-defend-dad-s-resources-ai" target="_blank" rel="noopener">Open Hosted Page</a>
+      </div>
+
+      <p class="muted" style="text-align:center;margin-top:10px">
+        If a content blocker hides the popup, use the hosted page link.
       </p>
     </div>
 
-    <!-- Donorbox Form (reCAPTCHA visible: scrolling + taller height) -->
-    <div id="donate" class="panel dbox-form">
+    <!-- (Optional) If you still want an embedded form below as a secondary option, uncomment this block.
+    <div class="panel">
+      <h2>Alternate: Embedded Form</h2>
       <script src="https://donorbox.org/widget.js" paypalExpress="false"></script>
-      <iframe
-        src="https://donorbox.org/embed/launch-defend-dad-s-resources-ai?"
-        name="donorbox"
-        allowpaymentrequest="allowpaymentrequest"
-        frameborder="0"
-        scrolling="yes"
-        height="2000px"
-        width="100%"
-        style="max-width: 640px; min-width: 260px; max-height:none!important"
-        allow="payment">
-      </iframe>
+      <iframe src="https://donorbox.org/embed/launch-defend-dad-s-resources-ai?"
+              name="donorbox" allowpaymentrequest="allowpaymentrequest"
+              frameborder="0" scrolling="yes" width="100%" height="2200px"
+              style="max-width: 680px; min-width: 260px; max-height:none!important" allow="payment"></iframe>
     </div>
+    -->
 
     <!-- AI Goal widget -->
     <div class="panel" id="ai-goal-panel">
@@ -80,6 +86,21 @@
       <a href="https://defend.dad">defend.dad</a>
     </div>
   </div>
+
+  <!-- Donorbox popup script -->
+  <script src="https://donorbox.org/widget.js" paypalExpress="false"></script>
+  <script>
+    // Tell Donorbox to treat all links with this class as popup triggers
+    window.DonorBox = window.DonorBox || {};
+    DonorBox.widgetLinkClassName = 'dbox-donation-button';
+
+    // Make the top-right nav "Donate" open the popup too
+    document.getElementById('donate-nav').addEventListener('click', function(e){
+      e.preventDefault();
+      const link = document.querySelector('.dbox-donation-button');
+      if (link) link.click();
+    });
+  </script>
 
   <!-- AI Goal widget config -->
   <script src="/assets/ai-goal.js"></script>
