@@ -16,6 +16,7 @@
     ],
     "notes": "Nationwide resources are a starting point; always check your state’s specific laws, forms, and procedures."
   },
+
   "alabama": { "name": "Alabama", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "alaska": { "name": "Alaska", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "arizona": { "name": "Arizona", "agencies": [], "forms": [], "statutes": [], "notes": "" },
@@ -65,5 +66,24 @@
   "washington": { "name": "Washington", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "west_virginia": { "name": "West Virginia", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "wisconsin": { "name": "Wisconsin", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "wyoming": { "name": "Wyoming", "agencies": [], "forms": [], "statutes": [], "notes": "" }
+
+  "wyoming": {
+    "name": "Wyoming",
+    "agencies": [
+      { "label": "Wyoming State Bar – Find a Lawyer", "url": "https://www.wyomingbar.org/for-the-public/find-a-lawyer/" },
+      { "label": "University of Wyoming College of Law – Legal Clinics", "url": "https://www.uwyo.edu/law/experiential/clinics/" }
+    ],
+    "forms": [
+      { "label": "Custody & Child Support Modification Packet (Married or Unmarried)", "url": "https://www.wyocourts.gov/app/uploads/2025/03/CCMR-02-Custody-and-Child-Support-Modification-Information-and-Instructions-Respondent-05-25.pdf" },
+      { "label": "Custody & Paternity Packet – Unmarried Parents", "url": "https://www.wyocourts.gov/legal-assist/self-help/forms/ccp-unmarried/" },
+      { "label": "Divorce with Children Packet – Married Parents", "url": "https://www.wyocourts.gov/legal-assist/self-help/forms/divorce-with-children/" }
+    ],
+    "statutes": [
+      { "label": "Wyoming Statutes – Full Text (Searchable)", "url": "https://www.wyoleg.gov/stateStatutes/StateStatutes?tab=1" },
+      { "label": "Wyoming Title 20 – Domestic Relations (PDF)", "url": "https://wyoleg.gov/statutes/compress/title20.pdf" },
+      { "label": "Child Support – Presumptive Guidelines & Deviations (§ 20-2-304)", "url": "https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/" },
+      { "label": "Wyoming Child Support Policy Manual", "url": "https://wychildsupportpolicymanual.wyo.gov/8-establishment/8-3-child-support" }
+    ],
+    "notes": "In Wyoming, both married and unmarried parents can use state-provided packets to file for custody, support, or modifications. Statutes are publicly available online via the Wyoming Legislature, with Title 20 covering Domestic Relations. Child support is generally calculated from both parents' incomes and time with the child, but courts may deviate based on other factors like healthcare costs, extraordinary expenses, or the child's needs."
+  }
 }
