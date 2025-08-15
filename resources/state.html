@@ -6,17 +6,42 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/assets/style.css" />
   <style>
-    body { background:#0e1117; color:#e6edf3; font-family:system-ui,sans-serif; margin:0; }
+    body {
+      background:#0e1117;
+      color:#e6edf3;
+      font-family:system-ui,sans-serif;
+      margin:0;
+    }
     .wrap { max-width:980px; margin:0 auto; padding:28px 18px; }
     h1,h2 { color:#d4af37; }
     a { color:#86b7ff; text-decoration:none; }
-    .panel { background:#161b22; border:1px solid #30363d; border-radius:14px; padding:20px; margin:18px 0; }
+    .panel {
+      background:rgba(22,27,34,0.85);
+      border:1px solid #30363d;
+      border-radius:14px;
+      padding:20px;
+      margin:18px 0;
+    }
     .section-title { margin-top:20px; }
     ul { padding-left:18px; }
     .muted { color:#9aa4b2; }
     /* Nav bar */
-    .topnav { background:#161b22; border-bottom:1px solid #30363d; padding:10px 0; position:sticky; top:0; z-index:1000; }
-    .nav-container { max-width:980px; margin:0 auto; display:flex; gap:20px; justify-content:center; flex-wrap:wrap; }
+    .topnav {
+      background:#161b22;
+      border-bottom:1px solid #30363d;
+      padding:10px 0;
+      position:sticky;
+      top:0;
+      z-index:1000;
+    }
+    .nav-container {
+      max-width:980px;
+      margin:0 auto;
+      display:flex;
+      gap:20px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
     .topnav a { color:#d4af37; font-weight:600; }
     .topnav a:hover { color:#e6edf3; }
   </style>
@@ -41,74 +66,70 @@
   </div>
 
   <script>
-    // Normalize: spaces or hyphens -> underscores
-    const p = new URLSearchParams(location.search);
-    const raw = decodeURIComponent(p.get('state') || '').trim();
-    const stateKey = raw.toLowerCase().replace(/[\s-]+/g, '_');
-
-    const titleEl = document.getElementById('state-title');
-    const container = document.getElementById('resources-container');
+    const urlParams = new URLSearchParams(window.location.search);
+    const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
 
     if (!stateKey) {
-      titleEl.textContent = "No state selected";
+      document.getElementById('state-title').textContent = "No state selected";
     } else {
+      // Wyoming background image
+      if (stateKey === 'wyoming') {
+        document.body.style.backgroundImage = "url('/assets/Dad-Wyoming.PNG')";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundAttachment = "fixed";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundColor = "rgba(14, 17, 23, 0.7)";
+        document.body.style.backgroundBlendMode = "overlay";
+      }
+
       fetch('/assets/states.json')
         .then(res => res.json())
         .then(data => {
-          const stateData = data[stateKey];
-          const nationalData = data.national;
-
-          if (!stateData) {
-            titleEl.textContent = "State not found";
-            container.innerHTML = '<div class="panel"><p class="muted">Try the <a href="/resources/">state list</a>.</p></div>';
+          if (!data[stateKey]) {
+            document.getElementById('state-title').textContent = "State not found";
             return;
           }
 
-          // Renderer that accepts strings or {label,url} objects
-          function renderMixedSection(title, items) {
+          const stateData = data[stateKey];
+          document.getElementById('state-title').textContent = `${stateData.name} Resources`;
+
+          const container = document.getElementById('resources-container');
+
+          function renderSection(title, items, isLinks = true) {
             if (!items || items.length === 0) return '';
             let html = `<div class="section-title"><h2>${title}</h2><ul>`;
-            for (const it of items) {
-              if (typeof it === 'string') {
-                html += `<li>${it}</li>`;
-              } else if (it && typeof it === 'object') {
-                const label = it.label || it.url || 'Link';
-                if (it.url) {
-                  html += `<li><a href="${it.url}" target="_blank" rel="noopener">${label}</a></li>`;
-                } else {
-                  html += `<li>${label}</li>`;
-                }
+            items.forEach(item => {
+              if (isLinks) {
+                html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
+              } else {
+                html += `<li>${item}</li>`;
               }
-            }
+            });
             html += '</ul></div>';
             return html;
           }
 
-          const pretty = stateData.name || stateKey.replace(/_/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
-          titleEl.textContent = `${pretty} Resources`;
+          const merged = {
+            agencies: [...(data.national.agencies || []), ...(stateData.agencies || [])],
+            forms:    [...(data.national.forms || []), ...(stateData.forms || [])],
+            statutes: [...(data.national.statutes || []), ...(stateData.statutes || [])],
+            notes:    [data.national.notes, stateData.notes].filter(Boolean).join(" ")
+          };
 
-          let html = `<div class="panel">`;
+          let html = '';
+          html += renderSection("Agencies & Help Centers", merged.agencies);
+          html += renderSection("Forms & Templates", merged.forms);
+          html += renderSection("Statutes & Laws", merged.statutes, false);
+          if (merged.notes) {
+            html += `<div class="section-title"><h2>Notes</h2><p>${merged.notes}</p></div>`;
+          }
 
-          // National first
-          html += `<h2>National Resources</h2>`;
-          html += renderMixedSection("Agencies & Help Centers", nationalData.agencies);
-          html += renderMixedSection("Forms & Templates",     nationalData.forms);
-          html += renderMixedSection("Statutes & Laws",        nationalData.statutes);
-          if (nationalData.notes) html += `<div class="section-title"><h2>Notes</h2><p>${nationalData.notes}</p></div>`;
-
-          // State next
-          html += `<h2 style="margin-top:30px;">${pretty} Resources</h2>`;
-          html += renderMixedSection("Agencies & Help Centers", stateData.agencies);
-          html += renderMixedSection("Forms & Templates",       stateData.forms);
-          html += renderMixedSection("Statutes & Laws",          stateData.statutes);
-          if (stateData.notes) html += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
-
-          html += `</div>`;
-          container.innerHTML = html;
+          container.innerHTML = `<div class="panel">${html}</div>`;
         })
-        .catch(() => {
-          titleEl.textContent = "Error loading resources";
-          container.innerHTML = '<div class="panel"><p class="muted">Please refresh or try again later.</p></div>';
+        .catch(err => {
+          document.getElementById('state-title').textContent = "Error loading resources";
+          console.error(err);
         });
     }
   </script>
