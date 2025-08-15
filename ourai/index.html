@@ -1,1 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Defend Dad — Our AI</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg:#0e1117; --panel:#161b22; --line:#30363d;
+      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
+    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    /* Nav bar */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
+    .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s}
+    .topnav a:hover{color:var(--text)}
+    /* Panels & content */
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    h1,h2{color:var(--gold);margin-top:0}
+    p{line-height:1.6}
+    .muted{color:var(--muted)}
+    .center{text-align:center}
+    .hero{max-width:720px;width:100%;height:auto;border:1px solid var(--line);border-radius:12px}
+    .grid{display:grid;gap:14px}
+    @media(min-width:720px){.grid-2{grid-template-columns:1fr 1fr}}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px}
+    .btn{display:inline-block;background:var(--gold);color:#000;font-weight:700;padding:10px 14px;border-radius:10px;text-decoration:none}
+    .btn:hover{filter:brightness(1.05)}
+  </style>
+</head>
+<body>
 
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="wrap">
+
+    <div class="panel">
+      <h1>Our AI — Built to Help Dads Fight Fair</h1>
+      <p>
+        We’re building a publicly available, free AI assistant focused on helping dads navigate
+        custody, parenting time, and child support. The goal: clear guidance, organized case info,
+        and practical tools to draft motions and stay on top of deadlines — all in plain language.
+      </p>
+      <p class="muted">
+        This won’t be quick or cheap. We’re funding development through donations, merchandise,
+        and startup grants so we can deliver this to dads at no cost.
+      </p>
+      <div class="center" style="margin-top:14px">
+        <img class="hero" src="/assets/Dad-ai-fix.PNG" alt="Defend Dad AI concept" />
+      </div>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>What It Will Do</h2>
+        <ul>
+          <li>Explain custody and support steps in plain language</li>
+          <li>Help draft basic motions and checklists</li>
+          <li>Track filings, dates, and evidence you provide</li>
+          <li>Organize your case details for better preparation</li>
+        </ul>
+        <p class="muted" style="margin-top:6px">
+          We’re not lawyers and this isn’t legal advice — it’s a tool to help you represent yourself
+          more confidently.
+        </p>
+      </div>
+      <div class="card">
+        <h2>How We’ll Fund It</h2>
+        <ul>
+          <li>Donations from supporters</li>
+          <li>Merchandise sales (profits to development)</li>
+          <li>Grant applications to jumpstart features</li>
+        </ul>
+        <p class="muted" style="margin-top:6px">
+          Transparency matters — we’ll share milestones and budgets as we build.
+        </p>
+      </div>
+    </div>
+
+    <div class="panel center">
+      <p style="margin-bottom:12px"><strong>Want to support the build?</strong></p>
+      <a class="btn" href="/shop/">Buy Merch</a>
+      <span style="display:inline-block;width:10px"></span>
+      <a class="btn" href="/donations/">Donate</a>
+      <p class="muted" style="margin-top:10px">Or join the conversation in our <a href="/community/">Community</a>.</p>
+    </div>
+
+  </div>
+</body>
+</html>
