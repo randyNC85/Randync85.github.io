@@ -41,7 +41,6 @@
   </div>
 
   <script>
-    // Get ?state= from URL
     const urlParams = new URLSearchParams(window.location.search);
     const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
 
@@ -57,11 +56,11 @@
           }
 
           const stateData = data[stateKey];
+          const nationalData = data.national;
           document.getElementById('state-title').textContent = `${stateData.name} Resources`;
 
           const container = document.getElementById('resources-container');
 
-          // Helper to render sections
           function renderSection(title, items, isLinks = true) {
             if (!items || items.length === 0) return '';
             let html = `<div class="section-title"><h2>${title}</h2><ul>`;
@@ -76,23 +75,28 @@
             return html;
           }
 
-          // Merge National + State
-          const merged = {
-            agencies: [...(data.national.agencies || []), ...(stateData.agencies || [])],
-            forms:    [...(data.national.forms || []), ...(stateData.forms || [])],
-            statutes: [...(data.national.statutes || []), ...(stateData.statutes || [])],
-            notes:    [data.national.notes, stateData.notes].filter(Boolean).join(" ")
-          };
+          let html = `<div class="panel">`;
 
-          let html = '';
-          html += renderSection("Agencies & Help Centers", merged.agencies);
-          html += renderSection("Forms & Templates", merged.forms);
-          html += renderSection("Statutes & Laws", merged.statutes, false);
-          if (merged.notes) {
-            html += `<div class="section-title"><h2>Notes</h2><p>${merged.notes}</p></div>`;
+          // National Section
+          html += `<h2>National Resources</h2>`;
+          html += renderSection("Agencies & Help Centers", nationalData.agencies);
+          html += renderSection("Forms & Templates", nationalData.forms);
+          html += renderSection("Statutes & Laws", nationalData.statutes, false);
+          if (nationalData.notes) {
+            html += `<div class="section-title"><h2>Notes</h2><p>${nationalData.notes}</p></div>`;
           }
 
-          container.innerHTML = `<div class="panel">${html}</div>`;
+          // State Section
+          html += `<h2 style="margin-top:30px;">${stateData.name} Resources</h2>`;
+          html += renderSection("Agencies & Help Centers", stateData.agencies);
+          html += renderSection("Forms & Templates", stateData.forms);
+          html += renderSection("Statutes & Laws", stateData.statutes, false);
+          if (stateData.notes) {
+            html += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
+          }
+
+          html += `</div>`;
+          container.innerHTML = html;
         })
         .catch(err => {
           document.getElementById('state-title').textContent = "Error loading resources";
