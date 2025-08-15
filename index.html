@@ -116,15 +116,28 @@
       <img class="shield" src="/defend-dad-logo-shield.png.PNG" alt="Defend Dad shield logo" />
     </div>
 
-    <hr class="hr" />
-    <div class="center muted">
-      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web: <a href="https://defenddad.org">defenddad.org</a> • Shortcut: <a href="https://defend.dad">defend.dad</a>
+    <!-- AI Goal widget -->
+    <div class="panel" id="ai-goal-panel">
+      <div id="ai-goal-widget"></div>
     </div>
 
-  </div>
+    <hr class="hr" />
+    <div class="center muted">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
+      <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
+      <a href="https://defend.dad">defend.dad</a>
+    </div>
+
+  </div> <!-- /.wrap -->
+
+  <!-- Site-wide AI Goal Widget scripts -->
+  <script src="/assets/ai-goal.js"></script>
+  <script>
+    window.DEFEND_DAD_CONFIG = {
+      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
+      goalTotal: 350000,
+      minGrantsToOpen: 500
+    };
+  </script>
 </body>
 </html>
-<!-- Site-wide AI Goal Widget -->
-<div id="ai-goal-widget"></div>
-<script src="/assets/ai-goal.js"></script>
-
