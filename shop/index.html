@@ -1,1 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Defend Dad — Shop (Coming Soon)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
 
+    /* Nav bar */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
+    .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s ease}
+    .topnav a:hover{color:var(--text)}
+
+    /* Content */
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    h1{color:var(--gold);margin:0 0 10px}
+    p{line-height:1.6;margin:8px 0}
+    .muted{color:var(--muted)}
+    .hero{display:flex;flex-direction:column;gap:16px;align-items:center;text-align:center}
+    .hero img{max-width:720px;width:100%;height:auto;border-radius:12px;border:1px solid var(--line)}
+    .btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+    .btn{display:inline-block;padding:10px 14px;border:1px solid var(--gold);border-radius:10px;color:var(--gold);text-decoration:none;font-weight:600}
+    .btn:hover{background:rgba(212,175,55,.08)}
+    .hr{height:1px;background:var(--line);margin:18px 0;border:0}
+    a{color:#86b7ff;text-decoration:none}
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- Shop Coming Soon Panel -->
+    <div class="panel hero">
+      <h1>Shop — Coming Soon</h1>
+      <img src="/assets/Dad-store.PNG" alt="Defend Dad store coming soon image" />
+      <p>
+        Thank you for your willingness to support <strong>Defend Dad</strong>.
+        We still have a lot of work to do before our store launches, but it’s coming.
+        Profits from our merchandise will help fund our AI assistant and cover filing fees—then, as we grow, contribute toward attorney costs for dads in need.
+      </p>
+      <p class="muted">
+        For now, we’re adding free self-help resources to get a dad started.
+        Please consider a donation to support the build, or check back soon for merch.
+      </p>
+      <div class="btns">
+        <a class="btn" href="/resources/">Free Resources</a>
+        <a class="btn" href="/donations/">Donate</a>
+      </div>
+    </div>
+
+    <!-- AI Goal widget -->
+    <div class="panel" id="ai-goal-panel">
+      <div id="ai-goal-widget"></div>
+    </div>
+
+    <hr class="hr" />
+    <div class="center muted">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
+      <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
+      <a href="https://defend.dad">defend.dad</a>
+    </div>
+
+  </div> <!-- /.wrap -->
+
+  <!-- Site-wide AI Goal Widget scripts -->
+  <script src="/assets/ai-goal.js"></script>
+  <script>
+    window.DEFEND_DAD_CONFIG = {
+      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
+      goalTotal: 350000,
+      minGrantsToOpen: 500
+    };
+  </script>
+</body>
+</html>
