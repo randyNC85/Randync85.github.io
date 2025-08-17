@@ -1,237 +1,98 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8" />
-  <title>Defend Dad — State Resources</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="/assets/style.css" />
-  <style>
-    :root{
-      --bg:#0e1117; --panel:#161b22; --line:#30363d;
-      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
-    }
-    html,body{height:100%}
-    body{
-      margin:0; background:var(--bg); color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-    }
-
-    /* Background image + overlay for readability */
-    .bg-wrap{
-      min-height:100%;
-      background-position:center;
-      background-size:cover;
-      background-repeat:no-repeat;
-      background-attachment:fixed;
-      position:relative;
-    }
-    .bg-wrap::before{
-      content:"";
-      position:absolute; inset:0;
-      background:rgba(14,17,23,.60); /* dark overlay */
-      backdrop-filter:saturate(120%) brightness(85%);
-    }
-
-    .wrap{position:relative; z-index:1; max-width:980px; margin:0 auto; padding:28px 18px}
-    h1,h2{color:var(--gold); margin-top:0}
-    a{color:#86b7ff; text-decoration:none}
-    a:hover{text-decoration:underline}
-    ul{padding-left:18px}
-    .muted{color:var(--muted)}
-
-    .panel{
-      background:rgba(22,27,34,.90);
-      border:1px solid var(--line);
-      border-radius:14px;
-      padding:20px;
-      margin:18px 0;
-    }
-    .twocol{display:grid; gap:16px}
-    @media(min-width:900px){ .twocol{grid-template-columns:1fr 1fr} }
-
-    /* Top nav (matches site) */
-    .topnav{background:var(--panel); border-bottom:1px solid var(--line); padding:10px 0; position:sticky; top:0; z-index:1000}
-    .nav-container{max-width:980px; margin:0 auto; display:flex; gap:20px; justify-content:center; flex-wrap:wrap}
-    .topnav a{color:var(--gold); font-weight:600; text-decoration:none; padding:6px 10px}
-    .topnav a:hover{color:var(--text)}
-
-    /* Info box styling */
-    .infobox{display:grid; gap:16px}
-    @media(min-width:900px){ .infobox{grid-template-columns:1fr 1fr} }
-    .ibox-card{background:#0f1319; border:1px solid var(--line); border-radius:12px; padding:16px}
-    .ibox-title{font-weight:700; color:var(--gold); margin:0 0 10px}
-    .kv{display:grid; row-gap:8px}
-    .kv-item{display:flex; justify-content:space-between; gap:10px; border-bottom:1px dashed #2a3037; padding:8px 0}
-    .kv-item:last-child{border-bottom:0}
-    .kv-label{color:#d4af37; font-weight:600}
-    .kv-value{color:#e6edf3}
-    .kv-note{display:block; color:var(--muted); font-size:.9em; margin-top:2px}
-  </style>
-</head>
-<body>
-
-  <!-- Navigation -->
-  <nav class="topnav">
-    <div class="nav-container">
-      <a href="/">Home</a>
-      <a href="/resources/">Resources</a>
-      <a href="/shop/">Shop</a>
-      <a href="/our-ai/">Our AI</a>
-      <a href="/community/">Community</a>
-      <a href="/donations/">Donations</a>
-    </div>
-  </nav>
-
-  <!-- Background wrapper -->
-  <div id="bg" class="bg-wrap">
-    <div class="wrap">
-      <h1 id="state-title">Loading…</h1>
-
-      <!-- Info box (factors + stats) -->
-      <div id="infobox"></div>
-
-      <!-- Two separate panels: Nationwide, then State -->
-      <div class="twocol">
-        <div class="panel" id="national-panel">
-          <h2>Nationwide Resources</h2>
-          <div id="national-sections"></div>
-        </div>
-
-        <div class="panel" id="state-panel">
-          <h2 id="state-panel-title">State Resources</h2>
-          <div id="state-sections"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 <script>
-(function(){
-  const params = new URLSearchParams(window.location.search);
-  const stateKey = (params.get('state') || '').toLowerCase().replace(/\s+/g,'_');
+  // Read ?state= from URL (e.g., /resources/state.html?state=florida)
+  const urlParams = new URLSearchParams(window.location.search);
+  const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
+
   const titleEl = document.getElementById('state-title');
-  const bgEl    = document.getElementById('bg');
+  const container = document.getElementById('resources-container');
 
-  if(!stateKey){
-    titleEl.textContent = 'No state selected';
-    return;
-  }
-
-  // Helper: clean “State Name” -> assets/State/Dad-StateName.PNG
-  function stateToImagePath(stateName){
-    // Remove spaces, keep hyphens if any, strip extra dots
-    const cleaned = stateName.replace(/\s+/g,'').replace(/\.+/g,'');
-    return `/assets/State/Dad-${cleaned}.PNG`;
-  }
-
-  // Render helpers
-  function renderLinks(list){
-    if(!Array.isArray(list) || list.length === 0) return '';
-    let html = '<ul>';
-    list.forEach(item=>{
-      if(!item) return;
-      if(typeof item === 'string'){
-        html += `<li>${item}</li>`;
-      } else if (item.url && item.label){
-        html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
-      } else if (item.label){ // label only
-        html += `<li>${item.label}</li>`;
-      }
-    });
-    html += '</ul>';
+  function section(title, items, asLinks = true) {
+    if (!items || !items.length) return '';
+    let html = `<div class="section-title"><h2>${title}</h2><ul>`;
+    for (const it of items) {
+      html += asLinks
+        ? `<li><a href="${it.url}" target="_blank" rel="noopener">${it.label}</a></li>`
+        : `<li>${typeof it === 'string' ? it : `${it.label ?? ''} ${it.value ? '— ' + it.value : ''} ${it.note ? `<span class="muted">(${it.note})</span>` : ''}`}</li>`;
+    }
+    html += `</ul></div>`;
     return html;
   }
 
-  function sectionHTML(title, items, areLinks=true){
-    if(!items || items.length===0) return '';
-    const body = areLinks ? renderLinks(items) : renderLinks(items); // both supported
-    return `<div class="section"><h3>${title}</h3>${body}</div>`;
-  }
+  async function load() {
+    if (!stateKey) {
+      titleEl.textContent = 'No state selected';
+      return;
+    }
 
-  fetch('/assets/states.json')
-    .then(r => r.json())
-    .then(data => {
-      const national = data.national;
-      const state = data[stateKey];
+    // Cache-bust the JSON to avoid stale loads on CDNs
+    const url = `/assets/states.json?v=${Date.now()}`;
 
-      if(!state){
+    try {
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+
+      if (!data[stateKey]) {
         titleEl.textContent = 'State not found';
         return;
       }
 
-      // Title
-      titleEl.textContent = `${state.name} Resources`;
+      // Optional per-state background image: assets/State/Dad-<StateNameNoSpaces>.PNG
+      const imgName = data[stateKey].name?.replace(/\s+/g, '') || '';
+      document.body.style.backgroundImage = `url('/assets/State/Dad-${imgName}.PNG')`;
+      document.body.style.backgroundSize = 'cover';
+      document.body.style.backgroundRepeat = 'no-repeat';
+      document.body.style.backgroundAttachment = 'fixed';
+      document.body.style.backgroundPosition = 'center';
+      document.body.style.backgroundColor = 'rgba(14,17,23,0.8)';
+      document.body.style.backgroundBlendMode = 'overlay';
 
-      // Background image (no HTML edits needed when you add more images)
-      const bgPath = stateToImagePath(state.name);
-      bgEl.style.backgroundImage = `url('${bgPath}')`;
+      const stateData = data[stateKey];
+      titleEl.textContent = `${stateData.name} Resources`;
 
-      // NATIONAL panel
-      const natEl = document.getElementById('national-sections');
-      let natHTML = '';
-      natHTML += sectionHTML('Agencies & Help Centers', national.agencies, true);
-      natHTML += sectionHTML('Forms & Templates',      national.forms,    true);
-      natHTML += sectionHTML('Statutes & Laws',         national.statutes, false);
-      if(national.notes){
-        natHTML += `<p class="muted">${national.notes}</p>`;
+      // NATIONWIDE box
+      let nat = '';
+      nat += section('Agencies & Help Centers', data.national.agencies);
+      nat += section('Forms & Templates', data.national.forms);
+      nat += section('Statutes & Laws', data.national.statutes, false);
+      if (data.national.notes) {
+        nat += `<div class="section-title"><h2>Notes</h2><p>${data.national.notes}</p></div>`;
       }
-      natEl.innerHTML = natHTML || '<p class="muted">No nationwide items yet.</p>';
 
-      // STATE panel
-      document.getElementById('state-panel-title').textContent = `${state.name} Resources`;
-      const stEl = document.getElementById('state-sections');
-      let stHTML = '';
-      stHTML += sectionHTML('Agencies & Help Centers', state.agencies, true);
-      stHTML += sectionHTML('Forms & Templates',       state.forms,    true);
-      stHTML += sectionHTML('Statutes & Laws',         state.statutes, false);
-      if(state.notes){
-        stHTML += `<p class="muted">${state.notes}</p>`;
+      // STATE box (includes infobox if present)
+      let st = '';
+      st += section('Agencies & Help Centers', stateData.agencies);
+      st += section('Forms & Templates', stateData.forms);
+      st += section('Statutes & Laws', stateData.statutes, false);
+      if (stateData.notes) {
+        st += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
       }
-      stEl.innerHTML = stHTML || '<p class="muted">No state-specific items yet.</p>';
+      if (stateData.infobox) {
+        const ib = stateData.infobox;
+        st += `
+          <div class="section-title">
+            <h2>${ib.title || 'At a Glance'}</h2>
+            ${ib.factors?.length ? `<h3 class="muted">${ib.factors_title || 'Key Factors'}</h3><ul>${
+              ib.factors.map(f => `<li>${f}</li>`).join('')
+            }</ul>` : ''}
+            ${ib.stats?.length ? `<h3 class="muted">${ib.stats_title || 'Trends'}</h3><ul>${
+              ib.stats.map(s => `<li><strong>${s.label}:</strong> ${s.value}${s.note ? ` <span class="muted">(${s.note})</span>` : ''}</li>`).join('')
+            }</ul>` : ''}
+            ${ib.disclaimer ? `<p class="muted">${ib.disclaimer}</p>` : ''}
+          </div>`;
+      }
 
-      // INFOBOX (optional per state)
-      const iboxWrap = document.getElementById('infobox');
-      const ibox = state.infobox;
-      if(ibox){
-        let factors = '';
-        if(Array.isArray(ibox.factors) && ibox.factors.length){
-          factors = '<div class="ibox-card"><h3 class="ibox-title">' +
-                    (ibox.factors_title || 'Key Factors') +
-                    '</h3><ul>' +
-                    ibox.factors.map(f => `<li>${f}</li>`).join('') +
-                    '</ul></div>';
-        }
-        let stats = '';
-        if(Array.isArray(ibox.stats) && ibox.stats.length){
-          stats = '<div class="ibox-card"><h3 class="ibox-title">' +
-                  (ibox.stats_title || 'Trends / Outcomes') +
-                  '</h3><div class="kv">' +
-                  ibox.stats.map(s => `
-                    <div class="kv-item">
-                      <span class="kv-label">${s.label}</span>
-                      <span class="kv-value">${s.value || ''}</span>
-                    </div>
-                    ${s.note ? `<span class="kv-note">${s.note}</span>` : ''}
-                  `).join('') +
-                  '</div>' +
-                  (ibox.disclaimer ? `<p class="muted" style="margin-top:10px">${ibox.disclaimer}</p>` : '') +
-                  '</div>';
-        }
-        if(factors || stats){
-          iboxWrap.innerHTML = `
-            <div class="panel">
-              <h2>${ibox.title || 'About Custody Decisions in ' + state.name}</h2>
-              <div class="infobox">${factors}${stats}</div>
-            </div>`;
-        }
-      }
-    })
-    .catch(err => {
+      container.innerHTML = `
+        <div class="panel"><h2>Nationwide Resources</h2>${nat || '<p class="muted">None yet.</p>'}</div>
+        <div class="panel"><h2>State Resources</h2>${st || '<p class="muted">None yet.</p>'}</div>
+      `;
+    } catch (err) {
       titleEl.textContent = 'Error loading resources';
-      console.error(err);
-    });
-})();
-</script>
+      // Show the error on-page to help debug
+      container.innerHTML = `<div class="panel"><pre class="muted" style="white-space:pre-wrap">Load error: ${err.message}</pre></div>`;
+      console.error('states.json load error:', err);
+    }
+  }
 
-</body>
-</html>
+  load();
+</script>
