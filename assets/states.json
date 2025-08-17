@@ -19,130 +19,64 @@
 
   "alabama": { "name": "Alabama", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "alaska": { "name": "Alaska", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "arizona": { "name": "Arizona", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "arkansas": { "name": "Arkansas", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "california": { "name": "California", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "colorado": { "name": "Colorado", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "connecticut": { "name": "Connecticut", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "delaware": { "name": "Delaware", "agencies": [], "forms": [], "statutes": [], "notes": "" },
+
   "florida": {
-  "name": "Florida",
-  "agencies": [
-    {
-      "label": "Florida Courts – Family Law Self-Help",
-      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information"
-    },
-    {
-      "label": "Florida Family Law Forms (Index)",
-      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms"
-    },
-    {
-      "label": "Florida Bar – Lawyer Referral Service",
-      "url": "https://lrs.floridabar.org/"
-    },
-    {
-      "label": "Florida Legal Aid Directory",
-      "url": "https://www.floridalegalaid.org/"
-    },
-    {
-      "label": "Florida Dept. of Revenue – Child Support",
-      "url": "https://floridarevenue.com/childsupport/Pages/default.aspx"
-    }
-  ],
-  "forms": [
-    {
-      "label": "Unmarried Fathers: Petition to Determine Paternity & Related Relief (Form 12.983a)",
-      "url": "https://www.flcourts.gov/content/download/403033/file/983a.pdf"
-    },
-    {
-      "label": "Married Parents: Petition for Dissolution w/ Minor Children (Form 12.901b1)",
-      "url": "https://www.flcourts.gov/content/download/403076/file/901b1.pdf"
-    },
-    {
-      "label": "Parenting Plan (Form 12.995a)",
-      "url": "https://www.flcourts.gov/content/download/403258/file/995a.pdf"
-    },
-    {
-      "label": "UCCJEA Affidavit (Form 12.902d) – Required",
-      "url": "https://www.flcourts.gov/content/download/403133/file/902d.pdf"
-    },
-    {
-      "label": "Child Support Guidelines Worksheet (Form 12.902e)",
-      "url": "https://www.flcourts.gov/content/download/403137/file/902e.pdf"
-    },
-    {
-      "label": "Financial Affidavit – Short/Long (Forms 12.902b / 12.902c)",
-      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms"
-    }
-  ],
-  "statutes": [
-    "Time-sharing & parenting plans: Florida Statutes §61.13",
-    "Child support guidelines: Florida Statutes §61.30",
-    "Best-interests standard; no gender preference; shared parental responsibility favored"
-  ],
-  "notes": "Florida uses Parenting Plans and time-sharing (not ‘custody’). Courts apply the child’s best interests, encourage frequent and continuing contact with both parents, and (since 2023) start from a rebuttable presumption of equal time-sharing, subject to evidence.",
-  "infobox": {
-    "title": "How Florida Judges Decide & What Outcomes Look Like",
-    "factors_title": "Key Best-Interests Factors (F.S. §61.13)",
-    "factors": [
-      "Each parent’s willingness to foster a close parent-child relationship and honor the schedule",
-      "Division of parental responsibilities; who actually handles day-to-day care",
-      "Putting the child’s needs ahead of one’s own",
-      "Stability and continuity of the child’s home/school/community",
-      "Moral fitness; mental & physical health of parents and child",
-      "Child’s school, home, and community record",
-      "Child’s reasonable preference (if mature enough)",
-      "Any evidence of abuse, neglect, domestic violence, or substance abuse"
+    "name": "Florida",
+    "agencies": [
+      { "label": "Florida Courts – Family Law Self-Help", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information" },
+      { "label": "Florida Family Law Forms (Index)", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms" },
+      { "label": "Florida Bar – Lawyer Referral Service", "url": "https://lrs.floridabar.org/" },
+      { "label": "Florida Legal Aid Directory", "url": "https://www.floridalegalaid.org/" },
+      { "label": "Florida Dept. of Revenue – Child Support", "url": "https://floridarevenue.com/childsupport/Pages/default.aspx" }
     ],
-    "stats_title": "Florida Time-Sharing Trends (High-Level)",
-    "stats": [
-      {
-        "label": "Equal time-sharing (50/50)",
-        "value": "Common / increasingly standard",
-        "note": "2023 law adds a rebuttable presumption for 50/50 when appropriate."
-      },
-      {
-        "label": "S
-  "georgia": { "name": "Georgia", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "hawaii": { "name": "Hawaii", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "idaho": { "name": "Idaho", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "illinois": { "name": "Illinois", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "indiana": { "name": "Indiana", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "iowa": { "name": "Iowa", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "kansas": { "name": "Kansas", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "kentucky": { "name": "Kentucky", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "louisiana": { "name": "Louisiana", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "maine": { "name": "Maine", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "maryland": { "name": "Maryland", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "massachusetts": { "name": "Massachusetts", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "michigan": { "name": "Michigan", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "minnesota": { "name": "Minnesota", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "mississippi": { "name": "Mississippi", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "missouri": { "name": "Missouri", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "montana": { "name": "Montana", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "nebraska": { "name": "Nebraska", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "nevada": { "name": "Nevada", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "new_hampshire": { "name": "New Hampshire", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "new_jersey": { "name": "New Jersey", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "new_mexico": { "name": "New Mexico", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "new_york": { "name": "New York", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "north_carolina": { "name": "North Carolina", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "north_dakota": { "name": "North Dakota", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "ohio": { "name": "Ohio", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "oklahoma": { "name": "Oklahoma", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "oregon": { "name": "Oregon", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "pennsylvania": { "name": "Pennsylvania", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "rhode_island": { "name": "Rhode Island", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "south_carolina": { "name": "South Carolina", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "south_dakota": { "name": "South Dakota", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "tennessee": { "name": "Tennessee", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "texas": { "name": "Texas", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "utah": { "name": "Utah", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "vermont": { "name": "Vermont", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "virginia": { "name": "Virginia", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "washington": { "name": "Washington", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "west_virginia": { "name": "West Virginia", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "wisconsin": { "name": "Wisconsin", "agencies": [], "forms": [], "statutes": [], "notes": "" },
+    "forms": [
+      { "label": "Unmarried Fathers: Petition to Determine Paternity & Related Relief (Form 12.983a)", "url": "https://www.flcourts.gov/content/download/403033/file/983a.pdf" },
+      { "label": "Married Parents: Petition for Dissolution w/ Minor Children (Form 12.901b1)", "url": "https://www.flcourts.gov/content/download/403076/file/901b1.pdf" },
+      { "label": "Parenting Plan (Form 12.995a)", "url": "https://www.flcourts.gov/content/download/403258/file/995a.pdf" },
+      { "label": "UCCJEA Affidavit (Form 12.902d) – Required", "url": "https://www.flcourts.gov/content/download/403133/file/902d.pdf" },
+      { "label": "Child Support Guidelines Worksheet (Form 12.902e)", "url": "https://www.flcourts.gov/content/download/403137/file/902e.pdf" },
+      { "label": "Financial Affidavit – Short/Long (Forms 12.902b / 12.902c)", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms" }
+    ],
+    "statutes": [
+      "Time-sharing & parenting plans: Florida Statutes §61.13",
+      "Child support guidelines: Florida Statutes §61.30",
+      "Best-interests standard; no gender preference; shared parental responsibility favored"
+    ],
+    "notes": "Florida uses Parenting Plans and time-sharing (not ‘custody’). Courts apply the child’s best interests, encourage frequent and continuing contact with both parents, and (since 2023) start from a rebuttable presumption of equal time-sharing, subject to evidence.",
+    "infobox": {
+      "title": "How Florida Judges Decide & What Outcomes Look Like",
+      "factors_title": "Key Best-Interests Factors (F.S. §61.13)",
+      "factors": [
+        "Each parent’s willingness to foster a close parent-child relationship and honor the schedule",
+        "Division of parental responsibilities; who actually handles day-to-day care",
+        "Putting the child’s needs ahead of one’s own",
+        "Stability and continuity of the child’s home/school/community",
+        "Moral fitness; mental & physical health of parents and child",
+        "Child’s school, home, and community record",
+        "Child’s reasonable preference (if mature enough)",
+        "Any evidence of abuse, neglect, domestic violence, or substance abuse"
+      ],
+      "stats_title": "Florida Time-Sharing Trends (High-Level)",
+      "stats": [
+        {
+          "label": "Equal time-sharing (50/50)",
+          "value": "Common / increasingly standard",
+          "note": "2023 law adds a rebuttable presumption for 50/50 when appropriate."
+        },
+        {
+          "label": "Sole custody to mother",
+          "value": "Still more frequent than to fathers",
+          "note": "But courts must apply gender-neutral analysis."
+        },
+        {
+          "label": "Sole custody to father",
+          "value": "Less common",
+          "note": "Typically requires showing mother is unfit or unable to care for child."
+        }
+      ],
+      "disclaimer": "Percentages vary by county and judge; trends are high-level only."
+    }
+  },
 
   "wyoming": {
     "name": "Wyoming",
@@ -161,6 +95,38 @@
       { "label": "Child Support – Presumptive Guidelines & Deviations (§ 20-2-304)", "url": "https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/" },
       { "label": "Wyoming Child Support Policy Manual", "url": "https://wychildsupportpolicymanual.wyo.gov/8-establishment/8-3-child-support" }
     ],
-    "notes": "In Wyoming, both married and unmarried parents can use state-provided packets to file for custody, support, or modifications. Statutes are publicly available online via the Wyoming Legislature, with Title 20 covering Domestic Relations. Child support is generally calculated from both parents' incomes and time with the child, but courts may deviate based on other factors like healthcare costs, extraordinary expenses, or the child's needs."
+    "notes": "In Wyoming, both married and unmarried parents can use state-provided packets to file for custody, support, or modifications. Statutes are publicly available online via the Wyoming Legislature, with Title 20 covering Domestic Relations.",
+    "infobox": {
+      "title": "Custody in Wyoming: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests of the child is the controlling factor (Wyo. Stat. §20-2-201)",
+        "Quality of each parent’s relationship with the child",
+        "Each parent’s ability to provide adequate care, education, and guidance",
+        "Stability and continuity of the child’s home environment",
+        "Child’s interaction and relationship with siblings and extended family",
+        "Willingness of each parent to respect the other’s rights and foster relationship",
+        "Any evidence of spousal or child abuse"
+      ],
+      "stats_title": "Custody Trends (Approximate, Wyoming & National Context)",
+      "stats": [
+        {
+          "label": "Equal/Shared custody (50/50 or close)",
+          "value": "Growing but still less common",
+          "note": "Estimates: ~30–35% of cases result in near-equal parenting time."
+        },
+        {
+          "label": "Primary custody to mother",
+          "value": "Most common outcome",
+          "note": "Nationally around 65–70% of sole/primary awards go to mothers; Wyoming similar."
+        },
+        {
+          "label": "Primary custody to father",
+          "value": "Less frequent (~10–15%)",
+          "note": "Courts may award when mother is unfit, absent, or father is proven primary caregiver."
+        }
+      ],
+      "disclaimer": "Exact percentages vary year by year and by judge. Stats shown are estimates from national and state-level studies."
+    }
   }
 }
