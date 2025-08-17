@@ -6,24 +6,38 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <link rel="stylesheet" href="/assets/style.css" />
   <style>
-    body{background:#0e1117;color:#e6edf3;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0}
+    :root{
+      --bg:#0e1117; --panel:#161b22; --line:#30363d;
+      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
+    }
+    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
-    h1,h2{color:#d4af37}
+    h1,h2{color:var(--gold);margin-top:0}
     a{color:#86b7ff;text-decoration:none}
-    .panel{background:rgba(22,27,34,.88);border:1px solid #30363d;border-radius:14px;padding:20px;margin:18px 0}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
     .section-title{margin-top:20px}
     ul{padding-left:18px}
-    .muted{color:#9aa4b2}
+    .muted{color:var(--muted)}
 
-    /* Nav */
-    .topnav{background:#161b22;border-bottom:1px solid #30363d;padding:10px 0;position:sticky;top:0;z-index:1000}
+    /* Nav bar */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
     .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
-    .topnav a{color:#d4af37;font-weight:600}
-    .topnav a:hover{color:#e6edf3}
+    .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s}
+    .topnav a:hover{color:var(--text)}
 
-    /* Two columns on wide screens */
-    .grid{display:grid;gap:18px}
-    @media(min-width:900px){.grid-2{grid-template-columns:1fr 1fr}}
+    /* Infobox styles */
+    .infobox{display:grid;gap:14px}
+    @media(min-width:800px){
+      .infobox{grid-template-columns:1.1fr .9fr}
+    }
+    .ibox-left,.ibox-right{background:rgba(0,0,0,.1);border:1px solid var(--line);border-radius:12px;padding:16px}
+    .ibox-title{font-weight:800;letter-spacing:.3px;margin:0 0 8px 0;color:var(--gold)}
+    .stat-row{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding:8px 0}
+    .stat-row:last-child{border-bottom:0}
+    .stat-label{font-weight:700}
+    .stat-value{color:var(--gold);font-weight:800}
+    .stat-note{display:block;color:var(--muted);font-size:.9rem;margin-top:4px}
+    .ibox-disclaimer{margin-top:10px;color:var(--muted);font-size:.9rem}
   </style>
 </head>
 <body>
@@ -42,111 +56,113 @@
 
   <div class="wrap">
     <h1 id="state-title">Loading...</h1>
-
-    <!-- NATIONAL + STATE columns -->
-    <div class="grid grid-2" id="columns" style="display:none">
-      <div id="national-col"></div>
-      <div id="state-col"></div>
-    </div>
-
-    <!-- Fallback single column (in case JS needs it) -->
-    <div id="single-col"></div>
-
-    <!-- AI Goal widget -->
-    <div class="panel" id="ai-goal-panel">
-      <div id="ai-goal-widget"></div>
-    </div>
+    <div id="resources-container"></div>
+    <div id="infobox-container"></div>
   </div>
 
   <script>
-    // Which state?
+    // Get ?state= from URL
     const params = new URLSearchParams(window.location.search);
     const stateKey = params.get('state')?.toLowerCase().replace(/\s+/g,'_');
 
-    // Gentle WY flag background when on Wyoming
-    if (stateKey === 'wyoming') {
-      document.body.style.backgroundImage = "url('/assets/Dad-Wyoming.PNG')";
-      document.body.style.backgroundSize = "cover";
-      document.body.style.backgroundRepeat = "no-repeat";
-      document.body.style.backgroundAttachment = "fixed";
-      document.body.style.backgroundPosition = "center";
-      // darker overlay so text stays readable
-      document.body.style.backgroundColor = "rgba(14,17,23,0.88)";
-      document.body.style.backgroundBlendMode = "overlay";
-    }
-
-    const titleEl   = document.getElementById('state-title');
-    const twoCols   = document.getElementById('columns');
-    const natCol    = document.getElementById('national-col');
-    const stateCol  = document.getElementById('state-col');
-    const singleCol = document.getElementById('single-col');
-
     if (!stateKey) {
-      titleEl.textContent = "No state selected";
+      document.getElementById('state-title').textContent = "No state selected";
     } else {
+      // Example: special background for Wyoming (optional)
+      if (stateKey === 'wyoming') {
+        document.body.style.backgroundImage = "url('/assets/Dad-Wyoming-Flag-vertical.png')";
+        document.body.style.backgroundSize = "cover";
+        document.body.style.backgroundRepeat = "no-repeat";
+        document.body.style.backgroundAttachment = "fixed";
+        document.body.style.backgroundPosition = "center";
+        document.body.style.backgroundColor = "rgba(14,17,23,0.72)";
+        document.body.style.backgroundBlendMode = "overlay";
+      }
+
       fetch('/assets/states.json')
         .then(r => r.json())
         .then(data => {
-          const national = data.national || {};
+          const titleEl = document.getElementById('state-title');
+          const resEl = document.getElementById('resources-container');
+          const iboxEl = document.getElementById('infobox-container');
+
+          if (!data[stateKey]) {
+            titleEl.textContent = "State not found";
+            return;
+          }
+
           const stateData = data[stateKey];
-          if (!stateData) { titleEl.textContent = "State not found"; return; }
           titleEl.textContent = `${stateData.name} Resources`;
 
-          // Helpers: render lists that may contain strings OR {label,url}
-          const renderLinks = (title, items) => {
+          // Helper: render list sections
+          function renderSection(title, items, isLinks = true) {
             if (!items || !items.length) return '';
             let html = `<div class="section-title"><h2>${title}</h2><ul>`;
-            for (const item of items) {
-              if (typeof item === 'string') {
-                html += `<li>${item}</li>`;
-              } else if (item && item.url && item.label) {
+            items.forEach(item => {
+              if (isLinks) {
                 html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
+              } else {
+                html += `<li>${item}</li>`;
               }
-            }
+            });
             html += `</ul></div>`;
             return html;
+          }
+
+          // Merge National + State
+          const merged = {
+            agencies: [...(data.national?.agencies || []), ...(stateData.agencies || [])],
+            forms:    [...(data.national?.forms || []), ...(stateData.forms || [])],
+            statutes: [...(data.national?.statutes || []), ...(stateData.statutes || [])],
+            notes:    [data.national?.notes, stateData.notes].filter(Boolean).join(' ')
           };
 
-          const renderPanel = (heading, blockHtml) =>
-            `<div class="panel"><h2 style="margin-top:0">${heading}</h2>${blockHtml}</div>`;
+          // Main resources panel
+          let html = '';
+          html += renderSection("Agencies & Help Centers", merged.agencies, true);
+          html += renderSection("Forms & Templates", merged.forms, true);
+          html += renderSection("Statutes & Laws", merged.statutes, false);
+          if (merged.notes) {
+            html += `<div class="section-title"><h2>Notes</h2><p class="muted">${merged.notes}</p></div>`;
+          }
+          resEl.innerHTML = `<div class="panel">${html}</div>`;
 
-          // NATIONAL (left)
-          let natHtml = '';
-          natHtml += renderLinks("Agencies & Help Centers", national.agencies);
-          natHtml += renderLinks("Forms & Templates",      national.forms);
-          natHtml += renderLinks("Statutes & Laws",         national.statutes);
-          if (national.notes) natHtml += `<div class="section-title"><h2>Notes</h2><p class="muted">${national.notes}</p></div>`;
+          // Infobox panel (if provided for this state)
+          const ib = stateData.infobox;
+          if (ib) {
+            const factors = (ib.factors || []).map(f => `<li>${f}</li>`).join('');
+            const stats = (ib.stats || []).map(s => `
+              <div class="stat-row">
+                <div class="stat-label">${s.label}</div>
+                <div class="stat-value">${s.value}</div>
+              </div>
+              ${s.note ? `<span class="stat-note">${s.note}</span>` : ''}
+            `).join('');
 
-          // STATE (right)
-          let stHtml = '';
-          stHtml += renderLinks("Agencies & Help Centers", stateData.agencies);
-          stHtml += renderLinks("Forms & Templates",       stateData.forms);
-          stHtml += renderLinks("Statutes & Laws",         stateData.statutes);
-          if (stateData.notes) stHtml += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
-
-          // Show two-column layout on wide screens
-          natCol.innerHTML = renderPanel("National Resources", natHtml || "<p class='muted'>No national items yet.</p>");
-          stateCol.innerHTML = renderPanel(`${stateData.name} Resources`, stHtml || "<p class='muted'>No state items yet.</p>");
-          twoCols.style.display = 'grid';
-
-          // Fallback single column (not used now, but kept for safety)
-          singleCol.innerHTML = '';
+            const iboxHTML = `
+              <div class="panel">
+                <h2>${ib.title || 'At-a-Glance'}</h2>
+                <div class="infobox">
+                  <div class="ibox-left">
+                    <p class="ibox-title">${ib.factors_title || 'Key Factors'}</p>
+                    <ul>${factors}</ul>
+                  </div>
+                  <div class="ibox-right">
+                    <p class="ibox-title">${ib.stats_title || 'Trends & Notes'}</p>
+                    ${stats || '<p class="muted">No data available.</p>'}
+                    ${ib.disclaimer ? `<p class="ibox-disclaimer">${ib.disclaimer}</p>` : ''}
+                  </div>
+                </div>
+              </div>
+            `;
+            iboxEl.innerHTML = iboxHTML;
+          }
         })
         .catch(err => {
+          document.getElementById('state-title').textContent = "Error loading resources";
           console.error(err);
-          titleEl.textContent = "Error loading resources";
         });
     }
-  </script>
-
-  <!-- AI Goal widget (same as other pages) -->
-  <script src="/assets/ai-goal.js"></script>
-  <script>
-    window.DEFEND_DAD_CONFIG = {
-      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
-      goalTotal: 350000,
-      minGrantsToOpen: 500
-    };
   </script>
 </body>
 </html>
