@@ -1,178 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Defend Dad – State Resources</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <title>Defend Dad — State Resources</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #0e1117;
-      color: #f1c40f;
-      min-height: 100vh;
+    :root{
+      --bg:#0e1117; --panel:#161b22; --line:#30363d;
+      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
+      --bg-url:none;
     }
-    header {
-      background: #1a1d23;
-      padding: 12px 20px;
-      text-align: center;
+    html,body{height:100%}
+    body{
+      margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg);color:var(--text)
     }
-    header a {
-      color: #f1c40f;
-      margin: 0 12px;
-      text-decoration: none;
-      font-weight: bold;
+
+    /* Background image with readable overlay */
+    body.has-bg::before{
+      content:"";position:fixed;inset:0;z-index:-2;
+      background-image:var(--bg-url);
+      background-size:cover;background-position:center;background-repeat:no-repeat;
     }
-    .container {
-      padding: 20px;
-      max-width: 900px;
-      margin: auto;
-      background: rgba(14,17,23,0.82);
+    body.has-bg::after{
+      content:"";position:fixed;inset:0;z-index:-1;
+      background:rgba(14,17,23,0.72); /* darken so text pops */
     }
-    h1, h2, h3 {
-      color: #f1c40f;
-    }
-    .card {
-      background: #1a1d23;
-      border-radius: 6px;
-      padding: 15px;
-      margin: 15px 0;
-    }
-    .card a {
-      color: #4fa3ff;
-      text-decoration: none;
-    }
-    .infobox {
-      background: rgba(255, 255, 255, 0.08);
-      border-left: 4px solid #f1c40f;
-      padding: 15px;
-      margin-top: 20px;
-    }
+
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+    h1,h2{color:var(--gold);margin-top:0}
+    a{color:#86b7ff;text-decoration:none}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
+    .section-title{margin-top:14px}
+    ul{margin:0.3rem 0 0.6rem 1.1rem}
+    .muted{color:var(--muted)}
+
+    /* Nav */
+    .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:10}
+    .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
+    .topnav a{color:var(--gold);font-weight:600}
+    .topnav a:hover{color:var(--text)}
   </style>
 </head>
 <body>
-  <header>
-    <a href="/">Home</a>
-    <a href="/resources.html">Resources</a>
-    <a href="/shop.html">Shop</a>
-    <a href="/ai.html">Our AI</a>
-    <a href="/community.html">Community</a>
-    <a href="/donations.html">Donations</a>
-  </header>
 
-  <div class="container" id="content">
-    <h1>Loading resources…</h1>
+  <!-- Navigation -->
+  <nav class="topnav">
+    <div class="nav-container">
+      <a href="/">Home</a>
+      <a href="/resources/">Resources</a>
+      <a href="/shop/">Shop</a>
+      <a href="/our-ai/">Our AI</a>
+      <a href="/community/">Community</a>
+      <a href="/donations/">Donations</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <h1 id="state-title">Loading resources…</h1>
+
+    <div id="national" class="panel" style="display:none"></div>
+    <div id="state" class="panel" style="display:none"></div>
   </div>
 
   <script>
-    async function loadResources() {
-      const params = new URLSearchParams(window.location.search);
-      const stateKey = params.get("state");
-      if (!stateKey) {
-        document.getElementById("content").innerHTML = "<h1>Error: No state specified.</h1>";
-        return;
+    // Map state key -> background image
+    const BG_MAP = {
+      wyoming:  "/assets/State/Dad-Wyoming.PNG",
+      florida:  "/assets/State/Dad-Florida%20.PNG",  // note the space in filename
+      texas:    "/assets/State/Dad-Texas.PNG"
+      // add more as you upload (same pattern)
+    };
+
+    // Utilities
+    const $ = sel => document.querySelector(sel);
+
+    function renderLinksSection(title, items) {
+      if (!items || !items.length) return "";
+      let html = `<div class="section-title"><h2>${title}</h2><ul>`;
+      for (const item of items) {
+        if (typeof item === "string") {
+          html += `<li>${item}</li>`;
+        } else if (item && item.url && item.label) {
+          html += `<li><a href="${item.url}" target="_blank" rel="noopener">${item.label}</a></li>`;
+        }
+      }
+      html += `</ul></div>`;
+      return html;
+    }
+
+    function renderInfobox(ibox) {
+      if (!ibox) return "";
+      let html = `<div class="section-title"><h2>${ibox.title || "Details"}</h2>`;
+      if (ibox.factors && ibox.factors.length) {
+        html += `<h3 style="color:#d4af37;margin-bottom:6px">${ibox.factors_title || "Factors"}</h3><ul>`;
+        ibox.factors.forEach(f => html += `<li>${f}</li>`);
+        html += `</ul>`;
+      }
+      if (ibox.stats && ibox.stats.length) {
+        html += `<h3 style="color:#d4af37;margin:12px 0 6px">${ibox.stats_title || "Stats"}</h3><ul>`;
+        ibox.stats.forEach(s => {
+          const label = s.label || "";
+          const value = s.value || "";
+          const note  = s.note ? ` — ${s.note}` : "";
+          html += `<li><strong>${label}:</strong> ${value}${note}</li>`;
+        });
+        html += `</ul>`;
+      }
+      if (ibox.disclaimer) html += `<p class="muted" style="margin-top:8px"><em>${ibox.disclaimer}</em></p>`;
+      html += `</div>`;
+      return html;
+    }
+
+    async function init() {
+      const params = new URLSearchParams(location.search);
+      const keyRaw = params.get("state");
+      const stateKey = keyRaw ? keyRaw.toLowerCase().replace(/\s+/g,'_') : "";
+
+      if (!stateKey) { $("#state-title").textContent = "No state selected"; return; }
+
+      // Background image: set CSS var only if we actually have one
+      const bg = BG_MAP[stateKey];
+      if (bg) {
+        document.body.style.setProperty('--bg-url', `url("${bg}")`);
+        document.body.classList.add('has-bg');
+      } else {
+        document.body.classList.remove('has-bg');
       }
 
       try {
-        const response = await fetch("/assets/data/resources.json");
-        const data = await response.json();
+        // IMPORTANT: your JSON lives here
+        const res = await fetch("/assets/states.json", {cache:"no-store"});
+        const data = await res.json();
 
-        const stateData = data[stateKey.toLowerCase()];
-        if (!stateData) {
-          document.getElementById("content").innerHTML = "<h1>No data found for this state.</h1>";
-          return;
-        }
+        const national = data.national;
+        const state = data[stateKey];
+        if (!state) { $("#state-title").textContent = "State not found"; return; }
 
-        // Background images mapping
-        const bgMap = {
-          wyoming:  "/assets/State/Dad-Wyoming.PNG",
-          florida:  "/assets/State/Dad-Florida%20.PNG", // has a space in filename
-          texas:    "/assets/State/Dad-Texas.PNG"
-        };
+        $("#state-title").textContent = `${state.name} Resources`;
 
-        // Apply background if exists
-        const bgUrl = bgMap[stateKey.toLowerCase()];
-        if (bgUrl) {
-          const img = new Image();
-          img.onload = () => {
-            document.body.style.backgroundImage = `url('${bgUrl}')`;
-            document.body.style.backgroundSize = "cover";
-            document.body.style.backgroundRepeat = "no-repeat";
-            document.body.style.backgroundAttachment = "fixed";
-            document.body.style.backgroundPosition = "center";
-            document.body.style.backgroundBlendMode = "overlay";
-          };
-          img.src = bgUrl + `?v=${Date.now()}`;
-        }
+        // NATIONAL panel
+        let natHTML = "";
+        natHTML += renderLinksSection("Agencies & Help (Nationwide)", national.agencies);
+        natHTML += renderLinksSection("Forms & Templates (Nationwide)", national.forms);
+        natHTML += renderLinksSection("Statutes & Laws (Nationwide)", national.statutes);
+        if (national.notes) natHTML += `<p class="muted">${national.notes}</p>`;
+        if (natHTML) { $("#national").innerHTML = natHTML; $("#national").style.display = ""; }
 
-        // Render content
-        let html = `<h1>${stateData.name} Resources</h1>`;
+        // STATE panel
+        let stHTML = "";
+        stHTML += renderLinksSection("Agencies & Legal Aid (State)", state.agencies);
+        stHTML += renderLinksSection("Forms (State)", state.forms);
+        stHTML += renderLinksSection("Statutes & Laws (State)", state.statutes);
+        if (state.notes) stHTML += `<p>${state.notes}</p>`;
+        if (state.infobox) stHTML += renderInfobox(state.infobox);
+        $("#state").innerHTML = stHTML || "<p>No state resources yet.</p>";
+        $("#state").style.display = "";
 
-        // Agencies
-        if (stateData.agencies && stateData.agencies.length) {
-          html += `<div class="card"><h2>Agencies & Legal Aid</h2><ul>`;
-          stateData.agencies.forEach(a => {
-            html += `<li><a href="${a.url}" target="_blank">${a.label}</a></li>`;
-          });
-          html += `</ul></div>`;
-        }
-
-        // Forms
-        if (stateData.forms && stateData.forms.length) {
-          html += `<div class="card"><h2>Forms</h2><ul>`;
-          stateData.forms.forEach(f => {
-            html += `<li><a href="${f.url}" target="_blank">${f.label}</a></li>`;
-          });
-          html += `</ul></div>`;
-        }
-
-        // Statutes
-        if (stateData.statutes && stateData.statutes.length) {
-          html += `<div class="card"><h2>Statutes</h2><ul>`;
-          stateData.statutes.forEach(s => {
-            if (typeof s === "string") {
-              html += `<li>${s}</li>`;
-            } else {
-              html += `<li><a href="${s.url}" target="_blank">${s.label}</a></li>`;
-            }
-          });
-          html += `</ul></div>`;
-        }
-
-        // Notes
-        if (stateData.notes) {
-          html += `<div class="card"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
-        }
-
-        // Infobox
-        if (stateData.infobox) {
-          const ib = stateData.infobox;
-          html += `<div class="infobox">`;
-          html += `<h2>${ib.title}</h2>`;
-          if (ib.factors && ib.factors.length) {
-            html += `<h3>${ib.factors_title}</h3><ul>`;
-            ib.factors.forEach(f => html += `<li>${f}</li>`);
-            html += `</ul>`;
-          }
-          if (ib.stats && ib.stats.length) {
-            html += `<h3>${ib.stats_title}</h3><ul>`;
-            ib.stats.forEach(s => html += `<li><strong>${s.label}:</strong> ${s.value} – ${s.note}</li>`);
-            html += `</ul>`;
-          }
-          if (ib.disclaimer) {
-            html += `<p><em>${ib.disclaimer}</em></p>`;
-          }
-          html += `</div>`;
-        }
-
-        document.getElementById("content").innerHTML = html;
-      } catch (err) {
-        console.error(err);
-        document.getElementById("content").innerHTML = "<h1>Error loading resources</h1>";
+      } catch (e) {
+        console.error(e);
+        $("#state-title").textContent = "Error loading resources";
       }
     }
 
-    loadResources();
+    init();
   </script>
 </body>
 </html>
