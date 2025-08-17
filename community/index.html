@@ -1,10 +1,11 @@
-
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <title>Defend Dad — Community</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Font Awesome for social icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-oqVuAfXRKap7fdgcCY5uykM6+R9GhXQf7FdxwC1zYhXQF3Z8GVkO2VkZxz5nN9q3UuM2sbgxX5fV2ZwHzyx0dg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <style>
     :root{
       --bg:#0e1117; --panel:#161b22; --line:#30363d;
@@ -13,7 +14,7 @@
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
 
-    /* Nav bar (same as Resources) */
+    /* Nav bar */
     .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
     .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
     .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s}
@@ -31,10 +32,11 @@
     .btn:hover{filter:brightness(1.05)}
     .grid{display:grid;gap:14px}
     @media(min-width:720px){.grid-2{grid-template-columns:1fr 1fr}}
+    @media(min-width:980px){.grid-4{grid-template-columns:repeat(4,1fr)}}
 
-    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px}
-    .card h3{margin:0 0 6px;color:var(--gold)}
-    .center{text-align:center}
+    .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:18px;text-align:center}
+    .card h3{margin:10px 0 6px;color:var(--gold)}
+    .icon{font-size:2.2rem;margin-bottom:8px;color:var(--gold)}
   </style>
 </head>
 <body>
@@ -56,27 +58,51 @@
 
     <div class="panel">
       <h1>Community</h1>
-      <p>We’re building a strong, respectful space for fathers and allies. Follow our main page for updates and <strong>join the private group</strong> to share stories, ask questions, and support other dads.</p>
+      <p>We’re building a strong, respectful space for fathers and allies. Follow our main page for updates and <strong>join the groups</strong> to share stories, ask questions, and support other dads.</p>
     </div>
 
-    <div class="grid grid-2">
-      <div class="card center">
-        <h3>Follow Our Facebook Page</h3>
+    <div class="grid grid-4">
+      <div class="card">
+        <i class="fab fa-facebook icon"></i>
+        <h3>Facebook Page</h3>
         <p class="muted">News, graphics, wins, and project updates.</p>
         <p>
           <a class="btn"
              href="https://www.facebook.com/share/1DELn5GpZ6/?mibextid=wwXIfr"
-             target="_blank" rel="noopener">Follow Defend Dad</a>
+             target="_blank" rel="noopener">Follow</a>
         </p>
       </div>
 
-      <div class="card center">
-        <h3>Join the Community Group</h3>
+      <div class="card">
+        <i class="fab fa-facebook-group icon"></i>
+        <h3>Facebook Group</h3>
         <p class="muted">Private discussion space for dads and supporters.</p>
         <p>
           <a class="btn"
              href="https://www.facebook.com/share/g/19QvUojLaE/?mibextid=wwXIfr"
-             target="_blank" rel="noopener">Request to Join</a>
+             target="_blank" rel="noopener">Join</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fab fa-reddit icon"></i>
+        <h3>Reddit</h3>
+        <p class="muted">Anonymous dad support + community discussion.</p>
+        <p>
+          <a class="btn"
+             href="https://www.reddit.com/r/DefendDad/s/j07pyU7ag3"
+             target="_blank" rel="noopener">Join</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <i class="fab fa-tiktok icon"></i>
+        <h3>TikTok</h3>
+        <p class="muted">Quick updates, memes, and advocacy clips.</p>
+        <p>
+          <a class="btn"
+             href="https://www.tiktok.com/@YOURHANDLE" 
+             target="_blank" rel="noopener">Follow</a>
         </p>
       </div>
     </div>
