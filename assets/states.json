@@ -25,7 +25,84 @@
   "colorado": { "name": "Colorado", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "connecticut": { "name": "Connecticut", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "delaware": { "name": "Delaware", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "florida": { "name": "Florida", "agencies": [], "forms": [], "statutes": [], "notes": "" },
+  "florida": {
+  "name": "Florida",
+  "agencies": [
+    {
+      "label": "Florida Courts – Family Law Self-Help",
+      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information"
+    },
+    {
+      "label": "Florida Family Law Forms (Index)",
+      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms"
+    },
+    {
+      "label": "Florida Bar – Lawyer Referral Service",
+      "url": "https://lrs.floridabar.org/"
+    },
+    {
+      "label": "Florida Legal Aid Directory",
+      "url": "https://www.floridalegalaid.org/"
+    },
+    {
+      "label": "Florida Dept. of Revenue – Child Support",
+      "url": "https://floridarevenue.com/childsupport/Pages/default.aspx"
+    }
+  ],
+  "forms": [
+    {
+      "label": "Unmarried Fathers: Petition to Determine Paternity & Related Relief (Form 12.983a)",
+      "url": "https://www.flcourts.gov/content/download/403033/file/983a.pdf"
+    },
+    {
+      "label": "Married Parents: Petition for Dissolution w/ Minor Children (Form 12.901b1)",
+      "url": "https://www.flcourts.gov/content/download/403076/file/901b1.pdf"
+    },
+    {
+      "label": "Parenting Plan (Form 12.995a)",
+      "url": "https://www.flcourts.gov/content/download/403258/file/995a.pdf"
+    },
+    {
+      "label": "UCCJEA Affidavit (Form 12.902d) – Required",
+      "url": "https://www.flcourts.gov/content/download/403133/file/902d.pdf"
+    },
+    {
+      "label": "Child Support Guidelines Worksheet (Form 12.902e)",
+      "url": "https://www.flcourts.gov/content/download/403137/file/902e.pdf"
+    },
+    {
+      "label": "Financial Affidavit – Short/Long (Forms 12.902b / 12.902c)",
+      "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms"
+    }
+  ],
+  "statutes": [
+    "Time-sharing & parenting plans: Florida Statutes §61.13",
+    "Child support guidelines: Florida Statutes §61.30",
+    "Best-interests standard; no gender preference; shared parental responsibility favored"
+  ],
+  "notes": "Florida uses Parenting Plans and time-sharing (not ‘custody’). Courts apply the child’s best interests, encourage frequent and continuing contact with both parents, and (since 2023) start from a rebuttable presumption of equal time-sharing, subject to evidence.",
+  "infobox": {
+    "title": "How Florida Judges Decide & What Outcomes Look Like",
+    "factors_title": "Key Best-Interests Factors (F.S. §61.13)",
+    "factors": [
+      "Each parent’s willingness to foster a close parent-child relationship and honor the schedule",
+      "Division of parental responsibilities; who actually handles day-to-day care",
+      "Putting the child’s needs ahead of one’s own",
+      "Stability and continuity of the child’s home/school/community",
+      "Moral fitness; mental & physical health of parents and child",
+      "Child’s school, home, and community record",
+      "Child’s reasonable preference (if mature enough)",
+      "Any evidence of abuse, neglect, domestic violence, or substance abuse"
+    ],
+    "stats_title": "Florida Time-Sharing Trends (High-Level)",
+    "stats": [
+      {
+        "label": "Equal time-sharing (50/50)",
+        "value": "Common / increasingly standard",
+        "note": "2023 law adds a rebuttable presumption for 50/50 when appropriate."
+      },
+      {
+        "label": "S
   "georgia": { "name": "Georgia", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "hawaii": { "name": "Hawaii", "agencies": [], "forms": [], "statutes": [], "notes": "" },
   "idaho": { "name": "Idaho", "agencies": [], "forms": [], "statutes": [], "notes": "" },
