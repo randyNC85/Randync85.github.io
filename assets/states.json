@@ -1,132 +1,53 @@
-{
-  "national": {
-    "name": "Nationwide",
+  "texas": {
+    "name": "Texas",
     "agencies": [
-      {"label": "LawHelp.org – Find free/low-cost legal help by state", "url": "https://www.lawhelp.org/"},
-      {"label": "Legal Services Corporation – Legal aid locator", "url": "https://www.lsc.gov/about-lsc/what-legal-aid/find-legal-aid"},
-      {"label": "ABA Free Legal Answers (civil, income-qualified)", "url": "https://abafreelegalanswers.org/"},
-      {"label": "National Parents Organization", "url": "https://www.sharedparenting.org/"}
+      { "label": "Texas State Law Library – Child Custody & Support Forms", "url": "https://guides.sll.texas.gov/child-custody-and-support/legal-forms" },
+      { "label": "TexasLawHelp.org – Custody & Visitation Forms", "url": "https://texaslawhelp.org/family-law-children/custody-and-visitation" },
+      { "label": "Texas Access & Visitation Program (OAG)", "url": "https://www.texasattorneygeneral.gov/child-support/families-and-parenting/access-and-visitation" },
+      { "label": "Harris County DRO – Self-Represented Services", "url": "https://dro.harriscountytx.gov/Self-Represented-Services/Forms" },
+      { "label": "State Bar of Texas – Lawyer Referral & Info Service", "url": "https://www.texasbar.com/Content/NavigationMenu/ForThePublic/FindALawyer/LRIS/default.htm" }
     ],
     "forms": [
-      {"label": "Uniform Child Custody Jurisdiction and Enforcement Act (UCCJEA) overview", "url": "https://www.uniformlaws.org/committees/community-home?communitykey=ae280c30-094a-4d8f-b722-8dcd614a8f3a"}
+      { "label": "Suit Affecting the Parent–Child Relationship (SAPCR)", "url": "https://texaslawhelp.org/article/how-to-file-an-original-suit-affecting-the-parent-child-relationship-sapcr" },
+      { "label": "Modification of Custody / Visitation", "url": "https://texaslawhelp.org/article/how-to-modify-a-family-court-order" },
+      { "label": "Paternity (Acknowledgment & Establishment)", "url": "https://texaslawhelp.org/article/paternity-establishment-in-texas" },
+      { "label": "Protective Orders (if abuse/domestic violence)", "url": "https://texaslawhelp.org/article/protective-orders" }
     ],
     "statutes": [
-      "UCCJEA adopted in 49 states + DC",
-      "Federal Title IV-D Child Support Enforcement framework"
+      "Texas Family Code Title 5 – The Parent-Child Relationship and the Suit Affecting the Parent-Child Relationship",
+      "Best interests of the child standard: Tex. Fam. Code §153.002",
+      "Presumption for Standard Possession Order (SPO): Tex. Fam. Code §153.252"
     ],
-    "notes": "Nationwide resources are a starting point; always check your state’s specific laws, forms, and procedures."
-  },
-
-  "alabama": { "name": "Alabama", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-  "alaska": { "name": "Alaska", "agencies": [], "forms": [], "statutes": [], "notes": "" },
-
-  "florida": {
-    "name": "Florida",
-    "agencies": [
-      { "label": "Florida Courts – Family Law Self-Help", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information" },
-      { "label": "Florida Family Law Forms (Index)", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms" },
-      { "label": "Florida Bar – Lawyer Referral Service", "url": "https://lrs.floridabar.org/" },
-      { "label": "Florida Legal Aid Directory", "url": "https://www.floridalegalaid.org/" },
-      { "label": "Florida Dept. of Revenue – Child Support", "url": "https://floridarevenue.com/childsupport/Pages/default.aspx" }
-    ],
-    "forms": [
-      { "label": "Unmarried Fathers: Petition to Determine Paternity & Related Relief (Form 12.983a)", "url": "https://www.flcourts.gov/content/download/403033/file/983a.pdf" },
-      { "label": "Married Parents: Petition for Dissolution w/ Minor Children (Form 12.901b1)", "url": "https://www.flcourts.gov/content/download/403076/file/901b1.pdf" },
-      { "label": "Parenting Plan (Form 12.995a)", "url": "https://www.flcourts.gov/content/download/403258/file/995a.pdf" },
-      { "label": "UCCJEA Affidavit (Form 12.902d) – Required", "url": "https://www.flcourts.gov/content/download/403133/file/902d.pdf" },
-      { "label": "Child Support Guidelines Worksheet (Form 12.902e)", "url": "https://www.flcourts.gov/content/download/403137/file/902e.pdf" },
-      { "label": "Financial Affidavit – Short/Long (Forms 12.902b / 12.902c)", "url": "https://www.flcourts.gov/Resources-Services/Family-Courts/Family-Law-Self-Help-Information/Family-Law-Forms" }
-    ],
-    "statutes": [
-      "Time-sharing & parenting plans: Florida Statutes §61.13",
-      "Child support guidelines: Florida Statutes §61.30",
-      "Best-interests standard; no gender preference; shared parental responsibility favored"
-    ],
-    "notes": "Florida uses Parenting Plans and time-sharing (not ‘custody’). Courts apply the child’s best interests, encourage frequent and continuing contact with both parents, and (since 2023) start from a rebuttable presumption of equal time-sharing, subject to evidence.",
+    "notes": "Texas uses the terms 'conservatorship' (custody) and 'possession & access' (visitation). Courts generally presume joint managing conservatorship unless there are issues like abuse, neglect, or unfitness. Fathers often face SPO schedules (~33% time), but 50/50 arrangements are becoming more accepted when logistically feasible.",
     "infobox": {
-      "title": "How Florida Judges Decide & What Outcomes Look Like",
-      "factors_title": "Key Best-Interests Factors (F.S. §61.13)",
+      "title": "Custody in Texas: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests of the Child)",
       "factors": [
-        "Each parent’s willingness to foster a close parent-child relationship and honor the schedule",
-        "Division of parental responsibilities; who actually handles day-to-day care",
-        "Putting the child’s needs ahead of one’s own",
-        "Stability and continuity of the child’s home/school/community",
-        "Moral fitness; mental & physical health of parents and child",
-        "Child’s school, home, and community record",
-        "Child’s reasonable preference (if mature enough)",
-        "Any evidence of abuse, neglect, domestic violence, or substance abuse"
+        "Child’s emotional and physical needs now and in the future",
+        "Each parent’s ability to provide a safe, stable, nurturing home",
+        "Parental cooperation and willingness to encourage a relationship with the other parent",
+        "Child’s preference if age 12 or older",
+        "Stability of each parent’s home environment and proximity of residences",
+        "Any history of abuse, neglect, family violence, or substance abuse"
       ],
-      "stats_title": "Florida Time-Sharing Trends (High-Level)",
+      "stats_title": "Custody Trends in Texas (Estimates)",
       "stats": [
         {
-          "label": "Equal time-sharing (50/50)",
-          "value": "Common / increasingly standard",
-          "note": "2023 law adds a rebuttable presumption for 50/50 when appropriate."
-        },
-        {
-          "label": "Sole custody to mother",
-          "value": "Still more frequent than to fathers",
-          "note": "But courts must apply gender-neutral analysis."
-        },
-        {
-          "label": "Sole custody to father",
-          "value": "Less common",
-          "note": "Typically requires showing mother is unfit or unable to care for child."
-        }
-      ],
-      "disclaimer": "Percentages vary by county and judge; trends are high-level only."
-    }
-  },
-
-  "wyoming": {
-    "name": "Wyoming",
-    "agencies": [
-      { "label": "Wyoming State Bar – Find a Lawyer", "url": "https://www.wyomingbar.org/for-the-public/find-a-lawyer/" },
-      { "label": "University of Wyoming College of Law – Legal Clinics", "url": "https://www.uwyo.edu/law/experiential/clinics/" }
-    ],
-    "forms": [
-      { "label": "Custody & Child Support Modification Packet (Married or Unmarried)", "url": "https://www.wyocourts.gov/app/uploads/2025/03/CCMR-02-Custody-and-Child-Support-Modification-Information-and-Instructions-Respondent-05-25.pdf" },
-      { "label": "Custody & Paternity Packet – Unmarried Parents", "url": "https://www.wyocourts.gov/legal-assist/self-help/forms/ccp-unmarried/" },
-      { "label": "Divorce with Children Packet – Married Parents", "url": "https://www.wyocourts.gov/legal-assist/self-help/forms/divorce-with-children/" }
-    ],
-    "statutes": [
-      { "label": "Wyoming Statutes – Full Text (Searchable)", "url": "https://www.wyoleg.gov/stateStatutes/StateStatutes?tab=1" },
-      { "label": "Wyoming Title 20 – Domestic Relations (PDF)", "url": "https://wyoleg.gov/statutes/compress/title20.pdf" },
-      { "label": "Child Support – Presumptive Guidelines & Deviations (§ 20-2-304)", "url": "https://law.justia.com/codes/wyoming/title-20/chapter-2/article-3/" },
-      { "label": "Wyoming Child Support Policy Manual", "url": "https://wychildsupportpolicymanual.wyo.gov/8-establishment/8-3-child-support" }
-    ],
-    "notes": "In Wyoming, both married and unmarried parents can use state-provided packets to file for custody, support, or modifications. Statutes are publicly available online via the Wyoming Legislature, with Title 20 covering Domestic Relations.",
-    "infobox": {
-      "title": "Custody in Wyoming: Key Factors & Outcomes",
-      "factors_title": "What Judges Consider",
-      "factors": [
-        "Best interests of the child is the controlling factor (Wyo. Stat. §20-2-201)",
-        "Quality of each parent’s relationship with the child",
-        "Each parent’s ability to provide adequate care, education, and guidance",
-        "Stability and continuity of the child’s home environment",
-        "Child’s interaction and relationship with siblings and extended family",
-        "Willingness of each parent to respect the other’s rights and foster relationship",
-        "Any evidence of spousal or child abuse"
-      ],
-      "stats_title": "Custody Trends (Approximate, Wyoming & National Context)",
-      "stats": [
-        {
-          "label": "Equal/Shared custody (50/50 or close)",
-          "value": "Growing but still less common",
-          "note": "Estimates: ~30–35% of cases result in near-equal parenting time."
+          "label": "Equal/Shared Custody (50/50 or close)",
+          "value": "Less common, but increasing",
+          "note": "Must rebut SPO presumption; judges consider feasibility and cooperation."
         },
         {
           "label": "Primary custody to mother",
           "value": "Most common outcome",
-          "note": "Nationally around 65–70% of sole/primary awards go to mothers; Wyoming similar."
+          "note": "Nationally ~65–70% of primary awards go to mothers; Texas is similar."
         },
         {
           "label": "Primary custody to father",
           "value": "Less frequent (~10–15%)",
-          "note": "Courts may award when mother is unfit, absent, or father is proven primary caregiver."
+          "note": "Usually awarded when mother is unfit, absent, or father is established primary caregiver."
         }
       ],
-      "disclaimer": "Exact percentages vary year by year and by judge. Stats shown are estimates from national and state-level studies."
+      "disclaimer": "Percentages are approximate and vary by county and judge. These reflect Texas and national custody studies."
     }
   }
-}
