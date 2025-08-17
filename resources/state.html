@@ -1,98 +1,178 @@
-<script>
-  // Read ?state= from URL (e.g., /resources/state.html?state=florida)
-  const urlParams = new URLSearchParams(window.location.search);
-  const stateKey = urlParams.get('state')?.toLowerCase().replace(/\s+/g, '_');
-
-  const titleEl = document.getElementById('state-title');
-  const container = document.getElementById('resources-container');
-
-  function section(title, items, asLinks = true) {
-    if (!items || !items.length) return '';
-    let html = `<div class="section-title"><h2>${title}</h2><ul>`;
-    for (const it of items) {
-      html += asLinks
-        ? `<li><a href="${it.url}" target="_blank" rel="noopener">${it.label}</a></li>`
-        : `<li>${typeof it === 'string' ? it : `${it.label ?? ''} ${it.value ? '— ' + it.value : ''} ${it.note ? `<span class="muted">(${it.note})</span>` : ''}`}</li>`;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Defend Dad – State Resources</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #0e1117;
+      color: #f1c40f;
+      min-height: 100vh;
     }
-    html += `</ul></div>`;
-    return html;
-  }
-
-  async function load() {
-    if (!stateKey) {
-      titleEl.textContent = 'No state selected';
-      return;
+    header {
+      background: #1a1d23;
+      padding: 12px 20px;
+      text-align: center;
     }
+    header a {
+      color: #f1c40f;
+      margin: 0 12px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+      background: rgba(14,17,23,0.82);
+    }
+    h1, h2, h3 {
+      color: #f1c40f;
+    }
+    .card {
+      background: #1a1d23;
+      border-radius: 6px;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .card a {
+      color: #4fa3ff;
+      text-decoration: none;
+    }
+    .infobox {
+      background: rgba(255, 255, 255, 0.08);
+      border-left: 4px solid #f1c40f;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="/">Home</a>
+    <a href="/resources.html">Resources</a>
+    <a href="/shop.html">Shop</a>
+    <a href="/ai.html">Our AI</a>
+    <a href="/community.html">Community</a>
+    <a href="/donations.html">Donations</a>
+  </header>
 
-    // Cache-bust the JSON to avoid stale loads on CDNs
-    const url = `/assets/states.json?v=${Date.now()}`;
+  <div class="container" id="content">
+    <h1>Loading resources…</h1>
+  </div>
 
-    try {
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json();
-
-      if (!data[stateKey]) {
-        titleEl.textContent = 'State not found';
+  <script>
+    async function loadResources() {
+      const params = new URLSearchParams(window.location.search);
+      const stateKey = params.get("state");
+      if (!stateKey) {
+        document.getElementById("content").innerHTML = "<h1>Error: No state specified.</h1>";
         return;
       }
 
-      // Optional per-state background image: assets/State/Dad-<StateNameNoSpaces>.PNG
-      const imgName = data[stateKey].name?.replace(/\s+/g, '') || '';
-      document.body.style.backgroundImage = `url('/assets/State/Dad-${imgName}.PNG')`;
-      document.body.style.backgroundSize = 'cover';
-      document.body.style.backgroundRepeat = 'no-repeat';
-      document.body.style.backgroundAttachment = 'fixed';
-      document.body.style.backgroundPosition = 'center';
-      document.body.style.backgroundColor = 'rgba(14,17,23,0.8)';
-      document.body.style.backgroundBlendMode = 'overlay';
+      try {
+        const response = await fetch("/assets/data/resources.json");
+        const data = await response.json();
 
-      const stateData = data[stateKey];
-      titleEl.textContent = `${stateData.name} Resources`;
+        const stateData = data[stateKey.toLowerCase()];
+        if (!stateData) {
+          document.getElementById("content").innerHTML = "<h1>No data found for this state.</h1>";
+          return;
+        }
 
-      // NATIONWIDE box
-      let nat = '';
-      nat += section('Agencies & Help Centers', data.national.agencies);
-      nat += section('Forms & Templates', data.national.forms);
-      nat += section('Statutes & Laws', data.national.statutes, false);
-      if (data.national.notes) {
-        nat += `<div class="section-title"><h2>Notes</h2><p>${data.national.notes}</p></div>`;
+        // Background images mapping
+        const bgMap = {
+          wyoming:  "/assets/State/Dad-Wyoming.PNG",
+          florida:  "/assets/State/Dad-Florida%20.PNG", // has a space in filename
+          texas:    "/assets/State/Dad-Texas.PNG"
+        };
+
+        // Apply background if exists
+        const bgUrl = bgMap[stateKey.toLowerCase()];
+        if (bgUrl) {
+          const img = new Image();
+          img.onload = () => {
+            document.body.style.backgroundImage = `url('${bgUrl}')`;
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundRepeat = "no-repeat";
+            document.body.style.backgroundAttachment = "fixed";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundBlendMode = "overlay";
+          };
+          img.src = bgUrl + `?v=${Date.now()}`;
+        }
+
+        // Render content
+        let html = `<h1>${stateData.name} Resources</h1>`;
+
+        // Agencies
+        if (stateData.agencies && stateData.agencies.length) {
+          html += `<div class="card"><h2>Agencies & Legal Aid</h2><ul>`;
+          stateData.agencies.forEach(a => {
+            html += `<li><a href="${a.url}" target="_blank">${a.label}</a></li>`;
+          });
+          html += `</ul></div>`;
+        }
+
+        // Forms
+        if (stateData.forms && stateData.forms.length) {
+          html += `<div class="card"><h2>Forms</h2><ul>`;
+          stateData.forms.forEach(f => {
+            html += `<li><a href="${f.url}" target="_blank">${f.label}</a></li>`;
+          });
+          html += `</ul></div>`;
+        }
+
+        // Statutes
+        if (stateData.statutes && stateData.statutes.length) {
+          html += `<div class="card"><h2>Statutes</h2><ul>`;
+          stateData.statutes.forEach(s => {
+            if (typeof s === "string") {
+              html += `<li>${s}</li>`;
+            } else {
+              html += `<li><a href="${s.url}" target="_blank">${s.label}</a></li>`;
+            }
+          });
+          html += `</ul></div>`;
+        }
+
+        // Notes
+        if (stateData.notes) {
+          html += `<div class="card"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
+        }
+
+        // Infobox
+        if (stateData.infobox) {
+          const ib = stateData.infobox;
+          html += `<div class="infobox">`;
+          html += `<h2>${ib.title}</h2>`;
+          if (ib.factors && ib.factors.length) {
+            html += `<h3>${ib.factors_title}</h3><ul>`;
+            ib.factors.forEach(f => html += `<li>${f}</li>`);
+            html += `</ul>`;
+          }
+          if (ib.stats && ib.stats.length) {
+            html += `<h3>${ib.stats_title}</h3><ul>`;
+            ib.stats.forEach(s => html += `<li><strong>${s.label}:</strong> ${s.value} – ${s.note}</li>`);
+            html += `</ul>`;
+          }
+          if (ib.disclaimer) {
+            html += `<p><em>${ib.disclaimer}</em></p>`;
+          }
+          html += `</div>`;
+        }
+
+        document.getElementById("content").innerHTML = html;
+      } catch (err) {
+        console.error(err);
+        document.getElementById("content").innerHTML = "<h1>Error loading resources</h1>";
       }
-
-      // STATE box (includes infobox if present)
-      let st = '';
-      st += section('Agencies & Help Centers', stateData.agencies);
-      st += section('Forms & Templates', stateData.forms);
-      st += section('Statutes & Laws', stateData.statutes, false);
-      if (stateData.notes) {
-        st += `<div class="section-title"><h2>Notes</h2><p>${stateData.notes}</p></div>`;
-      }
-      if (stateData.infobox) {
-        const ib = stateData.infobox;
-        st += `
-          <div class="section-title">
-            <h2>${ib.title || 'At a Glance'}</h2>
-            ${ib.factors?.length ? `<h3 class="muted">${ib.factors_title || 'Key Factors'}</h3><ul>${
-              ib.factors.map(f => `<li>${f}</li>`).join('')
-            }</ul>` : ''}
-            ${ib.stats?.length ? `<h3 class="muted">${ib.stats_title || 'Trends'}</h3><ul>${
-              ib.stats.map(s => `<li><strong>${s.label}:</strong> ${s.value}${s.note ? ` <span class="muted">(${s.note})</span>` : ''}</li>`).join('')
-            }</ul>` : ''}
-            ${ib.disclaimer ? `<p class="muted">${ib.disclaimer}</p>` : ''}
-          </div>`;
-      }
-
-      container.innerHTML = `
-        <div class="panel"><h2>Nationwide Resources</h2>${nat || '<p class="muted">None yet.</p>'}</div>
-        <div class="panel"><h2>State Resources</h2>${st || '<p class="muted">None yet.</p>'}</div>
-      `;
-    } catch (err) {
-      titleEl.textContent = 'Error loading resources';
-      // Show the error on-page to help debug
-      container.innerHTML = `<div class="panel"><pre class="muted" style="white-space:pre-wrap">Load error: ${err.message}</pre></div>`;
-      console.error('states.json load error:', err);
     }
-  }
 
-  load();
-</script>
+    loadResources();
+  </script>
+</body>
+</html>
