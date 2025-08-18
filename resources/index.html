@@ -5,27 +5,45 @@
   <title>Defend Dad — Resources by State</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
-    :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+    :root{
+      --bg:#0e1117; --panel:#161b22; --line:#30363d;
+      --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37; --accent:#86b7ff;
+    }
     *{box-sizing:border-box}
     body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
-    a{color:#86b7ff;text-decoration:none}
-    h1,h2{color:var(--gold);margin:0 0 10px}
+    a{color:var(--accent);text-decoration:none}
+    h1,h2{color:var(--gold);margin:0 0 12px}
     p{line-height:1.6;margin:8px 0}
     .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
     .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;margin:18px 0}
     .hr{height:1px;background:var(--line);margin:18px 0;border:0}
     .muted{color:var(--muted)}
-
+    .note{background:#0f141c;border:1px dashed var(--line);padding:12px;border-radius:10px;color:var(--muted)}
+    .stack{display:flex;flex-direction:column;gap:10px}
+    .row{display:flex;gap:10px;flex-wrap:wrap}
+    input[type="text"], input[type="email"], select, textarea{
+      width:100%; padding:12px 12px; border:1px solid var(--line); border-radius:10px;
+      background:#0f141c; color:var(--text); outline:none;
+    }
+    input:focus, select:focus, textarea:focus{border-color:var(--gold); box-shadow:0 0 0 2px rgba(212,175,55,.15)}
+    .btn{
+      display:inline-block; background:var(--gold); color:#000; font-weight:700;
+      padding:12px 16px; border-radius:10px; text-decoration:none; border:0; cursor:pointer;
+    }
+    .btn:hover{filter:brightness(1.05)}
+    .btn.secondary{background:transparent;color:var(--gold);border:1px solid var(--gold)}
     /* Top nav */
     .topnav{background:var(--panel);border-bottom:1px solid var(--line);padding:10px 0;position:sticky;top:0;z-index:1000}
     .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
     .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color .2s ease}
     .topnav a:hover{color:var(--text)}
-
     /* State grid */
     .states{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px;margin-top:12px}
-    .state{display:block;text-align:center;border:1px solid var(--line);border-radius:10px;padding:10px 12px;color:var(--text);background:#131820}
+    .state{display:block;text-align:center;border:1px solid var(--line);border-radius:10px;padding:12px;color:var(--text);background:#131820}
     .state:hover{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold) inset}
+    .filter{display:flex;gap:10px;align-items:center;margin-top:10px}
+    .filter input{flex:1}
+    .helptext{font-size:.9rem;color:var(--muted)}
   </style>
 </head>
 <body>
@@ -43,11 +61,85 @@
   </nav>
 
   <div class="wrap">
+    <!-- Update note -->
     <div class="panel">
       <h1>Resources by State</h1>
-      <p class="muted">Choose your state to see official courts, child support, forms, and self-help links. (Nationwide resources are automatically included on each state page.)</p>
+      <p class="muted">
+        We’re updating information, resources, and practical advice as fast as we can.
+        Most of us are doing this while working full-time, so thanks for your patience—and your help.
+        If you know a solid local or national resource, share it below and we’ll get it placed in the right spot to help dads everywhere.
+      </p>
+    </div>
 
-      <div class="states">
+    <!-- Submit a Resource -->
+    <div class="panel">
+      <h2>Submit a Resource</h2>
+      <p class="helptext">This simple form opens your email client and sends to <strong>info@defenddad.org</strong>. If you’d rather post anonymously, send via Reddit DM and we’ll add it.</p>
+
+      <!-- MAILTO fallback (works without backend) -->
+      <form id="mailtoForm" class="stack" action="mailto:info@defenddad.org" method="post" enctype="text/plain">
+        <div class="row">
+          <div style="flex:1 1 240px">
+            <label class="helptext">Your email (optional)</label>
+            <input type="email" name="From" placeholder="you@example.com" />
+          </div>
+          <div style="flex:1 1 220px">
+            <label class="helptext">State</label>
+            <select name="State">
+              <option value="Nationwide">Nationwide</option>
+              <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+              <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+              <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option><option>Illinois</option>
+              <option>Indiana</option><option>Iowa</option><option>Kansas</option><option>Kentucky</option><option>Louisiana</option>
+              <option>Maine</option><option>Maryland</option><option>Massachusetts</option><option>Michigan</option><option>Minnesota</option>
+              <option>Mississippi</option><option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+              <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+              <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+              <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+              <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+              <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+              <option>Wisconsin</option><option>Wyoming</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="helptext">Resource link (URL)</label>
+          <input type="text" name="Link" placeholder="https://example.gov/..." required />
+        </div>
+
+        <div>
+          <label class="helptext">Why is this helpful? (what it covers, who it helps)</label>
+          <textarea name="Notes" rows="5" placeholder="Brief description so we can place it correctly..." required></textarea>
+        </div>
+
+        <div class="row" style="align-items:center;gap:12px">
+          <label style="display:flex;gap:8px;align-items:center">
+            <input type="checkbox" name="Consent" required />
+            <span class="helptext">I confirm this is a public, non-spam resource.</span>
+          </label>
+        </div>
+
+        <div class="row">
+          <button class="btn" type="submit">Email this resource</button>
+          <a class="btn secondary" href="mailto:info@defenddad.org?subject=Resource%20Suggestion%20for%20Defend%20Dad">Open an empty email</a>
+        </div>
+      </form>
+
+      <!-- Optional: switch to Formspree later
+      <form class="stack" action="https://formspree.io/f/YOUR_FORM_ID" method="post">
+        ...same fields...
+      </form>
+      -->
+    </div>
+
+    <!-- State picker + filter -->
+    <div class="panel">
+      <h2>Pick Your State</h2>
+      <div class="filter">
+        <input id="stateFilter" type="text" placeholder="Type to filter states…" aria-label="Filter states" />
+      </div>
+      <div id="states" class="states" aria-live="polite">
         <a class="state" href="/resources/state.html?state=alabama">Alabama</a>
         <a class="state" href="/resources/state.html?state=alaska">Alaska</a>
         <a class="state" href="/resources/state.html?state=arizona">Arizona</a>
@@ -122,6 +214,17 @@
       goalTotal: 350000,
       minGrantsToOpen: 500
     };
+
+    // Simple state filter
+    const filter = document.getElementById('stateFilter');
+    const links = Array.from(document.querySelectorAll('#states .state'));
+    filter?.addEventListener('input', e => {
+      const q = e.target.value.trim().toLowerCase();
+      links.forEach(a => {
+        const show = a.textContent.toLowerCase().includes(q);
+        a.style.display = show ? '' : 'none';
+      });
+    });
   </script>
 </body>
 </html>
