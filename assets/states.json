@@ -18,15 +18,207 @@
   },
 
   "alabama":        {"name":"Alabama","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "alaska":         {"name":"Alaska","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "arizona":        {"name":"Arizona","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "arkansas":       {"name":"Arkansas","agencies":[],"forms":[],"statutes":[],"notes":""},
 
-  "california":     {"name":"California","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "colorado":       {"name":"Colorado","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "connecticut":    {"name":"Connecticut","agencies":[],"forms":[],"statutes":[],"notes":""},
+  "alaska": {
+    "name": "Alaska",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "Alaska often results in near-equal parenting time compared to many states.",
+    "infobox": {
+      "title": "Custody in Alaska: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Child’s physical, emotional, social needs",
+        "Ability of each parent to meet those needs and co-parent",
+        "Stability of the home and community ties",
+        "History of abuse/neglect/substance issues",
+        "Each parent’s willingness to foster the other relationship"
+      ],
+      "stats_title": "Alaska Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 50% / 50%","note":"Equal/shared physical custody is common."},
+        {"label":"Equal/shared custody (50/50)","value":"Very common","note":"One of the most shared-parenting friendly states."},
+        {"label":"Primary custody to mother","value":"Lower than US avg","note":"Gap smaller than most states."},
+        {"label":"Primary custody to father","value":"Moderate"},
+        {"label":"Avg child support (2 kids)","value":"≈ $527 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Figures reflect recent comparative trends; outcomes vary by judge and facts."
+    }
+  },
 
-  "delaware":       {"name":"Delaware","agencies":[],"forms":[],"statutes":[],"notes":""},
+  "arizona": {
+    "name": "Arizona",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "Arizona strongly favors substantial time with both parents and often uses equal time schedules.",
+    "infobox": {
+      "title": "Custody in Arizona: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Past caregiving and parent–child relationships",
+        "Ability to cooperate and promote the other parent’s role",
+        "Child’s adjustment to home/school/community",
+        "Any abuse, neglect, or substance issues",
+        "Child’s wishes if of sufficient maturity"
+      ],
+      "stats_title": "Arizona Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 50% / 50%"},
+        {"label":"Equal/shared custody (50/50)","value":"High","note":"Common and encouraged when feasible."},
+        {"label":"Primary custody to mother","value":"Lower than US avg"},
+        {"label":"Primary custody to father","value":"Moderate"},
+        {"label":"Avg child support (2 kids)","value":"≈ $534 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Directional trends; county practices differ."
+    }
+  },
+
+  "arkansas": {
+    "name": "Arkansas",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "Outcomes often give one parent (usually mother) a majority of time; equal time occurs but is not the norm.",
+    "infobox": {
+      "title": "Custody in Arkansas: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Child’s needs and parental fitness",
+        "Continuity/stability of caregiving and home",
+        "Co-parenting cooperation and compliance",
+        "Any abuse/neglect or domestic violence"
+      ],
+      "stats_title": "Arkansas Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 72% / 28%"},
+        {"label":"Equal/shared custody (50/50)","value":"Low"},
+        {"label":"Primary custody to mother","value":"Common"},
+        {"label":"Primary custody to father","value":"Less common"},
+        {"label":"Avg child support (2 kids)","value":"≈ $824 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Averages vary by county and case facts."
+    }
+  },
+
+  "california": {
+    "name": "California",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "CA promotes frequent and continuing contact with both parents; true 50/50 is growing but not automatic statewide.",
+    "infobox": {
+      "title": "Custody in California: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Health, safety, welfare of the child",
+        "History of caregiving and stability",
+        "Co-parenting and conflict level",
+        "Any abuse or substance issues",
+        "Child’s preference (if mature)"
+      ],
+      "stats_title": "California Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 67% / 33%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate & growing"},
+        {"label":"Primary custody to mother","value":"More common"},
+        {"label":"Primary custody to father","value":"Less common"},
+        {"label":"Avg child support (2 kids)","value":"≈ $566 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Counties vary widely; many cases are by agreement."
+    }
+  },
+
+  "colorado": {
+    "name": "Colorado",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "CO encourages shared parenting but many plans still give one parent more time.",
+    "infobox": {
+      "title": "Custody in Colorado: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Child’s relationships and needs",
+        "Past pattern of involvement",
+        "Ability to place child’s needs first",
+        "Proximity and logistics",
+        "Any abuse/neglect/substance issues"
+      ],
+      "stats_title": "Colorado Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 68% / 32%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate"},
+        {"label":"Primary custody to mother","value":"More common"},
+        {"label":"Primary custody to father","value":"Less common"},
+        {"label":"Avg child support (2 kids)","value":"≈ $494 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Local practices differ; many cases settle."
+    }
+  },
+
+  "connecticut": {
+    "name": "Connecticut",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "CT frequently orders joint physical custody; equal time is common.",
+    "infobox": {
+      "title": "Custody in Connecticut: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Child’s needs and stability",
+        "Each parent’s caregiving history",
+        "Co-parenting capacity",
+        "Any abuse/neglect",
+        "Child’s preferences if mature"
+      ],
+      "stats_title": "Connecticut Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 50% / 50%"},
+        {"label":"Equal/shared custody (50/50)","value":"High"},
+        {"label":"Primary custody to mother","value":"Lower than US avg"},
+        {"label":"Primary custody to father","value":"Moderate"},
+        {"label":"Avg child support (2 kids)","value":"≈ $987 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Broad trends; each case turns on its facts."
+    }
+  },
+
+  "delaware": {
+    "name": "Delaware",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "DE commonly uses equal/shared schedules.",
+    "infobox": {
+      "title": "Custody in Delaware: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider (Best Interests)",
+      "factors": [
+        "Child’s welfare and stability",
+        "Caregiving history and cooperation",
+        "School/home/community ties",
+        "Abuse, neglect, DV, or substance issues"
+      ],
+      "stats_title": "Delaware Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 50% / 50%"},
+        {"label":"Equal/shared custody (50/50)","value":"High"},
+        {"label":"Primary custody to mother","value":"Lower than US avg"},
+        {"label":"Primary custody to father","value":"Moderate"},
+        {"label":"Avg child support (2 kids)","value":"≈ $463 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Exact outcomes vary by judge and evidence."
+    }
+  },
 
   "florida": {
     "name": "Florida",
@@ -66,18 +258,140 @@
       ],
       "stats_title": "Florida Time-Sharing Trends (High-Level)",
       "stats": [
-        {"label":"Equal time-sharing (50/50)","value":"Common / increasingly standard","note":"2023 law adds a rebuttable presumption when appropriate."},
-        {"label":"Primary/sole custody to mother","value":"Still more frequent than to fathers","note":"Courts must apply gender-neutral analysis."},
-        {"label":"Primary/sole custody to father","value":"Less common","note":"Typically requires evidence the mother is unfit or unable to care for the child."}
+        {"label":"Typical time split (mother / father)","value":"≈ 50% / 50%"},
+        {"label":"Equal time-sharing (50/50)","value":"Common / increasingly standard","note":"2023 law creates a rebuttable presumption when appropriate."},
+        {"label":"Primary/sole custody to mother","value":"Still more frequent than to fathers"},
+        {"label":"Primary/sole custody to father","value":"Less common"},
+        {"label":"Avg child support (2 kids)","value":"≈ $544 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
       ],
       "disclaimer": "Percentages vary by county and judge; trends are directional only."
+    },
+    "background": "/assets/State/Dad-Florida.PNG"
+  },
+
+  "georgia": {
+    "name": "Georgia",
+    "agencies": [
+      {"label":"Georgia Legal Aid","url":"https://www.georgialegalaid.org/"},
+      {"label":"Georgia Courts – Family Law","url":"https://georgiacourts.gov/family-law/"}
+    ],
+    "forms": [
+      {"label":"Petition for Legitimation (Unmarried Fathers)","url":"https://www.georgialegalaid.org/resource/petition-for-legitimation"},
+      {"label":"Parenting Plan (Required)","url":"https://georgiacourts.gov/wp-content/uploads/parenting-plan.pdf"}
+    ],
+    "statutes": [
+      "Best interests of the child: O.C.G.A. §19-9-3",
+      "Parenting plans mandatory in custody cases"
+    ],
+    "notes": "Georgia emphasizes parenting plans and child’s best interests. Legitimation is required for unmarried fathers.",
+    "infobox": {
+      "title": "Custody in Georgia: Key Factors & Outcomes",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s emotional/physical needs",
+        "Past caregiving and stability",
+        "Each parent’s fitness and ability to co-parent",
+        "History of abuse, neglect, or substance abuse",
+        "Child’s preference if age 14+"
+      ],
+      "stats_title": "Georgia Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 67% / 33%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate; increasing"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 12%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $650 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 82% mothers / 18% fathers"}
+      ],
+      "disclaimer": "Figures reflect averages; outcomes vary by county."
     }
   },
 
-  "georgia":        {"name":"Georgia","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "hawaii":         {"name":"Hawaii","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "idaho":          {"name":"Idaho","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "illinois":       {"name":"Illinois","agencies":[],"forms":[],"statutes":[],"notes":""},
+  "hawaii": {
+    "name": "Hawaii",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "HI often uses joint custody arrangements; equal time depends on logistics.",
+    "infobox": {
+      "title": "Custody in Hawaii",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s best interests and safety",
+        "Parental fitness and cooperation",
+        "Continuity of care and cultural ties",
+        "History of abuse or neglect"
+      ],
+      "stats_title": "Hawaii Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody","value":"Moderate"},
+        {"label":"Primary custody to mother","value":"More frequent"},
+        {"label":"Primary custody to father","value":"Less frequent"},
+        {"label":"Avg child support (2 kids)","value":"≈ $702 /mo"},
+        {"label":"Who receives support","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Hawaii law favors joint custody; exact outcomes vary by circuit."
+    }
+  },
+
+  "idaho": {
+    "name": "Idaho",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "Idaho encourages joint custody when in child’s best interests.",
+    "infobox": {
+      "title": "Custody in Idaho",
+      "factors_title": "Key Factors",
+      "factors": [
+        "Child’s welfare and needs",
+        "Parental involvement history",
+        "Ability to provide stability",
+        "Abuse, neglect, or substance issues"
+      ],
+      "stats_title": "Idaho Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 70% / 30%"},
+        {"label":"Equal/shared custody","value":"Low–moderate"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 10–12%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $532 /mo"},
+        {"label":"Who receives support","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Patterns reflect state-level studies; individual results vary."
+    }
+  },
+
+  "illinois": {
+    "name": "Illinois",
+    "agencies": [],
+    "forms": [],
+    "statutes": [],
+    "notes": "Illinois uses 'allocation of parental responsibilities' instead of custody; shared parenting has grown.",
+    "infobox": {
+      "title": "Custody in Illinois",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s best interests and needs",
+        "Parenting ability and cooperation",
+        "History of caregiving",
+        "Abuse, neglect, or violence"
+      ],
+      "stats_title": "Illinois Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody","value":"Moderate"},
+        {"label":"Primary custody to mother","value":"Still more common"},
+        {"label":"Primary custody to father","value":"≈ 15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $813 /mo"},
+        {"label":"Who receives support","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "Trends vary between Cook County and downstate."
+    }
+  },
+
   "indiana":        {"name":"Indiana","agencies":[],"forms":[],"statutes":[],"notes":""},
   "iowa":           {"name":"Iowa","agencies":[],"forms":[],"statutes":[],"notes":""},
   "kansas":         {"name":"Kansas","agencies":[],"forms":[],"statutes":[],"notes":""},
@@ -142,13 +456,16 @@
         "Stability of each home and proximity of residences",
         "Any history of abuse, neglect, family violence, or substance abuse"
       ],
-      "stats_title": "Custody Trends in Texas (Estimates)",
+      "stats_title": "Texas Snapshot",
       "stats": [
-        {"label":"Equal/Shared custody (50/50 or close)","value":"Less common, but increasing","note":"Must rebut SPO presumption; judge looks at logistics & cooperation."},
-        {"label":"Primary custody to mother","value":"Most common outcome","note":"Nationally ~65–70% of primary awards go to mothers; Texas similar."},
-        {"label":"Primary custody to father","value":"~10–15%","note":"More likely when mother is unfit/absent or father is the established primary caregiver."}
+        {"label":"Typical time split (mother / father)","value":"≈ 67% / 33%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate; increasing"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 10–15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $759 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
       ],
-      "disclaimer": "Percentages vary by county/judge; these are directional, not hard stats."
+      "disclaimer": "Most cases resolve by agreement; county practices vary."
     }
   },
 
@@ -157,7 +474,42 @@
   "virginia":       {"name":"Virginia","agencies":[],"forms":[],"statutes":[],"notes":""},
   "washington":     {"name":"Washington","agencies":[],"forms":[],"statutes":[],"notes":""},
   "west_virginia":  {"name":"West Virginia","agencies":[],"forms":[],"statutes":[],"notes":""},
-  "wisconsin":      {"name":"Wisconsin","agencies":[],"forms":[],"statutes":[],"notes":""},
+
+  "wisconsin": {
+    "name": "Wisconsin",
+    "agencies": [
+      {"label":"Wisconsin Court System – Self Help","url":"https://www.wicourts.gov/services/public/selfhelp.htm"},
+      {"label":"Wisconsin State Law Library – Family Law","url":"https://wilawlibrary.gov/topics/family.php"}
+    ],
+    "forms": [
+      {"label":"Custody & Placement Forms","url":"https://www.wicourts.gov/forms1/circuit.htm#family"}
+    ],
+    "statutes": [
+      "Custody & placement: Wis. Stat. §767",
+      "Child support guidelines: DCF §150"
+    ],
+    "notes": "WI presumes joint legal custody and encourages shared placement.",
+    "infobox": {
+      "title": "Custody in Wisconsin",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s needs and adjustment",
+        "Parental cooperation",
+        "History of caregiving",
+        "Any abuse or substance issues"
+      ],
+      "stats_title": "Wisconsin Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate; often granted when parents live near each other"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $675 /mo"},
+        {"label":"Who receives support","value":"≈ 80% mothers / 20% fathers"}
+      ],
+      "disclaimer": "County practices vary; trends are averages only."
+    }
+  },
 
   "wyoming": {
     "name": "Wyoming",
@@ -189,13 +541,17 @@
         "Willingness to respect the other parent’s rights and foster the relationship",
         "Any evidence of spousal/child abuse"
       ],
-      "stats_title": "Custody Trends (Approximate)",
+      "stats_title": "Wyoming Snapshot",
       "stats": [
-        {"label":"Equal/shared custody (50/50 or close)","value":"~30–35%","note":"Growing but still not the majority"},
-        {"label":"Primary custody to mother","value":"Most common","note":"Often ~65–70% nationally; WY similar"},
-        {"label":"Primary custody to father","value":"~10–15%","note":"When mother is unfit/absent or father is proven primary caregiver"}
+        {"label":"Typical time split (mother / father)","value":"≈ 71% / 29%"},
+        {"label":"Equal/shared custody (50/50 or close)","value":"≈ 30–35%","note":"Growing but not majority"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 10–15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $484 /mo"},
+        {"label":"Who receives support (M vs F)","value":"≈ 80% mothers / 20% fathers"}
       ],
       "disclaimer": "Exact numbers vary by judge and year; these are directional estimates."
-    }
+    },
+    "background": "/assets/State/Dad-Wyoming.PNG"
   }
 }
