@@ -1,1 +1,178 @@
+{
+  "alabama": {
+    "name": "Alabama",
+    "agencies": [
+      {"label": "Alabama Courts – Family Law", "url": "https://judicial.alabama.gov/FamilyCourt"},
+      {"label": "Alabama Legal Help", "url": "https://www.alabamalegalhelp.org/"}
+    ],
+    "forms": [
+      {"label": "Custody & Visitation Forms", "url": "https://judicial.alabama.gov/FamilyCourt#forms"}
+    ],
+    "statutes": [
+      "Best interests of the child: Ala. Code §30-3-1",
+      "Joint custody presumption: Ala. Code §30-3-150"
+    ],
+    "notes": "Alabama courts generally favor joint custody when both parents are fit.",
+    "infobox": {
+      "title": "Custody in Alabama",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s age, needs, and safety",
+        "Stability of each parent’s home",
+        "History of caregiving",
+        "Willingness to foster relationship with other parent"
+      ],
+      "stats_title": "Alabama Snapshot",
+      "stats": [
+        {"label":"Typical time split (mother / father)","value":"≈ 70% / 30%"},
+        {"label":"Equal/shared custody (50/50)","value":"Low–moderate"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $650 /mo"},
+        {"label":"Who receives support","value":"≈ 82% mothers / 18% fathers"}
+      ],
+      "disclaimer": "Averages only — county judges may differ."
+    }
+  },
 
+  "alaska": {
+    "name": "Alaska",
+    "agencies": [
+      {"label":"Alaska Court System – Family Law Self Help", "url":"https://courts.alaska.gov/shc/family/family.htm"}
+    ],
+    "forms": [
+      {"label":"Custody & Parenting Plan Forms","url":"https://courts.alaska.gov/shc/family/forms.htm"}
+    ],
+    "statutes": [
+      "Custody: Alaska Stat. §25.20.060",
+      "Child support guidelines: Alaska R. Civ. P. 90.3"
+    ],
+    "notes": "Alaska strongly favors shared custody if practical.",
+    "infobox": {
+      "title": "Custody in Alaska",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s best interests",
+        "History of domestic violence",
+        "Stability and continuity of care",
+        "Parental cooperation"
+      ],
+      "stats_title": "Alaska Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody","value":"Moderate"},
+        {"label":"Primary custody to mother","value":"More frequent"},
+        {"label":"Primary custody to father","value":"≈ 17%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $720 /mo"},
+        {"label":"Who receives support","value":"≈ 79% mothers / 21% fathers"}
+      ],
+      "disclaimer": "Alaska emphasizes joint custody but outcomes vary."
+    }
+  },
+
+  "arizona": {
+    "name": "Arizona",
+    "agencies": [
+      {"label":"AZ Courts – Family Law","url":"https://www.azcourts.gov/familylaw"}
+    ],
+    "forms": [
+      {"label":"Parenting Plan Template","url":"https://www.azcourts.gov/familylaw/forms"}
+    ],
+    "statutes": [
+      "Best interests of the child: A.R.S. §25-403",
+      "Parenting time factors: A.R.S. §25-403.02"
+    ],
+    "notes": "Arizona law presumes equal parenting time is best for the child unless proven otherwise.",
+    "infobox": {
+      "title": "Custody in Arizona",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests of the child",
+        "Past caregiving and stability",
+        "Parental cooperation",
+        "History of abuse, neglect, or violence"
+      ],
+      "stats_title": "Arizona Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 60% / 40%"},
+        {"label":"Equal/shared custody (50/50)","value":"High compared to other states"},
+        {"label":"Primary custody to mother","value":"Still more common"},
+        {"label":"Primary custody to father","value":"≈ 18%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $680 /mo"},
+        {"label":"Who receives support","value":"≈ 78% mothers / 22% fathers"}
+      ],
+      "disclaimer": "Arizona is considered one of the most pro-50/50 states."
+    }
+  },
+
+  "arkansas": {
+    "name": "Arkansas",
+    "agencies": [
+      {"label":"Arkansas Judiciary – Domestic Relations","url":"https://arcourts.gov/domestic-relations"}
+    ],
+    "forms": [
+      {"label":"Custody & Visitation Forms","url":"https://arcourts.gov/forms"}
+    ],
+    "statutes": [
+      "Best interests of the child: Ark. Code §9-13-101",
+      "Presumption of joint custody (2021 law)"
+    ],
+    "notes": "Arkansas law now presumes joint custody is in the best interest of children.",
+    "infobox": {
+      "title": "Custody in Arkansas",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests of the child",
+        "Parental ability to cooperate",
+        "Stability of environment",
+        "Evidence of abuse or neglect"
+      ],
+      "stats_title": "Arkansas Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody (50/50)","value":"Increasing since 2021 law"},
+        {"label":"Primary custody to mother","value":"Still more common"},
+        {"label":"Primary custody to father","value":"≈ 14%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $600 /mo"},
+        {"label":"Who receives support","value":"≈ 82% mothers / 18% fathers"}
+      ],
+      "disclaimer": "Post-2021 law, judges must justify when denying joint custody."
+    }
+  },
+
+  "california": {
+    "name": "California",
+    "agencies": [
+      {"label":"California Courts – Family Law","url":"https://www.courts.ca.gov/selfhelp-family.htm"},
+      {"label":"California Child Support Services","url":"https://childsupport.ca.gov/"}
+    ],
+    "forms": [
+      {"label":"Custody & Visitation Forms","url":"https://www.courts.ca.gov/forms.htm?filter=FL"}
+    ],
+    "statutes": [
+      "Custody law: Cal. Fam. Code §3011 (best interests of the child)",
+      "Preference for frequent and continuing contact with both parents"
+    ],
+    "notes": "California emphasizes frequent and continuing contact with both parents, but outcomes vary widely by county.",
+    "infobox": {
+      "title": "Custody in California",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s health, safety, and welfare",
+        "History of abuse or substance issues",
+        "Co-parenting ability",
+        "Continuity and stability"
+      ],
+      "stats_title": "California Snapshot",
+      "stats": [
+        {"label":"Typical time split","value":"≈ 65% / 35%"},
+        {"label":"Equal/shared custody (50/50)","value":"Moderate; varies by county"},
+        {"label":"Primary custody to mother","value":"Most common"},
+        {"label":"Primary custody to father","value":"≈ 15%"},
+        {"label":"Avg child support (2 kids)","value":"≈ $850 /mo"},
+        {"label":"Who receives support","value":"≈ 83% mothers / 17% fathers"}
+      ],
+      "disclaimer": "Outcomes differ widely between northern and southern CA."
+    }
+  }
+}
