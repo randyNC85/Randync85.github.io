@@ -10,33 +10,51 @@
     --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
   .wrap{max-width:960px;margin:0 auto;padding:28px 16px}
 
-  .tracker{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 24px}
+  .tracker{position:relative;background:var(--panel);border:1px solid var(--line);
+           border-radius:16px;padding:18px 18px 24px}
   .tracker h2{margin:0 0 8px;font-size:1.25rem;color:var(--gold)}
   .meta{display:flex;justify-content:space-between;gap:10px;font-weight:700;margin:8px 0 10px}
-  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.85rem;color:var(--muted)}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;
+        padding:3px 10px;font-size:.85rem;color:var(--muted)}
   .raised{color:#0ed88b;border-color:#0ed88b22}
 
   .bar-wrap{position:relative;padding:28px 16px}
-  .bar{position:relative;height:22px;border:1px solid var(--line);background:#0b0e13;border-radius:14px;overflow:hidden}
-  .fill{position:absolute;inset:0 0 0 0;width:0%;background:linear-gradient(90deg,var(--gold),#f6d773)}
+  .bar{position:relative;height:22px;border:1px solid var(--line);
+       background:#0b0e13;border-radius:14px;overflow:hidden}
+  .fill{position:absolute;inset:0;width:0%;
+        background:linear-gradient(90deg,var(--gold),#f6d773)}
 
   .ticks{position:relative;height:36px;margin-top:10px;font-size:.85rem;color:var(--muted)}
   .tick{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;text-align:center}
-  .tick::before{content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:1px;height:10px;background:var(--line)}
+  .tick::before{content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);
+                width:1px;height:10px;background:var(--line)}
   .amt{display:block;color:#e6edf3;font-weight:700}
   .lbl{display:block;color:var(--muted)}
 
-  /* Mascots */
-  .mascots{position:relative;height:160px;margin-top:8px}
-  .push-dad{position:absolute;left:-10px;bottom:-10px;width:180px;pointer-events:none;transform:translateX(-10px)}
-  .kids{position:absolute;right:-4px;bottom:-6px;width:200px;pointer-events:none}
-  .coin-dad{position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);width:160px;pointer-events:none}
-  .coin{position:absolute;left:50%;top:-20px;transform:translateX(-50%);width:36px;height:36px;border-radius:50%;
-        background:radial-gradient(circle at 35% 35%, #fff7b8 0%, #ffd24d 40%, #d4af37 70%, #8c6e1a 100%);
-        border:1px solid rgba(0,0,0,.25);opacity:.0;animation:drop 3.2s ease-in-out infinite}
+  /* Mascots (smaller + always within/near bar) */
+  .mascots{position:relative;height:120px;margin-top:6px}
+  .push-dad{
+    position:absolute;left:-6px;bottom:-10px;
+    width:110px;max-width:28vw;pointer-events:none;object-fit:contain;
+  }
+  .kids{
+    position:absolute;right:-6px;bottom:-10px;
+    width:140px;max-width:36vw;pointer-events:none;object-fit:contain;
+  }
+  .coin-dad{
+    position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);
+    width:120px;max-width:30vw;pointer-events:none;object-fit:contain;
+  }
+  .coin{
+    position:absolute;left:50%;top:-20px;transform:translateX(-50%);
+    width:36px;height:36px;border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fff7b8 0%, #ffd24d 40%, #d4af37 70%, #8c6e1a 100%);
+    border:1px solid rgba(0,0,0,.25);opacity:0;animation:drop 3.2s ease-in-out infinite
+  }
   @keyframes drop{
     0%{opacity:0;transform:translateX(-50%) translateY(-30px) rotate(0)}
     10%{opacity:1}
@@ -45,12 +63,12 @@
     100%{opacity:0;transform:translateX(-50%) translateY(90px) rotate(300deg)}
   }
 
-  /* Goal marker dad */
+  /* Goal marker dad (smaller, sits just above bar) */
   .goal-dad{
-    position:absolute;bottom:54px;height:80px;
+    position:absolute;bottom:42px;height:64px;
     transform:translateX(-50%);left:0%;
     transition:left .8s cubic-bezier(.22,.8,.26,1);
-    pointer-events:none;
+    pointer-events:none;object-fit:contain;
   }
 
   .hint{margin-top:10px;color:var(--muted);font-size:.9rem}
@@ -69,21 +87,21 @@
 
     <div class="bar-wrap">
       <!-- coin dad above the bar -->
-      <img class="coin-dad" src="/assets/Image/dad-coins.PNG" alt="Dad dropping coin" />
+      <img class="coin-dad" src="/assets/Image/dad-coins.png" alt="Dad dropping coin" />
       <div class="coin" aria-hidden="true"></div>
 
       <!-- push dad to the left of bar -->
-      <img class="push-dad" src="/assets/Image/dad-push.PNG" alt="Dad pushing progress" />
+      <img class="push-dad" src="/assets/Image/dad-push.png" alt="Dad pushing progress" />
 
       <div class="bar" aria-label="Goal progress">
         <div class="fill" id="fill"></div>
       </div>
 
       <!-- kids cheering on the right -->
-      <img class="kids" src="/assets/Image/team-dad-kids.PNG" alt="Kids cheering" />
+      <img class="kids" src="/assets/Image/team-dad-kids.png" alt="Kids cheering" />
 
       <!-- GOAL MARKER DAD -->
-      <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-goal.PNG" alt="Goal marker" />
+      <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-goal.png" alt="Goal marker" />
     </div>
 
     <!-- Milestones (with dollar amounts) -->
@@ -95,38 +113,38 @@
 </div>
 
 <script>
-  /* ==== CONFIG ==== */
-  let CURRENT_RAISED = 350;     // current amount ($)
-  const MILESTONES = [
+  /* ==== DEFAULTS (used if config file not found) ==== */
+  let CURRENT_RAISED = 350;  // dollars
+  let MILESTONES = [
     { label: "Website Development", amount: 300 },
     { label: "App Development", amount: 1000 },
     { label: "Complete App Development", amount: 5000 },
     { label: "Defend Dad AI 1.1 Development", amount: 20000 } // total
   ];
-  const GOAL_TOTAL = MILESTONES[MILESTONES.length - 1].amount;
 
+  /* ==== ELEMENTS ==== */
   const fill = document.getElementById('fill');
   const raisedPill = document.getElementById('raised-pill');
   const ticks = document.getElementById('ticks');
   const goalPill = document.getElementById('goal-pill');
   const goalDad = document.getElementById('goal-dad');
 
-  goalPill.textContent = '$' + GOAL_TOTAL.toLocaleString();
+  function formatUSD(n){ return '$' + Number(n).toLocaleString('en-US', {maximumFractionDigits:0}); }
+  function goalTotal(){ return MILESTONES[MILESTONES.length - 1].amount; }
 
   function renderTicks(){
     ticks.innerHTML = '';
+    const total = goalTotal();
     MILESTONES.forEach(ms => {
-      const pct = Math.min(100, (ms.amount / GOAL_TOTAL) * 100);
+      const pct = Math.min(100, (ms.amount / total) * 100);
       const el = document.createElement('div');
       el.className = 'tick';
       el.style.left = pct + '%';
-      el.innerHTML = `<span class="amt">$${ms.amount.toLocaleString()}</span><span class="lbl">${ms.label}</span>`;
+      el.innerHTML = `<span class="amt">${formatUSD(ms.amount)}</span><span class="lbl">${ms.label}</span>`;
       ticks.appendChild(el);
     });
+    goalPill.textContent = formatUSD(total);
   }
-  renderTicks();
-
-  function formatUSD(n){ return '$' + n.toLocaleString('en-US', {maximumFractionDigits:0}); }
 
   function animateCount(to){
     let from = 0;
@@ -139,18 +157,20 @@
   }
 
   function setBar(amount){
-    const pct = Math.min(100, (amount / GOAL_TOTAL) * 100);
+    const total = goalTotal();
+    const pct = Math.min(100, (amount / total) * 100);
     fill.style.width = pct + '%';
   }
 
   function setGoalDad(amount){
+    const total = goalTotal();
     let last = { amount: 0 };
     for(const ms of MILESTONES){
       if(ms.amount <= amount){ last = ms; } else { break; }
     }
-    const pct = Math.min(100, (last.amount / GOAL_TOTAL) * 100);
+    const pct = Math.min(100, (last.amount / total) * 100);
     goalDad.style.left = pct + '%';
-    goalDad.title = last.label ? `Reached: ${last.label} ($${last.amount.toLocaleString()})` : '';
+    goalDad.title = last.label ? `Reached: ${last.label} (${formatUSD(last.amount)})` : '';
   }
 
   function setProgress(newAmount){
@@ -159,12 +179,35 @@
     setGoalDad(newAmount);
   }
 
-  // Initial render
-  animateCount(CURRENT_RAISED);
-  requestAnimationFrame(()=> setBar(CURRENT_RAISED));
-  setGoalDad(CURRENT_RAISED);
+  /* ==== LOAD LIVE CONFIG FROM /assets/tools/current-donations.html ==== */
+  async function loadConfig(){
+    try{
+      const res = await fetch('/assets/tools/current-donations.html', { cache: 'no-cache' });
+      if(!res.ok) throw new Error('config fetch failed');
+      const html = await res.text();
+      const doc = new DOMParser().parseFromString(html, 'text/html');
+      const cfgEl = doc.getElementById('dd-config');
+      if(!cfgEl) throw new Error('dd-config not found');
+      const cfg = JSON.parse(cfgEl.textContent || '{}');
 
-  // Example: later you can update with setProgress(NEW_AMOUNT)
+      // Apply config if present
+      if(typeof cfg.currentRaised === 'number'){ CURRENT_RAISED = cfg.currentRaised; }
+      if(Array.isArray(cfg.milestones) && cfg.milestones.length >= 1){
+        MILESTONES = cfg.milestones;
+      }
+    }catch(e){
+      console.warn('Using default donation config:', e?.message || e);
+    }
+  }
+
+  // Boot
+  (async function init(){
+    await loadConfig();
+    renderTicks();
+    animateCount(CURRENT_RAISED);
+    requestAnimationFrame(()=> setBar(CURRENT_RAISED));
+    setGoalDad(CURRENT_RAISED);
+  })();
 </script>
 </body>
 </html>
