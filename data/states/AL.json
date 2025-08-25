@@ -1,0 +1,20 @@
+{
+  "terms": [
+    "<strong>Custody (legal vs. physical):</strong> plain-English definition here.",
+    "<strong>Parenting time:</strong> what it means in Alabama…"
+  ],
+  "prepare": [
+    "Keep a calendar of actual overnights.",
+    "Organize messages; keep tone civil.",
+    "Draft a one-page timeline of key dates."
+  ],
+  "motions": [
+    {"title": "Enforce Parenting Time", "desc": "When the schedule isn’t followed."},
+    {"title": "Modify Schedule", "desc": "Material change, best interest, etc."}
+  ],
+  "template": "IN THE _______ COURT OF _______ COUNTY, ALABAMA\nCase No.: ________\n\n[Your Name], Petitioner,\nv.\n[Other Parent], Respondent.\n\nMOTION FOR [SHORT TITLE]\n\n1. I am the father of minor child(ren)…\n2. Current order (date): …\n3. Issue: …\n4. Relief requested: …\n5. Best-interest reasons:\n   • …\n   • …\n\nRespectfully submitted,\n[Signature block]",
+  "resources": [
+    {"title": "Court Finder", "url": "#"},
+    {"title": "State Forms", "url": "#"}
+  ]
+}
