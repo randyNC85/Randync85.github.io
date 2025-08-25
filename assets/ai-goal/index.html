@@ -3,178 +3,126 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Defend Dad — Goal Tracker</title>
+<title>Defend Dad — Basic Goal Tracker</title>
 <style>
+  /* ---- Old dark theme ---- */
   :root{
     --bg:#0e1117; --panel:#161b22; --line:#30363d;
     --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
-    --bar-h: 22px;              /* <— one knob to size the whole tracker */
+    --bar-h: 22px;
   }
   *{box-sizing:border-box}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
   .wrap{max-width:960px;margin:0 auto;padding:28px 16px}
 
   /* Card */
   .tracker{
-    position:relative;background:var(--panel);
-    border:1px solid rgba(48,54,61,.5);        /* lighter look */
-    border-radius:16px;padding:18px 18px 22px;
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:14px; padding:18px;
   }
-  .title{margin:0 0 8px;font-size:1.6rem;color:var(--gold);font-weight:800;letter-spacing:.2px}
-  .meta{display:flex;justify-content:space-between;gap:10px;font-weight:700;margin:8px 0 12px;flex-wrap:wrap}
-  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.95rem;color:var(--muted)}
-  .raised{color:#0ed88b;border-color:#0ed88b22}
+  h1{margin:0 0 10px; font-size:1.35rem; color:var(--gold)}
+  .meta{
+    display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap;
+    margin-bottom:12px; font-weight:700;
+  }
+  .pill{
+    display:inline-block; padding:6px 12px; border-radius:999px; font-size:.95rem;
+    border:1px solid var(--line); color:var(--muted); background:rgba(13,17,23,.35);
+  }
+  .pill.raised{ color:#0ed88b; border-color:#0ed88b22 }
 
   /* Progress bar */
-  .bar-wrap{position:relative;padding:30px 16px 18px}
+  .bar-wrap{ margin-top:6px }
   .bar{
-    height:var(--bar-h);border:1px solid var(--line);
-    background:#0b0e13;border-radius:14px;overflow:hidden;
+    position:relative; height:var(--bar-h);
+    border:1px solid var(--line); border-radius:12px; overflow:hidden;
+    background:#0b0e13;
   }
   .fill{
-    position:absolute;inset:0 0 0 0;width:0%;
+    position:absolute; inset:0; width:0%;
     background:linear-gradient(90deg,var(--gold),#f6d773);
+    transition:width .7s cubic-bezier(.22,.8,.26,1);
   }
 
-  /* Mascots, sized from the bar so they always fit */
-  .push-dad{
-    position:absolute;left:-4px;bottom:calc(var(--bar-h) * -0.35);
-    height:calc(var(--bar-h) * 3.3);pointer-events:none;
-  }
-  .kids{
-    position:absolute;right:-4px;bottom:calc(var(--bar-h) * -0.25);
-    height:calc(var(--bar-h) * 3.0);pointer-events:none;
-  }
-  .coin-dad{
-    position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);
-    height:calc(var(--bar-h) * 3.0);pointer-events:none;
-  }
-  .coin{
-    position:absolute;left:50%;top:-16px;transform:translateX(-50%);
-    width:calc(var(--bar-h) * 1.6);height:calc(var(--bar-h) * 1.6);border-radius:50%;
-    background:radial-gradient(circle at 35% 35%, #fff7b8 0%, #ffd24d 40%, #d4af37 70%, #8c6e1a 100%);
-    border:1px solid rgba(0,0,0,.25);opacity:.0;animation:drop 3s ease-in-out infinite;
-  }
-  @keyframes drop{
-    0%{opacity:0;transform:translateX(-50%) translateY(-30px) rotate(0)}
-    10%{opacity:1}
-    60%{transform:translateX(-50%) translateY(calc(var(--bar-h)*4)) rotate(200deg)}
-    70%{transform:translateX(-50%) translateY(calc(var(--bar-h)*3.6)) rotate(220deg)}
-    100%{opacity:0;transform:translateX(-50%) translateY(calc(var(--bar-h)*4.2)) rotate(300deg)}
-  }
-
-  /* Goal marker (little flag dad). It jumps to the last reached milestone */
-  .goal-dad{
-    position:absolute;bottom:calc(var(--bar-h) * 2.5);
-    height:calc(var(--bar-h) * 2.4);
-    transform:translateX(-50%);left:0%;
-    transition:left .8s cubic-bezier(.22,.8,.26,1);
-    pointer-events:none;
-  }
-
-  /* Milestone ticks */
-  .ticks{position:relative;height:44px;margin-top:10px;font-size:.85rem;color:var(--muted)}
-  .tick{position:absolute;top:0;transform:translateX(-50%);text-align:center}
+  /* Ticks */
+  .ticks{ position:relative; height:42px; margin-top:10px; font-size:.85rem; color:var(--muted) }
+  .tick{ position:absolute; top:0; transform:translateX(-50%); text-align:center; white-space:nowrap }
   .tick::before{
-    content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);
-    width:1px;height:12px;background:var(--line);
+    content:""; position:absolute; left:50%; top:-10px; transform:translateX(-50%);
+    width:1px; height:10px; background:var(--line);
   }
-  .amt{display:block;color:#e6edf3;font-weight:800}
-  .lbl{display:block;color:var(--muted);max-width:140px}
+  .amt{ display:block; color:var(--text); font-weight:800 }
+  .lbl{ display:block; max-width:140px; margin:0 auto; color:var(--muted) }
 
-  .hint{margin-top:14px;color:var(--muted);font-size:1rem}
-  .gold{color:var(--gold)}
-
-  @media (max-width:560px){
-    .title{font-size:1.3rem}
-    .lbl{max-width:110px}
-    .ticks{height:52px}
-  }
+  .hint{ margin-top:12px; color:var(--muted); font-size:.95rem }
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <div class="tracker" id="dd-tracker">
-    <h2 class="title">On Our Way to the Next Milestone</h2>
+    <h1>Goal Progress</h1>
 
     <div class="meta">
       <div>Raised: <span class="pill raised" id="raised-pill">$0</span></div>
-      <div>Total Goal: <span class="pill" id="goal-pill">$0</span></div>
+      <div>Goal: <span class="pill" id="goal-pill">$0</span></div>
     </div>
 
-    <div class="bar-wrap">
-      <!-- coin dad above the bar -->
-      <img class="coin-dad" src="/assets/Image/dad-coins.png" alt="Dad dropping coin" />
-      <div class="coin" aria-hidden="true"></div>
-
-      <!-- push dad to the left of the bar -->
-      <img class="push-dad" src="/assets/Image/dad-push.png" alt="Dad pushing progress" />
-
-      <div class="bar" aria-label="Goal progress">
+    <div class="bar-wrap" aria-label="Donation progress">
+      <div class="bar" role="progressbar" aria-valuemin="0" aria-valuenow="0" aria-valuemax="100" id="progressbar">
         <div class="fill" id="fill"></div>
       </div>
-
-      <!-- kids cheering on the right -->
-      <img class="kids" src="/assets/Image/team-dad-kids.png" alt="Kids cheering" />
-
-      <!-- goal marker dad -->
-      <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-hold.png" alt="Goal marker" />
+      <div class="ticks" id="ticks" aria-hidden="true"></div>
     </div>
 
-    <div class="ticks" id="ticks"></div>
-
-    <p class="hint">
-      Defend Dad is building practical tools so everyday dads are treated fairly with their kids.
-      We don’t pay ourselves—donations cover development, hosting and other real costs only.
-      Your support moves us from milestone to milestone. <span class="gold">Thank you.</span>
-    </p>
+    <p class="hint">Your support moves us to the next milestone. Thank you.</p>
   </div>
 
 </div>
 
 <script>
-(async function init(){
+(async function(){
   const fill = document.getElementById('fill');
   const raisedPill = document.getElementById('raised-pill');
   const goalPill = document.getElementById('goal-pill');
   const ticks = document.getElementById('ticks');
-  const goalDad = document.getElementById('goal-dad');
+  const progressbar = document.getElementById('progressbar');
 
   function usd(n){ return '$' + Number(n||0).toLocaleString('en-US', {maximumFractionDigits:0}); }
 
-  // Load live numbers
-  const res = await fetch('/assets/tools/current-donations.json?cb=' + Date.now());
-  const data = await res.json();
+  try{
+    const res = await fetch('/assets/tools/current-donations.json?cb=' + Date.now());
+    const data = await res.json();
 
-  const RAISED = Number(data.raised||0);
-  const GOAL   = Number(data.goalTotal||0);
-  const M      = Array.isArray(data.milestones) ? data.milestones : [];
+    const raised = Number(data.raised || 0);
+    const goal   = Number(data.goalTotal || 0);
+    const miles  = Array.isArray(data.milestones) ? data.milestones : [];
 
-  raisedPill.textContent = usd(RAISED);
-  goalPill.textContent   = usd(GOAL);
+    // Labels
+    raisedPill.textContent = usd(raised);
+    goalPill.textContent   = usd(goal);
 
-  // Fill bar
-  const pct = Math.max(0, Math.min(100, (RAISED / GOAL) * 100));
-  requestAnimationFrame(()=> fill.style.width = pct + '%');
+    // Progress %
+    const pct = goal > 0 ? Math.max(0, Math.min(100, (raised/goal)*100)) : 0;
+    requestAnimationFrame(()=> fill.style.width = pct + '%');
+    progressbar.setAttribute('aria-valuenow', Math.round(pct));
 
-  // Milestone ticks
-  ticks.innerHTML = '';
-  M.forEach(ms => {
-    const p = Math.min(100, (ms.amount / GOAL) * 100);
-    const el = document.createElement('div');
-    el.className = 'tick';
-    el.style.left = p + '%';
-    el.innerHTML = `<span class="amt">${usd(ms.amount)}</span><span class="lbl">${ms.label}</span>`;
-    ticks.appendChild(el);
-  });
-
-  // Place the little flag-dad at the last completed milestone
-  let last = { amount: 0 };
-  for(const ms of M){ if(ms.amount <= RAISED) last = ms; else break; }
-  const gp = Math.min(100, (last.amount / GOAL) * 100);
-  goalDad.style.left = gp + '%';
-  goalDad.title = last.label ? `Reached: ${last.label} (${usd(last.amount)})` : 'Getting started';
+    // Build ticks
+    ticks.innerHTML = '';
+    miles.forEach(ms=>{
+      const p = goal > 0 ? Math.min(100, (ms.amount/goal)*100) : 0;
+      const el = document.createElement('div');
+      el.className = 'tick';
+      el.style.left = p + '%';
+      el.innerHTML = `<span class="amt">${usd(ms.amount)}</span><span class="lbl">${ms.label||''}</span>`;
+      ticks.appendChild(el);
+    });
+  }catch(e){
+    raisedPill.textContent = '—';
+    goalPill.textContent = '—';
+    console.error('Tracker load error:', e);
+  }
 })();
 </script>
 </body>
