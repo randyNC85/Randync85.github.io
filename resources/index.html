@@ -44,6 +44,23 @@
     .filter{display:flex;gap:10px;align-items:center;margin-top:10px}
     .filter input{flex:1}
     .helptext{font-size:.9rem;color:var(--muted)}
+
+    /* Responsive iframe container */
+    .embed {
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#0e1117;
+    }
+    .embed iframe{
+      width:100%;
+      height:600px;
+      border:0;
+      display:block;
+    }
+    @media (max-width:720px){
+      .embed iframe{ height:760px; }
+    }
   </style>
 </head>
 <body>
@@ -125,12 +142,6 @@
           <a class="btn secondary" href="mailto:info@defenddad.org?subject=Resource%20Suggestion%20for%20Defend%20Dad">Open an empty email</a>
         </div>
       </form>
-
-      <!-- Optional: switch to Formspree later
-      <form class="stack" action="https://formspree.io/f/YOUR_FORM_ID" method="post">
-        ...same fields...
-      </form>
-      -->
     </div>
 
     <!-- State picker + filter -->
@@ -140,6 +151,7 @@
         <input id="stateFilter" type="text" placeholder="Type to filter states…" aria-label="Filter states" />
       </div>
       <div id="states" class="states" aria-live="polite">
+        <!-- States list unchanged -->
         <a class="state" href="/resources/state.html?state=alabama">Alabama</a>
         <a class="state" href="/resources/state.html?state=alaska">Alaska</a>
         <a class="state" href="/resources/state.html?state=arizona">Arizona</a>
@@ -195,7 +207,10 @@
 
     <!-- AI Goal widget -->
     <div class="panel" id="ai-goal-panel">
-      <div id="ai-goal-widget"></div>
+      <h2>Donation Tracker</h2>
+      <div class="embed">
+        <iframe src="/assets/ai-goal/index.html" title="Defend Dad Donation Tracker"></iframe>
+      </div>
     </div>
 
     <hr class="hr" />
@@ -206,15 +221,7 @@
     </div>
   </div>
 
-  <!-- AI Goal widget config -->
-  <script src="/assets/ai-goal.js"></script>
   <script>
-    window.DEFEND_DAD_CONFIG = {
-      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
-      goalTotal: 350000,
-      minGrantsToOpen: 500
-    };
-
     // Simple state filter
     const filter = document.getElementById('stateFilter');
     const links = Array.from(document.querySelectorAll('#states .state'));
