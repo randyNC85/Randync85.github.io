@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Defend Dad — Coming Soon</title>
+  <title>Defend Dad — Support, Resources & Fair Parenting Time</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Defend Dad equips fathers with practical tools, legal guidance, and community support to secure fair parenting time and due process." />
+  <meta name="description" content="Defend Dad equips fathers with tools, guidance, and community support to secure equal parenting time, navigate custody, and fight for fairness in family court." />
   <style>
     :root{
       --bg:#0e1117; --panel:#161b22; --line:#30363d;
@@ -34,6 +34,23 @@
     .nav-container{max-width:980px;margin:0 auto;display:flex;gap:20px;justify-content:center;flex-wrap:wrap}
     .topnav a{color:var(--gold);text-decoration:none;font-weight:600;padding:6px 10px;transition:color 0.2s ease}
     .topnav a:hover{color:var(--text)}
+
+    /* Responsive iframe container */
+    .embed {
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#0e1117;
+    }
+    .embed iframe{
+      width:100%;
+      height:900px;       /* adjust if your /our-ai/ page grows */
+      border:0;
+      display:block;
+    }
+    @media (max-width:720px){
+      .embed iframe{ height:1040px; } /* a bit taller for mobile */
+    }
   </style>
 </head>
 <body>
@@ -116,9 +133,12 @@
       <img class="shield" src="/defend-dad-logo-shield.png.PNG" alt="Defend Dad shield logo" />
     </div>
 
-    <!-- AI Goal widget -->
+    <!-- 7) Embed the custom goal tracker page -->
     <div class="panel" id="ai-goal-panel">
-      <div id="ai-goal-widget"></div>
+      <h2>Goal Progress</h2>
+      <div class="embed">
+        <iframe src="/our-ai/" title="Defend Dad Goal Tracker"></iframe>
+      </div>
     </div>
 
     <hr class="hr" />
@@ -130,14 +150,5 @@
 
   </div> <!-- /.wrap -->
 
-  <!-- Site-wide AI Goal Widget scripts -->
-  <script src="/assets/ai-goal.js"></script>
-  <script>
-    window.DEFEND_DAD_CONFIG = {
-      csvUrl: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSYwJ7Q9IJAU2z94W15JS5tuQla0bnEll_RUZ6ILBYSXxm1yNsdvp-Vz6Pqzhw85GrPmqsS5qpBXCCX/pub?gid=461905329&single=true&output=csv",
-      goalTotal: 350000,
-      minGrantsToOpen: 500
-    };
-  </script>
 </body>
 </html>
