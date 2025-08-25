@@ -44,13 +44,23 @@
     }
     .embed iframe{
       width:100%;
-      height:900px;       /* adjust if your /assets/ai-goal/ page grows */
+      height:900px;
       border:0;
       display:block;
     }
     @media (max-width:720px){
-      .embed iframe{ height:1040px; } /* a bit taller for mobile */
+      .embed iframe{ height:1040px; }
     }
+
+    /* Hidden dev link image */
+    .dev-link {
+      display:block;
+      margin:20px auto;
+      width:48px; /* small size */
+      opacity:0.55; /* subtle so casual users overlook */
+      transition:opacity 0.2s ease;
+    }
+    .dev-link:hover { opacity:1; }
   </style>
 </head>
 <body>
@@ -146,6 +156,13 @@
       Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
       <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
       <a href="https://defend.dad">defend.dad</a>
+    </div>
+
+    <!-- Hidden dev link to storefront -->
+    <div class="center">
+      <a href="/storefront/index.html">
+        <img class="dev-link" src="/assets/Image/dad-coins.png" alt="Dev link to storefront" />
+      </a>
     </div>
 
   </div> <!-- /.wrap -->
