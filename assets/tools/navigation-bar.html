@@ -1,1 +1,160 @@
+<!-- Defend Dad - Global Navigation (brand v2) -->
+<style>
+  :root{
+    /* Brand v2 */
+    --bg:#0d0f14;           /* deeper backdrop */
+    --panel:#141923;        /* panels/cards */
+    --line:#2a3240;         /* subtle borders */
+    --text:#e9edf4;         /* primary text */
+    --muted:#9aa6b2;        /* secondary text */
+    --gold:#e6c258;         /* brand gold (softer) */
+    --accent:#6fd2c7;       /* teal accent for hovers/focus */
+  }
 
+  /* Top bar shell */
+  .dd-nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: var(--panel);
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Banner area */
+  .dd-nav__hero {
+    position: relative;
+    max-width: 1160px; margin: 0 auto;
+    padding: 0 16px;
+    background:
+      linear-gradient(180deg, rgba(13,15,20,0.0) 0%, rgba(13,15,20,0.25) 100%);
+  }
+  .dd-nav__imgwrap {
+    position: relative;
+    height: 92px;  /* adjust to taste */
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+  }
+  /* If you upload a text-less banner, keep this filename: */
+  .dd-nav__imgwrap::before{
+    content:"";
+    position:absolute; inset:0;
+    background: url("/assets/Image/nav-banner-blank.png") center/cover no-repeat;
+    /* Fallback if image missing: */
+    background-color: #101521;
+  }
+  /* Soft mask so HTML links read clearly even if current image still has text */
+  .dd-nav__imgmask{
+    position:absolute; inset:0;
+    background: linear-gradient(90deg, rgba(16,21,33,.36), rgba(16,21,33,.16) 20%, rgba(16,21,33,.16) 80%, rgba(16,21,33,.36));
+    pointer-events:none;
+  }
+
+  /* Link row (real, accessible text) */
+  .dd-nav__links {
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    gap: 18px; padding: 0 12px;
+  }
+  .dd-nav__links a{
+    color: var(--text);
+    text-decoration:none;
+    font-weight: 760;
+    letter-spacing:.2px;
+    font-size: 1.02rem;
+    padding: 10px 12px;
+    border-radius: 10px;
+    transition: color .15s ease, background .15s ease, transform .05s ease;
+    white-space:nowrap;
+  }
+  .dd-nav__links a:hover{
+    color:#0b0f14; background:var(--gold);
+  }
+  .dd-nav__links a:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  /* Compact / mobile */
+  .dd-nav__row {
+    max-width: 1160px; margin: 0 auto; padding: 8px 12px 10px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .dd-brand {
+    display:flex; align-items:center; gap:10px; color:var(--gold); font-weight:800;
+    text-decoration:none;
+  }
+  .dd-brand img{ width:28px; height:28px }
+  .dd-hamburger{
+    display:none; background:transparent; border:1px solid var(--line); color:var(--text);
+    padding:8px 10px; border-radius:10px;
+  }
+
+  /* Responsive: stack links under hero on small screens */
+  @media (max-width: 760px){
+    .dd-nav__imgwrap{ height: 84px; }
+    .dd-nav__links{ display:none }      /* hide wide row */
+    .dd-hamburger{ display:block }      /* show toggle */
+  }
+
+  /* Slide-down panel for mobile */
+  .dd-drawer{
+    display:none;
+    border-top:1px solid var(--line);
+    background: var(--panel);
+  }
+  .dd-drawer a{
+    display:block; padding:12px 16px; border-top:1px solid var(--line);
+    color:var(--text); text-decoration:none; font-weight:700;
+  }
+  .dd-drawer a:hover{ background:#0f1420; color:var(--gold) }
+</style>
+
+<nav class="dd-nav" role="navigation" aria-label="Primary">
+  <!-- compact row (logo + hamburger) -->
+  <div class="dd-nav__row">
+    <a class="dd-brand" href="/">
+      <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
+      <span>Defend Dad</span>
+    </a>
+    <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">
+      Menu
+    </button>
+  </div>
+
+  <!-- banner (image behind, real links on top) -->
+  <div class="dd-nav__hero">
+    <div class="dd-nav__imgwrap">
+      <div class="dd-nav__imgmask"></div>
+      <div class="dd-nav__links" aria-hidden="false">
+        <a href="/">Home</a>
+        <a href="/toolbox">Dad’s Toolbox</a>
+        <a href="/dads-library">Dad’s Library</a>
+        <a href="/progress">Progress</a>
+        <a href="/transparency">Transparency</a>
+        <a href="/storefront">Dad’s Storefront</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- mobile drawer -->
+  <div class="dd-drawer" id="ddDrawer">
+    <a href="/">Home</a>
+    <a href="/toolbox">Dad’s Toolbox</a>
+    <a href="/dads-library">Dad’s Library</a>
+    <a href="/progress">Progress</a>
+    <a href="/transparency">Transparency</a>
+    <a href="/storefront">Dad’s Storefront</a>
+  </div>
+</nav>
+
+<script>
+  // Simple mobile toggle
+  (function(){
+    const btn = document.getElementById('ddToggle');
+    const drawer = document.getElementById('ddDrawer');
+    if(!btn || !drawer) return;
+    btn.addEventListener('click', ()=>{
+      const open = drawer.style.display === 'block';
+      drawer.style.display = open ? 'none' : 'block';
+      btn.setAttribute('aria-expanded', (!open).toString());
+    });
+  })();
+</script>
