@@ -1,1 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Defend Dad — Dad’s Storefront</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
+  <style>
+    /* ===== Light Theme (royal purple accent) ===== */
+    :root{
+      --bg:#f6f7fb;           /* page background */
+      --panel:#ffffff;        /* cards/panels */
+      --line:#e6e8ef;         /* borders/dividers */
+      --text:#1f2430;         /* primary text */
+      --muted:#6b7380;        /* secondary text */
+      --gold:#d4af37;         /* brand gold accent (legacy) */
+      --purple:#5b3df5;       /* royal purple accent */
+      --purple-ink:#3b2bd4;   /* darker purple text */
+    }
+
+    html,body{margin:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    .wrap{max-width:980px;margin:0 auto;padding:28px 18px}
+
+    /* ===== Global Navigation (brand v2) — light tune ===== */
+    .dd-nav { position: sticky; top:0; z-index:1000; background:#fff; border-bottom:1px solid var(--line) }
+    .dd-nav__row { max-width:1160px; margin:0 auto; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .dd-brand{ display:flex; align-items:center; gap:10px; color:var(--purple-ink); font-weight:800; text-decoration:none }
+    .dd-brand img{ width:28px; height:28px }
+
+    .dd-hamburger{ display:none; background:transparent; border:1px solid var(--line); color:var(--text); padding:8px 10px; border-radius:10px }
+
+    .dd-nav__hero{ position:relative; max-width:1160px; margin:0 auto; padding:0 16px; }
+    .dd-nav__imgwrap{ position:relative; height:92px; overflow:hidden; border-bottom:1px solid var(--line); border-top:1px solid var(--line) }
+    .dd-nav__imgwrap::before{
+      content:"";
+      position:absolute; inset:0;
+      background:url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
+      background-color:#f3f4fa; /* gentle fallback */
+      filter:saturate(1.05) brightness(1.02);
+    }
+    .dd-nav__imgmask{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,.75), rgba(255,255,255,.35) 22%, rgba(255,255,255,.35) 78%, rgba(255,255,255,.75)) }
+
+    .dd-nav__links{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:18px; padding:0 12px }
+    .dd-nav__links a{
+      color: var(--purple-ink);
+      text-decoration:none; font-weight:760; letter-spacing:.2px; font-size:1.02rem;
+      padding:10px 12px; border-radius:10px; white-space:nowrap;
+      transition: background .15s ease, color .15s ease, transform .05s ease;
+    }
+    .dd-nav__links a:hover{ background:var(--purple); color:#fff }
+    .dd-nav__links a:focus-visible{ outline:2px solid var(--purple); outline-offset:2px }
+
+    @media (max-width:760px){
+      .dd-hamburger{ display:block }
+      .dd-nav__imgwrap{ height:84px }
+      .dd-nav__links{ display:none }
+    }
+    .dd-drawer{ display:none; border-top:1px solid var(--line); background:#fff }
+    .dd-drawer a{ display:block; padding:12px 16px; border-top:1px solid var(--line); color:var(--purple-ink); text-decoration:none; font-weight:700 }
+    .dd-drawer a:hover{ background:#efeefe; color:#2016a8 }
+
+    /* ===== Page content ===== */
+    .panel{
+      background:var(--panel); border:1px solid var(--line); border-radius:14px;
+      padding:20px; margin:18px 0; box-shadow: 0 2px 10px rgba(27,30,45,.04);
+    }
+    h1{ margin:0 0 10px; color:var(--purple-ink) }
+    h2{ margin:0 0 8px; color:var(--purple-ink) }
+    p{ line-height:1.65; margin:8px 0 }
+    .muted{ color:var(--muted) }
+
+    .hero{ display:flex; flex-direction:column; gap:16px; align-items:center; text-align:center }
+    .hero img{
+      max-width:720px; width:100%; height:auto; border-radius:12px;
+      border:1px solid var(--line);
+    }
+
+    .btns{ display:flex; gap:12px; flex-wrap:wrap; justify-content:center; margin-top:10px }
+    .btn{
+      display:inline-block; padding:10px 14px; border-radius:10px; font-weight:700; text-decoration:none;
+      border:1px solid var(--purple); color:#fff; background:var(--purple);
+      box-shadow: 0 6px 14px rgba(91,61,245,.18);
+    }
+    .btn.secondary{ background:transparent; color:var(--purple-ink); border-color:var(--purple) }
+    .btn:hover{ filter:brightness(1.06) }
+
+    .hr{ height:1px; background:var(--line); margin:18px 0; border:0 }
+    .center{ text-align:center }
+
+    /* Responsive iframe wrapper for the donation tracker */
+    .embed{
+      border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
+    }
+    .embed iframe{ width:100%; height:920px; border:0; display:block }
+    @media (max-width:720px){
+      .embed iframe{ height:1050px; }
+    }
+
+    /* ===== Compact Donate Block ===== */
+    .donate-cta { text-align:center; max-width:760px; margin:18px auto }
+    .donate-cta h2 { color: var(--purple-ink); margin: 0 0 6px }
+    .donate-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; margin-top:10px }
+    .donate-actions .btn { padding:9px 14px; border-radius:10px; font-weight:700; text-decoration:none }
+    .donate-fill { background: var(--purple); color:#fff; border:1px solid var(--purple); box-shadow: 0 6px 14px rgba(91,61,245,.16) }
+    .donate-fill:hover { filter: brightness(1.07) }
+    .donate-outline { background: transparent; color: var(--purple-ink); border:1px solid var(--purple) }
+    .donate-outline:hover { background:#efeefe }
+  </style>
+</head>
+<body>
+
+  <!-- Global Navigation -->
+  <nav class="dd-nav" role="navigation" aria-label="Primary">
+    <div class="dd-nav__row">
+      <a class="dd-brand" href="/">
+        <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
+        <span>Defend Dad</span>
+      </a>
+      <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">Menu</button>
+    </div>
+
+    <div class="dd-nav__hero">
+      <div class="dd-nav__imgwrap">
+        <div class="dd-nav__imgmask"></div>
+        <div class="dd-nav__links">
+          <a href="/">Home</a>
+          <a href="/toolbox">Dad’s Toolbox</a>
+          <a href="/dads-library">Dad’s Library</a>
+          <a href="/progress">Progress</a>
+          <a href="/transparency">Transparency</a>
+          <a href="/storefront">Dad’s Storefront</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="dd-drawer" id="ddDrawer">
+      <a href="/">Home</a>
+      <a href="/toolbox">Dad’s Toolbox</a>
+      <a href="/dads-library">Dad’s Library</a>
+      <a href="/progress">Progress</a>
+      <a href="/transparency">Transparency</a>
+      <a href="/storefront">Dad’s Storefront</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+
+    <!-- Shop Coming Soon -->
+    <div class="panel hero">
+      <h1>Shop — Coming Soon</h1>
+      <img src="/assets/Image/Dad-store.PNG" alt="Defend Dad store coming soon" />
+      <p>
+        Thank you for your willingness to support <strong>Defend Dad</strong>.
+        We’re getting merch ready—designed to fund real tools for real dads.
+        Profits help build our AI assistant and cover practical costs like filing fees and hosting.
+      </p>
+      <p class="muted">
+        For now, we’re adding free self-help resources. If you’d like to accelerate the build,
+        your support below moves us to the next milestone.
+      </p>
+      <div class="btns">
+        <a class="btn secondary" href="/dads-library">Free Resources</a>
+        <a class="btn" href="/transparency">How your support is used</a>
+      </div>
+    </div>
+
+    <!-- Compact Donate CTA -->
+    <div class="panel donate-cta" id="donate">
+      <h2>Support the Build</h2>
+      <p class="muted">Your gift funds free tools, hosting, and filing-fee microgrants. Thank you.</p>
+
+      <div class="donate-actions">
+        <!-- Opens Donorbox secure popup -->
+        <a class="btn donate-fill dbox-donation-button"
+           href="https://donorbox.org/launch-defend-dad-s-resources-ai">
+          Donate (secure popup)
+        </a>
+
+        <!-- Fallback: opens the hosted donation page -->
+        <a class="btn donate-outline"
+           href="https://donorbox.org/launch-defend-dad-s-resources-ai"
+           target="_blank" rel="noopener">
+          Open hosted page
+        </a>
+      </div>
+
+      <div class="muted" style="font-size:.9rem;margin-top:8px">
+        Popup blocked? Use the hosted link.
+      </div>
+    </div>
+
+    <!-- Donation Tracker (embed) -->
+    <div class="panel">
+      <h1>Help Us Reach the Next Goal</h1>
+      <div class="embed">
+        <iframe src="/assets/tools/goals.html" title="Defend Dad Donation Tracker"></iframe>
+      </div>
+    </div>
+
+    <hr class="hr" />
+    <div class="center muted">
+      Contact: <a href="mailto:info@defenddad.org">info@defenddad.org</a> • Web:
+      <a href="https://defenddad.org">defenddad.org</a> • Shortcut:
+      <a href="https://defend.dad">defend.dad</a>
+    </div>
+
+  </div>
+
+  <!-- Donorbox popup script -->
+  <script src="https://donorbox.org/widget.js" paypalExpress="false"></script>
+  <script>
+    // Treat any link with this class as a Donorbox popup trigger
+    window.DonorBox = window.DonorBox || {};
+    DonorBox.widgetLinkClassName = 'dbox-donation-button';
+  </script>
+
+  <!-- Mobile nav toggle -->
+  <script>
+    (function(){
+      const btn = document.getElementById('ddToggle');
+      const drawer = document.getElementById('ddDrawer');
+      if(!btn || !drawer) return;
+      btn.addEventListener('click', ()=>{
+        const open = drawer.style.display === 'block';
+        drawer.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', (!open).toString());
+      });
+    })();
+  </script>
+</body>
+</html>
