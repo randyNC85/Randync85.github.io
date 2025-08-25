@@ -3,154 +3,204 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Defend Dad — Goal Tracker</title>
+<title>Defend Dad — Goals</title>
 <style>
   :root{
     --bg:#0e1117; --panel:#161b22; --line:#30363d;
     --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
+    --bar-h: 24px; /* easy to tweak bar height */
   }
   *{box-sizing:border-box}
   body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
   .wrap{max-width:960px;margin:0 auto;padding:28px 16px}
 
-  .tracker{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 18px 24px}
-  .tracker h2{margin:0 0 8px;font-size:1.25rem;color:var(--gold)}
-  .meta{display:flex;justify-content:space-between;gap:10px;font-weight:700;margin:8px 0 10px}
-  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:3px 10px;font-size:.85rem;color:var(--muted)}
+  .tracker{
+    position:relative;background:var(--panel);
+    border:0; border-radius:16px; padding:18px 18px 24px;
+  }
+  .tracker h2{margin:0 0 6px;font-size:1.6rem;color:var(--gold)}
+
+  .meta{display:flex;justify-content:space-between;gap:10px;font-weight:700;margin:8px 0 6px}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.9rem;color:var(--muted)}
   .raised{color:#0ed88b;border-color:#0ed88b22}
 
-  .bar-wrap{position:relative;padding:28px 16px}
-  .bar{position:relative;height:22px;border:1px solid var(--line);background:#0b0e13;border-radius:14px;overflow:hidden}
-  .fill{position:absolute;inset:0 0 0 0;width:0%;background:linear-gradient(90deg,var(--gold),#f6d773)}
+  .bar-wrap{position:relative;padding:26px 12px 10px}
+  .bar{
+    position:relative;height:var(--bar-h);
+    border:1px solid var(--line); background:#0b0e13;
+    border-radius:14px; overflow:hidden;
+  }
+  .fill{
+    position:absolute;inset:0 0 0 0;width:0%;
+    background:linear-gradient(90deg,var(--gold),#f6d773);
+  }
 
   .ticks{position:relative;height:36px;margin-top:10px;font-size:.85rem;color:var(--muted)}
   .tick{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;text-align:center}
-  .tick::before{content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:1px;height:10px;background:var(--line)}
+  .tick::before{
+    content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);
+    width:1px;height:10px;background:var(--line);
+  }
   .amt{display:block;color:#e6edf3;font-weight:700}
   .lbl{display:block;color:var(--muted)}
 
-  /* Mascots */
-  .mascots{position:relative;height:160px;margin-top:8px}
-  .push-dad{position:absolute;left:-10px;bottom:-10px;width:150px;pointer-events:none;transform:translateX(-10px)}
-  .kids{position:absolute;right:-10px;bottom:-10px;width:160px;pointer-events:none}
-  .coin-dad{position:absolute;left:50%;top:-8px;transform:translate(-50%,-100%);width:120px;pointer-events:none}
-  .coin{position:absolute;left:50%;top:-20px;transform:translateX(-50%);width:36px;height:36px;border-radius:50%;
-        background:radial-gradient(circle at 35% 35%, #fff7b8 0%, #ffd24d 40%, #d4af37 70%, #8c6e1a 100%);
-        border:1px solid rgba(0,0,0,.25);opacity:.0;animation:drop 3.2s ease-in-out infinite}
+  /* Mascots – scale to the bar so they never overflow */
+  .coin-dad{
+    position:absolute;left:50%;top:calc(-1 * var(--bar-h));
+    transform:translate(-50%,-55%); height:calc(var(--bar-h) * 3.2);
+    pointer-events:none;
+  }
+  .coin{
+    position:absolute;left:50%;top:calc(-0.8 * var(--bar-h));
+    transform:translateX(-50%); width:calc(var(--bar-h) * 1.6); height:calc(var(--bar-h) * 1.6);
+    border-radius:50%;
+    background:radial-gradient(circle at 35% 35%, #fff7b8 0%, #ffd24d 40%, #d4af37 70%, #8c6e1a 100%);
+    border:1px solid rgba(0,0,0,.25); opacity:.0; animation:drop 3.2s ease-in-out infinite;
+  }
   @keyframes drop{
     0%{opacity:0;transform:translateX(-50%) translateY(-30px) rotate(0)}
     10%{opacity:1}
-    60%{transform:translateX(-50%) translateY(86px) rotate(200deg)}
-    70%{transform:translateX(-50%) translateY(80px) rotate(220deg)}
-    100%{opacity:0;transform:translateX(-50%) translateY(90px) rotate(300deg)}
+    60%{transform:translateX(-50%) translateY(calc(var(--bar-h) * 3.8)) rotate(200deg)}
+    70%{transform:translateX(-50%) translateY(calc(var(--bar-h) * 3.4)) rotate(220deg)}
+    100%{opacity:0;transform:translateX(-50%) translateY(calc(var(--bar-h) * 4.0)) rotate(300deg)}
   }
-
-  /* Goal marker dad */
+  .push-dad{
+    position:absolute;left:-8px;bottom:calc(var(--bar-h) * 0.3);
+    height:calc(var(--bar-h) * 3.8); pointer-events:none;
+  }
+  .kids{
+    position:absolute;right:-6px;bottom:calc(var(--bar-h) * 0.2);
+    height:calc(var(--bar-h) * 4.1); pointer-events:none;
+  }
   .goal-dad{
-    position:absolute;bottom:54px;height:70px;
-    transform:translateX(-50%);left:0%;
+    position:absolute;bottom:calc(var(--bar-h) + 6px); height:calc(var(--bar-h) * 3.2);
+    transform:translateX(-50%); left:0%;
     transition:left .8s cubic-bezier(.22,.8,.26,1);
     pointer-events:none;
   }
 
-  .hint{margin-top:10px;color:var(--muted);font-size:.9rem}
+  .hint{margin-top:14px;color:var(--muted);font-size:.98rem;line-height:1.55}
   .gold{color:var(--gold)}
 </style>
 </head>
 <body>
-<div class="wrap">
+  <div class="wrap">
+    <div class="tracker" id="dd-tracker">
+      <h2>On Our Way to the Next Milestone</h2>
 
-  <div class="tracker" id="dd-tracker">
-    <h2>Community Build Goal</h2>
-    <div class="meta">
-      <div>Raised: <span class="pill raised" id="raised-pill">$0</span></div>
-      <div>Total Goal: <span class="pill" id="goal-pill">$0</span></div>
-    </div>
-
-    <div class="bar-wrap">
-      <!-- coin dad above the bar -->
-      <img class="coin-dad" src="/assets/Image/dad-coins.png" alt="Dad dropping coin" />
-      <div class="coin" aria-hidden="true"></div>
-
-      <!-- push dad to the left of bar -->
-      <img class="push-dad" src="/assets/Image/dad-hold.png" alt="Dad pushing progress" />
-
-      <div class="bar" aria-label="Goal progress">
-        <div class="fill" id="fill"></div>
+      <div class="meta">
+        <div>Raised: <span class="pill raised" id="raised-pill">$0</span></div>
+        <div>Total Goal: <span class="pill" id="goal-pill">$0</span></div>
       </div>
 
-      <!-- kids cheering on the right -->
-      <img class="kids" src="/assets/Image/team-dad-kids.png" alt="Kids cheering" />
+      <div class="bar-wrap">
+        <!-- Coin-drop dad above the bar -->
+        <img class="coin-dad" src="/assets/Image/dad-coins.png" alt="Dad dropping coin" />
+        <div class="coin" aria-hidden="true"></div>
 
-      <!-- GOAL MARKER DAD -->
-      <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-goal.png" alt="Goal marker" />
+        <!-- Push dad to the left of the bar -->
+        <img class="push-dad" src="/assets/Image/dad-push.png" alt="Dad pushing progress" />
+
+        <!-- Progress bar -->
+        <div class="bar" aria-label="Goal progress">
+          <div class="fill" id="fill"></div>
+        </div>
+
+        <!-- Kids cheering on the right -->
+        <img class="kids" src="/assets/Image/team-dad-kids.png" alt="Kids cheering" />
+
+        <!-- Milestone marker dad -->
+        <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-goal.png" alt="Goal marker" />
+      </div>
+
+      <div class="ticks" id="ticks"></div>
+
+      <p class="hint">
+        Defend Dad is building practical tools so everyday dads are treated fairly with their kids.
+        We don’t pay ourselves—donations cover development, hosting and other real costs only.
+        Your support moves us from milestone to milestone. <span class="gold">Thank you.</span>
+      </p>
     </div>
-
-    <!-- Milestones (with dollar amounts) -->
-    <div class="ticks" id="ticks"></div>
-
-    <div class="hint">Every coin moves the bar. When we hit each marker, we unlock the next phase. <span class="gold">Thank you.</span></div>
   </div>
 
-</div>
+  <!-- Pull live numbers & milestones -->
+  <script>
+    const fill = document.getElementById('fill');
+    const raisedPill = document.getElementById('raised-pill');
+    const ticks = document.getElementById('ticks');
+    const goalPill = document.getElementById('goal-pill');
+    const goalDad = document.getElementById('goal-dad');
 
-<script>
-  let CURRENT_RAISED = 0;
-  let MILESTONES = [];
-  let GOAL_TOTAL = 0;
+    let GOAL_TOTAL = 0;
+    let MILESTONES = [];
 
-  const fill = document.getElementById('fill');
-  const raisedPill = document.getElementById('raised-pill');
-  const ticks = document.getElementById('ticks');
-  const goalPill = document.getElementById('goal-pill');
-  const goalDad = document.getElementById('goal-dad');
+    function formatUSD(n){ return '$' + Number(n || 0).toLocaleString('en-US', {maximumFractionDigits:0}); }
 
-  function formatUSD(n){ return '$' + n.toLocaleString('en-US',{maximumFractionDigits:0}); }
+    function renderTicks(){
+      ticks.innerHTML = '';
+      MILESTONES.forEach(ms => {
+        const pct = Math.min(100, (ms.amount / GOAL_TOTAL) * 100);
+        const el = document.createElement('div');
+        el.className = 'tick';
+        el.style.left = pct + '%';
+        el.innerHTML = `<span class="amt">${formatUSD(ms.amount)}</span><span class="lbl">${ms.label}</span>`;
+        ticks.appendChild(el);
+      });
+    }
 
-  function renderTicks(){
-    ticks.innerHTML = '';
-    MILESTONES.forEach(ms => {
-      const pct = Math.min(100, (ms.amount / GOAL_TOTAL) * 100);
-      const el = document.createElement('div');
-      el.className = 'tick';
-      el.style.left = pct + '%';
-      el.innerHTML = `<span class="amt">$${ms.amount.toLocaleString()}</span><span class="lbl">${ms.label}</span>`;
-      ticks.appendChild(el);
-    });
-  }
+    function setBar(amount){
+      const pct = Math.min(100, (amount / GOAL_TOTAL) * 100);
+      fill.style.width = pct + '%';
+    }
 
-  function setBar(amount){
-    const pct = Math.min(100,(amount/GOAL_TOTAL)*100);
-    fill.style.width = pct + '%';
-  }
+    function setGoalDad(amount){
+      let last = { amount: 0, label: '' };
+      for(const ms of MILESTONES){ if(ms.amount <= amount){ last = ms; } else { break; } }
+      const pct = Math.min(100, (last.amount / GOAL_TOTAL) * 100);
+      goalDad.style.left = pct + '%';
+      goalDad.title = last.label ? `Reached: ${last.label} (${formatUSD(last.amount)})` : '';
+    }
 
-  function setGoalDad(amount){
-    let last = { amount:0 };
-    for(const ms of MILESTONES){ if(ms.amount <= amount){ last = ms; } else { break; } }
-    const pct = Math.min(100,(last.amount/GOAL_TOTAL)*100);
-    goalDad.style.left = pct + '%';
-    goalDad.title = last.label ? `Reached: ${last.label} ($${last.amount.toLocaleString()})` : '';
-  }
+    function animateCount(to){
+      let from = 0;
+      const step = Math.max(1, Math.floor(to / 60));
+      const timer = setInterval(()=>{
+        from += step;
+        if(from >= to){ from = to; clearInterval(timer); }
+        raisedPill.textContent = formatUSD(from);
+      }, 16);
+    }
 
-  function setProgress(newAmount){
-    raisedPill.textContent = formatUSD(newAmount);
-    setBar(newAmount);
-    setGoalDad(newAmount);
-  }
-
-  // === NEW: Load from external file ===
-  fetch('/assets/tools/current-donations.html')
-    .then(r => r.json())
-    .then(data => {
-      CURRENT_RAISED = data.current;
-      MILESTONES = data.milestones;
-      GOAL_TOTAL = MILESTONES[MILESTONES.length-1].amount;
-
-      goalPill.textContent = '$' + GOAL_TOTAL.toLocaleString();
-      renderTicks();
-      setProgress(CURRENT_RAISED);
-    })
-    .catch(err => console.error('Donation data load error:',err));
-</script>
+    async function loadData(){
+      try{
+        const res = await fetch('/assets/tools/current-donations.json', {cache: 'no-store'});
+        const data = await res.json();
+        const raised = Number(data.raised || 0);
+        GOAL_TOTAL = Number(data.goalTotal || 0);
+        MILESTONES = Array.isArray(data.milestones) ? data.milestones : [];
+        goalPill.textContent = formatUSD(GOAL_TOTAL);
+        renderTicks();
+        animateCount(raised);
+        requestAnimationFrame(()=> setBar(raised));
+        setGoalDad(raised);
+      }catch(e){
+        console.error('Failed to load donations JSON', e);
+        // Fallback if JSON is missing
+        GOAL_TOTAL = 20000;
+        MILESTONES = [
+          { label: "Website Development", amount: 300 },
+          { label: "App Development", amount: 1000 },
+          { label: "Complete App Development", amount: 5000 },
+          { label: "Defend Dad AI 1.1 Development", amount: 20000 }
+        ];
+        goalPill.textContent = formatUSD(GOAL_TOTAL);
+        renderTicks();
+        animateCount(350);
+        requestAnimationFrame(()=> setBar(350));
+        setGoalDad(350);
+      }
+    }
+    loadData();
+  </script>
 </body>
 </html>
