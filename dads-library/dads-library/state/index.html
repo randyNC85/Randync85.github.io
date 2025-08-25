@@ -1,0 +1,31 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dad’s Library — States A–Z</title>
+<style>
+  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .tile{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;text-decoration:none;color:var(--text)}
+  .tile:hover{border-color:var(--gold)}
+  .mini{width:40px;height:40px;object-fit:contain}
+</style>
+</head><body>
+<div class="wrap">
+  <h1>States A–Z</h1>
+  <div class="grid" id="grid"></div>
+</div>
+<script>
+(async ()=>{
+  const map = await (await fetch('/data/regions.json')).json();
+  const list = Object.entries(map.states).sort((a,b)=>a[1].name.localeCompare(b[1].name));
+  const grid = document.getElementById('grid');
+  list.forEach(([code,st])=>{
+    const a = document.createElement('a');
+    a.className='tile'; a.href = '/dads-library/state/template.html?code=' + code;
+    a.innerHTML = `<img class="mini" src="${st.mini}" alt="${st.name} mini"><div>${st.name} <span style="opacity:.6">(${code})</span></div>`;
+    grid.appendChild(a);
+  });
+})();
+</script>
+</body></html>
