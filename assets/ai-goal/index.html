@@ -20,21 +20,12 @@
   .raised{color:#0ed88b;border-color:#0ed88b22}
 
   .bar-wrap{position:relative;padding:28px 16px}
-  .bar{
-    position:relative;height:22px;border:1px solid var(--line);
-    background:#0b0e13;border-radius:14px;overflow:hidden;
-  }
-  .fill{
-    position:absolute;inset:0 0 0 0;width:0%;
-    background:linear-gradient(90deg,var(--gold),#f6d773);
-  }
+  .bar{position:relative;height:22px;border:1px solid var(--line);background:#0b0e13;border-radius:14px;overflow:hidden}
+  .fill{position:absolute;inset:0 0 0 0;width:0%;background:linear-gradient(90deg,var(--gold),#f6d773)}
 
   .ticks{position:relative;height:36px;margin-top:10px;font-size:.85rem;color:var(--muted)}
   .tick{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap;text-align:center}
-  .tick::before{
-    content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);
-    width:1px;height:10px;background:var(--line);
-  }
+  .tick::before{content:"";position:absolute;left:50%;top:-10px;transform:translateX(-50%);width:1px;height:10px;background:var(--line)}
   .amt{display:block;color:#e6edf3;font-weight:700}
   .lbl{display:block;color:var(--muted)}
 
@@ -56,7 +47,7 @@
 
   /* Goal marker dad */
   .goal-dad{
-    position:absolute;bottom:54px;height:80px; /* sit above the bar */
+    position:absolute;bottom:54px;height:80px;
     transform:translateX(-50%);left:0%;
     transition:left .8s cubic-bezier(.22,.8,.26,1);
     pointer-events:none;
@@ -78,21 +69,21 @@
 
     <div class="bar-wrap">
       <!-- coin dad above the bar -->
-      <img class="coin-dad" src="assets/Image/dad-coins.PNG" alt="Dad dropping coin" />
+      <img class="coin-dad" src="/assets/Image/dad-coins.PNG" alt="Dad dropping coin" />
       <div class="coin" aria-hidden="true"></div>
 
       <!-- push dad to the left of bar -->
-      <img class="push-dad" src="assets/Image/dad-push.PNG" alt="Dad pushing progress" />
+      <img class="push-dad" src="/assets/Image/dad-push.PNG" alt="Dad pushing progress" />
 
       <div class="bar" aria-label="Goal progress">
         <div class="fill" id="fill"></div>
       </div>
 
       <!-- kids cheering on the right -->
-      <img class="kids" src="assets/Image/team-dad-kids.PNG" alt="Kids cheering" />
+      <img class="kids" src="/assets/Image/team-dad-kids.PNG" alt="Kids cheering" />
 
-      <!-- GOAL MARKER DAD (new) -->
-      <img class="goal-dad" id="goal-dad" src="assets/Image/dad-goal.png" alt="Goal reached" />
+      <!-- GOAL MARKER DAD -->
+      <img class="goal-dad" id="goal-dad" src="/assets/Image/dad-goal.PNG" alt="Goal marker" />
     </div>
 
     <!-- Milestones (with dollar amounts) -->
@@ -104,7 +95,7 @@
 </div>
 
 <script>
-  /* ==== CONFIG (edit here) ==== */
+  /* ==== CONFIG ==== */
   let CURRENT_RAISED = 350;     // current amount ($)
   const MILESTONES = [
     { label: "Website Development", amount: 300 },
@@ -114,7 +105,6 @@
   ];
   const GOAL_TOTAL = MILESTONES[MILESTONES.length - 1].amount;
 
-  /* ==== ELEMENTS ==== */
   const fill = document.getElementById('fill');
   const raisedPill = document.getElementById('raised-pill');
   const ticks = document.getElementById('ticks');
@@ -123,7 +113,6 @@
 
   goalPill.textContent = '$' + GOAL_TOTAL.toLocaleString();
 
-  // Build milestone ticks
   function renderTicks(){
     ticks.innerHTML = '';
     MILESTONES.forEach(ms => {
@@ -154,9 +143,7 @@
     fill.style.width = pct + '%';
   }
 
-  // NEW: move goal dad to last completed milestone
   function setGoalDad(amount){
-    // find last milestone with amount <= current
     let last = { amount: 0 };
     for(const ms of MILESTONES){
       if(ms.amount <= amount){ last = ms; } else { break; }
@@ -166,9 +153,7 @@
     goalDad.title = last.label ? `Reached: ${last.label} ($${last.amount.toLocaleString()})` : '';
   }
 
-  // Helper you can call later to update live amounts and auto-move marker
   function setProgress(newAmount){
-    CURRENT_RAISED = newAmount;
     raisedPill.textContent = formatUSD(newAmount);
     setBar(newAmount);
     setGoalDad(newAmount);
@@ -179,9 +164,7 @@
   requestAnimationFrame(()=> setBar(CURRENT_RAISED));
   setGoalDad(CURRENT_RAISED);
 
-  // Example: when you later change the number (e.g., after a fetch),
-  // just call setProgress(NEW_DOLLAR_AMOUNT);
-  // setTimeout(()=> setProgress(1200), 4000); // demo move to next milestone
+  // Example: later you can update with setProgress(NEW_AMOUNT)
 </script>
 </body>
 </html>
