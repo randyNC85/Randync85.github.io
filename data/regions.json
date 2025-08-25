@@ -1,0 +1,25 @@
+{
+  "regions": {
+    "northeast": ["CT","ME","MA","NH","NJ","NY","PA","RI","VT"],
+    "south": ["AL","AR","DC","DE","FL","GA","KY","LA","MD","MS","NC","OK","SC","TN","TX","VA","WV"],
+    "midwest": ["IL","IN","IA","KS","MI","MN","MO","NE","ND","OH","SD","WI"],
+    "west": ["CA","OR","WA","NV"],
+    "mountain-plains": ["AZ","CO","ID","MT","NM","UT","WY"],
+    "ak-hi": ["AK","HI"]
+  },
+  "states": {
+    "AL": {
+      "name": "Alabama",
+      "slug": "alabama",
+      "mini": "/assets/Image/state-image/alabama-rocket-dad.png",
+      "data": "/data/states/AL.json"
+    },
+    "AK": {
+      "name": "Alaska",
+      "slug": "alaska",
+      "mini": "/assets/Image/state-image/alaska-parka-salmon-dad.png",
+      "data": "/data/states/AK.json"
+    }
+    // ...fill the rest as you add them...
+  }
+}
