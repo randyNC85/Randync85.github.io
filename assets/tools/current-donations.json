@@ -1,6 +1,6 @@
 {
   "raised": 350,
-  "goalTotal": 8,000,
+  "goalTotal": 8000,
   "milestones": [
     { "label": "Website Development", "amount": 300 },
     { "label": "App Development",   "amount": 1000 },
