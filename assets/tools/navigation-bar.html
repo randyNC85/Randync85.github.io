@@ -32,22 +32,22 @@
     overflow: hidden;
     border-bottom: 1px solid var(--line);
   }
-  /* If you upload a text-less banner, keep this filename: */
+  /* Text-less banner image */
   .dd-nav__imgwrap::before{
     content:"";
     position:absolute; inset:0;
-    background: url("/assets/Image/nav-banner-blank.png") center/cover no-repeat;
+    background: url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
     /* Fallback if image missing: */
     background-color: #101521;
   }
-  /* Soft mask so HTML links read clearly even if current image still has text */
+  /* Soft mask so HTML links read clearly */
   .dd-nav__imgmask{
     position:absolute; inset:0;
     background: linear-gradient(90deg, rgba(16,21,33,.36), rgba(16,21,33,.16) 20%, rgba(16,21,33,.16) 80%, rgba(16,21,33,.36));
     pointer-events:none;
   }
 
-  /* Link row (real, accessible text) */
+  /* Link row */
   .dd-nav__links {
     position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
@@ -87,14 +87,12 @@
     padding:8px 10px; border-radius:10px;
   }
 
-  /* Responsive: stack links under hero on small screens */
   @media (max-width: 760px){
     .dd-nav__imgwrap{ height: 84px; }
-    .dd-nav__links{ display:none }      /* hide wide row */
-    .dd-hamburger{ display:block }      /* show toggle */
+    .dd-nav__links{ display:none }
+    .dd-hamburger{ display:block }
   }
 
-  /* Slide-down panel for mobile */
   .dd-drawer{
     display:none;
     border-top:1px solid var(--line);
@@ -108,7 +106,6 @@
 </style>
 
 <nav class="dd-nav" role="navigation" aria-label="Primary">
-  <!-- compact row (logo + hamburger) -->
   <div class="dd-nav__row">
     <a class="dd-brand" href="/">
       <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
@@ -119,7 +116,6 @@
     </button>
   </div>
 
-  <!-- banner (image behind, real links on top) -->
   <div class="dd-nav__hero">
     <div class="dd-nav__imgwrap">
       <div class="dd-nav__imgmask"></div>
@@ -134,7 +130,6 @@
     </div>
   </div>
 
-  <!-- mobile drawer -->
   <div class="dd-drawer" id="ddDrawer">
     <a href="/">Home</a>
     <a href="/toolbox">Dad’s Toolbox</a>
@@ -146,7 +141,6 @@
 </nav>
 
 <script>
-  // Simple mobile toggle
   (function(){
     const btn = document.getElementById('ddToggle');
     const drawer = document.getElementById('ddDrawer');
