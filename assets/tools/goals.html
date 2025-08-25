@@ -9,13 +9,12 @@
   :root{
     --bg:#f6f7fb;
     --panel:#11161f;          /* dark card for contrast */
-    --panel-soft:#161b22;
     --line:#2a3240;
     --text:#e9edf4;
     --muted:#9aa6b2;
     --gold:#e6c258;
     --purple:#5b3df5;
-    --bar-h:22px;
+    --bar-h:22px;             /* knob to size everything */
   }
   *{box-sizing:border-box}
   html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
@@ -35,7 +34,6 @@
   }
   .raised{
     color:#0ed88b;border-color:#0ed88b33;background:#062015;
-    /* subtle pulse to catch the eye */
     animation:pulse 3s infinite;
   }
   @keyframes pulse{
@@ -56,24 +54,26 @@
     transition:width .8s ease;
   }
 
-  /* Mascots (scale with bar so they never overflow) */
+  /* Mascots (scaled from bar) */
   .push-dad{
     position:absolute;left:-4px;bottom:calc(var(--bar-h) * -0.35);
-    height:calc(var(--bar-h) * 3.3);pointer-events:auto;user-select:none;
+    height:calc(var(--bar-h) * 3.3);pointer-events:none;user-select:none;
   }
   .kids{
     position:absolute;right:-4px;bottom:calc(var(--bar-h) * -0.25);
     height:calc(var(--bar-h) * 3.0);pointer-events:none;user-select:none;
   }
-  .coin-dad-link{position:absolute;left:50%;top:-6px;transform:translate(-50%,-100%);display:block}
+
+  /* Clickable coin-dad; lowered & nudged left so it doesn’t cover the pill */
+  .coin-dad-link{
+    position:absolute;left:46%;top:8px;transform:translate(-50%,-50%);display:block;
+  }
   .coin-dad{
-    height:calc(var(--bar-h) * 3.0);pointer-events:auto;user-select:none;display:block;
+    height:calc(var(--bar-h) * 3.0);display:block;
     filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));
     transition:transform .2s ease;
   }
   .coin-dad-link:hover .coin-dad{ transform:translateY(-2px) }
-
-  /* (Removed the old vertical mini-bar entirely) */
 
   /* Goal marker */
   .goal-dad{
@@ -84,23 +84,27 @@
     pointer-events:none;
   }
 
-  /* Milestone ticks */
-  .ticks{position:relative;height:44px;margin-top:10px;font-size:.85rem;color:var(--muted)}
-  .tick{position:absolute;top:0;transform:translateX(-50%);text-align:center;white-space:nowrap}
+  /* Milestone ticks (clean, no overlap) */
+  .ticks{
+    position:relative;height:48px;margin-top:10px;font-size:.9rem;color:var(--muted);
+    z-index:1; pointer-events:none;  /* prevents odd overlay touches */
+  }
+  .tick{
+    position:absolute;top:0;transform:translateX(-50%);
+    text-align:center;white-space:nowrap;letter-spacing:normal;
+  }
   .tick::before{
     content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);
     width:1px;height:12px;background:#2b3442;
   }
-  .amt{display:block;color:#e6edf3;font-weight:800}
+  .amt{display:block;color:#e6edf3;font-weight:800;text-shadow:none}
   .lbl{display:block;color:var(--muted);max-width:140px}
 
   .hint{margin-top:14px;color:var(--muted);font-size:1rem}
   .gold{color:var(--gold)}
 
   /* Inline CTA under bar */
-  .cta{
-    margin-top:10px;text-align:center
-  }
+  .cta{ margin-top:12px;text-align:center }
   .cta a{
     display:inline-block;background:var(--purple);color:#fff;text-decoration:none;
     padding:8px 12px;border-radius:10px;font-weight:800;letter-spacing:.2px;
@@ -111,7 +115,7 @@
   @media (max-width:560px){
     .title{font-size:1.35rem}
     .lbl{max-width:110px}
-    .ticks{height:52px}
+    .ticks{height:54px}
   }
 </style>
 </head>
@@ -135,7 +139,7 @@
              onerror="this.style.display='none'"/>
       </a>
 
-      <!-- left mascot (fallback if dad-push.png doesn’t exist) -->
+      <!-- push dad (fallback to hold if missing) -->
       <img class="push-dad"
            src="/assets/Image/dad-push.png"
            alt="Dad pushing progress"
@@ -143,13 +147,13 @@
 
       <div class="bar" aria-label="Goal progress"><div class="fill" id="fill"></div></div>
 
-      <!-- kids cheering on the right -->
+      <!-- kids cheering -->
       <img class="kids"
            src="/assets/Image/team-dad-kids.png"
            alt="Kids cheering"
            onerror="this.style.display='none'"/>
 
-      <!-- goal flag dad -->
+      <!-- goal marker -->
       <img class="goal-dad" id="goal-dad"
            src="/assets/Image/dad-hold.png"
            alt="Goal marker"
@@ -159,7 +163,7 @@
     <!-- Milestones -->
     <div class="ticks" id="ticks"></div>
 
-    <!-- Inline CTA -->
+    <!-- CTA -->
     <div class="cta">
       <span class="hint">💪 Want to push us forward?</span>
       &nbsp;<a href="/storefront/index.html">Donate or Shop →</a>
@@ -184,8 +188,8 @@
 
   const usd = n => '$' + Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0});
 
-  // Load live numbers
-  let data = {raised:0, goalTotal:0, milestones:[]};
+  // Load live numbers (cache-busted)
+  let data = {raised:0, goalTotal:1, milestones:[]};
   try{
     const res = await fetch('/assets/tools/current-donations.json?cb=' + Date.now());
     data = await res.json();
@@ -198,13 +202,13 @@
   raisedP.textContent = usd(RAISED);
   goalP.textContent   = usd(GOAL);
 
-  // Fill bar
+  // Progress
   requestAnimationFrame(()=>{
     const pct = Math.max(0, Math.min(100, (RAISED/GOAL)*100));
     fill.style.width = pct + '%';
   });
 
-  // Milestone ticks
+  // Ticks
   ticks.innerHTML = '';
   M.forEach(ms=>{
     const p = Math.min(100, (ms.amount/GOAL)*100);
@@ -216,7 +220,7 @@
     ticks.appendChild(el);
   });
 
-  // Goal dad at last reached milestone (so $300 for raised 350)
+  // Goal-dad at last completed milestone (so $300 with your JSON)
   let last = {amount:0, label:''};
   for(const ms of M){ if(ms.amount <= RAISED){ last = ms; } else { break; } }
   const gp = Math.min(100, (last.amount/GOAL)*100);
