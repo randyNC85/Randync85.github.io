@@ -1,1 +1,30 @@
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dad’s Library — Find Your Region</title>
+<style>
+  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
+  h1{margin:0 0 10px;color:var(--gold)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--text)}
+  .card:hover{border-color:var(--gold)}
+  .muted{color:var(--muted)}
+</style>
+</head><body>
+<div class="wrap">
+  <h1>Dad’s Library</h1>
+  <p class="muted">Click your region to find state-specific plain-language resources.</p>
 
+  <div class="grid">
+    <a class="card" href="/dads-library/regions/northeast/">Northeast</a>
+    <a class="card" href="/dads-library/regions/south/">South</a>
+    <a class="card" href="/dads-library/regions/midwest/">Midwest</a>
+    <a class="card" href="/dads-library/regions/west/">West</a>
+    <a class="card" href="/dads-library/regions/mountain-plains/">Mountain/Plains</a>
+    <a class="card" href="/dads-library/regions/ak-hi/">Alaska & Hawaii</a>
+  </div>
+
+  <p class="muted" style="margin-top:14px"><a href="/dads-library/state/">Browse A–Z instead</a></p>
+</div>
+</body></html>
