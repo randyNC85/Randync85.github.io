@@ -1,0 +1,42 @@
+[
+  {
+    "code": "VA",
+    "name": "Virginia",
+    "slug": "virginia",
+    "mini": "/assets/Image/states/mini/virginia.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "WA",
+    "name": "Washington",
+    "slug": "washington",
+    "mini": "/assets/Image/states/mini/washington.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "WV",
+    "name": "West Virginia",
+    "slug": "west_virginia",
+    "mini": "/assets/Image/states/mini/west-virginia.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "WI",
+    "name": "Wisconsin",
+    "slug": "wisconsin",
+    "mini": "/assets/Image/states/mini/wisconsin.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "WY",
+    "name": "Wyoming",
+    "slug": "wyoming",
+    "mini": "/assets/Image/states/mini/wyoming.png",
+    "overview": "",
+    "resources": []
+  }
+]
