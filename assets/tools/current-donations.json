@@ -1,7 +1,18 @@
 {
-  "raised": 1000,
-  "goalTotal": 1001,
+  "raised": 350,
+  "goalTotal": 5000,
   "milestones": [
-
+    {
+      "amount": 300,
+      "label": "Website Development"
+    },
+    {
+      "amount": 800,
+      "label": "Defend Dad PC Program"
+    },
+    {
+      "amount": 5000,
+      "label": "Build App and AI 1.0"
+    }
   ]
-}
+} 
