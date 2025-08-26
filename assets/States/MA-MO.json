@@ -1,0 +1,42 @@
+[
+  {
+    "code": "MA",
+    "name": "Massachusetts",
+    "slug": "massachusetts",
+    "mini": "/assets/Image/states/mini/massachusetts.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "MI",
+    "name": "Michigan",
+    "slug": "michigan",
+    "mini": "/assets/Image/states/mini/michigan.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "MN",
+    "name": "Minnesota",
+    "slug": "minnesota",
+    "mini": "/assets/Image/states/mini/minnesota.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "MS",
+    "name": "Mississippi",
+    "slug": "mississippi",
+    "mini": "/assets/Image/states/mini/mississippi.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "MO",
+    "name": "Missouri",
+    "slug": "missouri",
+    "mini": "/assets/Image/states/mini/missouri.png",
+    "overview": "",
+    "resources": []
+  }
+]
