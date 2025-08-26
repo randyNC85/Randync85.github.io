@@ -1,0 +1,42 @@
+[
+  {
+    "code": "MT",
+    "name": "Montana",
+    "slug": "montana",
+    "mini": "/assets/Image/states/mini/montana.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NE",
+    "name": "Nebraska",
+    "slug": "nebraska",
+    "mini": "/assets/Image/states/mini/nebraska.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NV",
+    "name": "Nevada",
+    "slug": "nevada",
+    "mini": "/assets/Image/states/mini/nevada.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NH",
+    "name": "New Hampshire",
+    "slug": "new_hampshire",
+    "mini": "/assets/Image/states/mini/new-hampshire.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NJ",
+    "name": "New Jersey",
+    "slug": "new_jersey",
+    "mini": "/assets/Image/states/mini/new-jersey.png",
+    "overview": "",
+    "resources": []
+  }
+]
