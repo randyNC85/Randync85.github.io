@@ -1,59 +1,303 @@
 {
-  "states": [
-    {
-      "code": "CO",
-      "name": "Colorado",
-      "region": "mountain-plains",
-      "mini": "/assets/Image/states/mini/colorado.png",
-      "resources": {
-        "basics": "/resources/colorado/basics.html",
-        "motions": "/resources/colorado/motions.html",
-        "templates": "/resources/colorado/templates.html"
-      }
-    },
-    {
-      "code": "CT",
-      "name": "Connecticut",
-      "region": "northeast",
-      "mini": "/assets/Image/states/mini/connecticut.png",
-      "resources": {
-        "basics": "/resources/connecticut/basics.html",
-        "motions": "/resources/connecticut/motions.html",
-        "templates": "/resources/connecticut/templates.html"
-      }
-    },
-    {
-      "code": "DE",
-      "name": "Delaware",
-      "region": "northeast",
-      "mini": "/assets/Image/states/mini/delaware.png",
-      "resources": {
-        "basics": "/resources/delaware/basics.html",
-        "motions": "/resources/delaware/motions.html",
-        "templates": "/resources/delaware/templates.html"
-      }
-    },
-    {
-      "code": "FL",
-      "name": "Florida",
-      "region": "south",
-      "mini": "/assets/Image/states/mini/florida.png",
-      "resources": {
-        "basics": "/resources/florida/basics.html",
-        "motions": "/resources/florida/motions.html",
-        "templates": "/resources/florida/templates.html"
-      }
-    },
-    {
-      "code": "GA",
-      "name": "Georgia",
-      "region": "south",
-      "mini": "/assets/Image/states/mini/georgia.png",
-      "resources": {
-        "basics": "/resources/georgia/basics.html",
-        "motions": "/resources/georgia/motions.html",
-        "templates": "/resources/georgia/templates.html"
-      }
+  "colorado": {
+    "name": "Colorado",
+    "mini": "/assets/Image/states/mini/colorado.png",
+    "agencies": [
+      {"label": "Colorado Judicial Branch — Family / Domestic", "url": "https://www.courts.state.co.us/Self_Help/family/"},
+      {"label": "CO Child Support Services (CDHS)", "url": "https://cdhs.colorado.gov/child-support"}
+    ],
+    "forms": [
+      {"label": "Domestic Relations Forms (Parenting Time / APR)", "url": "https://www.courts.state.co.us/Forms/Forms_List.cfm?Form_Type_ID=94"},
+      {"label": "Unmarried: Allocation of Parental Responsibilities (APR)", "url": "https://www.courts.state.co.us/Self_Help/family/"}
+    ],
+    "calculators": [
+      {"label": "Colorado Child Support — Guidelines & Calculator", "url": "https://www.courts.state.co.us/Forms/Forms_List.cfm?Form_Type_ID=94"}
+    ],
+    "statutes": [
+      {"label": "Best interests / parental responsibilities — C.R.S. §14-10-124", "url": "https://law.justia.com/codes/colorado/"},
+      {"label": "Child support guidelines — C.R.S. §14-10-115", "url": "https://law.justia.com/codes/colorado/"}
+    ],
+    "law_library": [
+      {"label": "Colorado Revised Statutes (browse)", "url": "https://law.justia.com/codes/colorado/"}
+    ],
+    "info": [
+      {"label": "Colorado Legal Services — Family", "url": "https://www.coloradolegalservices.org/"},
+      {"label": "Self-Help Family (Court Guides)", "url": "https://www.courts.state.co.us/Self_Help/family/"}
+    ],
+    "bar": {"label": "Colorado Bar — Find a Lawyer", "url": "https://www.cobar.org/For-the-Public"},
+    "common_orders": [
+      {"label": "Parenting Class (often required)", "url": "https://www.courts.state.co.us/Self_Help/family/"},
+      {"label": "Mediation / ADR", "url": "https://www.courts.state.co.us/Administration/Unit.cfm/Unit/adr"},
+      {"label": "CFI (Child & Family Investigator)", "url": "https://www.courts.state.co.us/Administration/Section.cfm?Section=CFI"},
+      {"label": "PRE (Parental Responsibilities Evaluation)", "url": "https://www.courts.state.co.us/Self_Help/family/"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline (call/text 988)", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 — Local Services", "url": "https://www.211.org/"},
+      {"label": "Email Defend Dad (we’ll listen)", "url": "mailto:CEO@defenddad.com"}
+    ],
+    "infobox": {
+      "title": "Custody in Colorado",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Child’s best interests (C.R.S. §14-10-124)",
+        "History of caregiving & stability",
+        "Ability to co-parent & support child’s relationship with the other parent",
+        "Any abuse, neglect, substance issues"
+      ],
+      "stats_title": "Colorado Snapshot",
+      "stats": [
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Moderate"},
+        {"label": "Primary custody to mother", "value": "More common"},
+        {"label": "Primary custody to father", "value": "≈ 16%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $700 /mo"},
+        {"label": "Who receives support", "value": "≈ 80% mothers / 20% fathers"}
+      ],
+      "quirk": "Unique to CO: courts frequently use CFI (fast, limited-scope) or PRE (full evaluation) in contested cases.",
+      "disclaimer": "County practice varies; local standing orders may require parenting class and mediation."
     }
-  ]
+  },
+
+  "connecticut": {
+    "name": "Connecticut",
+    "mini": "/assets/Image/states/mini/connecticut.png",
+    "agencies": [
+      {"label": "CT Judicial Branch — Family", "url": "https://www.jud.ct.gov/family/"},
+      {"label": "CT DSS — Child Support", "url": "https://portal.ct.gov/dss/child-support"}
+    ],
+    "forms": [
+      {"label": "Family Forms (Custody / Visitation)", "url": "https://www.jud.ct.gov/webforms/"},
+      {"label": "Parentage / Unmarried", "url": "https://www.jud.ct.gov/family/parentage.htm"}
+    ],
+    "calculators": [
+      {"label": "CT Child Support Calculator (official)", "url": "https://ctguidelines.org/"}
+    ],
+    "statutes": [
+      {"label": "Custody / visitation — Conn. Gen. Stat. §46b-56", "url": "https://www.cga.ct.gov/current/pub/chap_815j.htm"},
+      {"label": "Child support guidelines", "url": "https://ctguidelines.org/"}
+    ],
+    "law_library": [
+      {"label": "CT General Statutes (browse)", "url": "https://www.cga.ct.gov/current/pub/titles.htm"}
+    ],
+    "info": [
+      {"label": "CTLawHelp — Family", "url": "https://ctlawhelp.org/en/family"}
+    ],
+    "bar": {"label": "CT Bar — Find a Lawyer", "url": "https://www.ctbar.org/for-the-public/find-a-Connecticut-lawyer"},
+    "common_orders": [
+      {"label": "Parenting Education Program (often mandatory)", "url": "https://www.jud.ct.gov/family/parenting_ed.asp"},
+      {"label": "Family Services Mediation", "url": "https://www.jud.ct.gov/family/services.htm"},
+      {"label": "Supervised Visitation", "url": "https://www.jud.ct.gov/family/visitation.htm"},
+      {"label": "Family Relations Evaluation", "url": "https://www.jud.ct.gov/family/services.htm"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 CT", "url": "https://www.211ct.org/"},
+      {"label": "Email Defend Dad", "url": "mailto:CEO@defenddad.com"}
+    ],
+    "infobox": {
+      "title": "Custody in Connecticut",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests of the child",
+        "Stability, continuity, and parenting history",
+        "Ability to co-parent and reduce conflict",
+        "Any family violence or risk factors"
+      ],
+      "stats_title": "Connecticut Snapshot",
+      "stats": [
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Moderate"},
+        {"label": "Primary custody to mother", "value": "More common"},
+        {"label": "Primary custody to father", "value": "≈ 15%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $800 /mo"},
+        {"label": "Who receives support", "value": "≈ 82% mothers / 18% fathers"}
+      ],
+      "quirk": "Parenting Education Program is widely required when minor children are involved.",
+      "disclaimer": "Family Relations (mediation/evaluation) is common; county practices vary."
+    }
+  },
+
+  "delaware": {
+    "name": "Delaware",
+    "mini": "/assets/Image/states/mini/delaware.png",
+    "agencies": [
+      {"label": "Delaware Family Court — Self-Help", "url": "https://courts.delaware.gov/family/selfhelp.aspx"},
+      {"label": "Division of Child Support Services", "url": "https://dhss.delaware.gov/dcse/"}
+    ],
+    "forms": [
+      {"label": "Family Court Forms (Custody / Visitation)", "url": "https://courts.delaware.gov/family/forms.aspx"},
+      {"label": "Parentage / Unmarried", "url": "https://courts.delaware.gov/family/selfhelp.aspx"}
+    ],
+    "calculators": [
+      {"label": "Child Support (Melson Formula) — Guidelines & Tools", "url": "https://courts.delaware.gov/family/support.aspx"}
+    ],
+    "statutes": [
+      {"label": "Best interests factors — 13 Del. C. §722", "url": "https://delcode.delaware.gov/title13/c007/index.html"},
+      {"label": "Child support — Melson Formula", "url": "https://courts.delaware.gov/family/support.aspx"}
+    ],
+    "law_library": [
+      {"label": "Delaware Code (browse)", "url": "https://delcode.delaware.gov/"}
+    ],
+    "info": [
+      {"label": "Delaware Law Help — Family", "url": "https://delegalhelplink.org/"}
+    ],
+    "bar": {"label": "Delaware State Bar — Lawyer Referral", "url": "https://www.dsba.org/for-the-public/find-a-lawyer/"},
+    "common_orders": [
+      {"label": "Parenting Education Program", "url": "https://courts.delaware.gov/family/parenting.aspx"},
+      {"label": "Mediation (often required)", "url": "https://courts.delaware.gov/family/mediation.aspx"},
+      {"label": "Supervised Visitation", "url": "https://courts.delaware.gov/family/selfhelp.aspx"},
+      {"label": "Custody Evaluations / Home Studies", "url": "https://courts.delaware.gov/family/selfhelp.aspx"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line", "url": "https://www.crisistextline.org/"},
+      {"label": "Delaware 211", "url": "https://delaware211.org/"},
+      {"label": "Email Defend Dad", "url": "mailto:CEO@defenddad.com"}
+    ],
+    "infobox": {
+      "title": "Custody in Delaware",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests factors (13 Del. C. §722)",
+        "Parental cooperation & communication",
+        "Safety concerns, abuse, or neglect",
+        "Continuity and stability"
+      ],
+      "stats_title": "Delaware Snapshot",
+      "stats": [
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Moderate"},
+        {"label": "Primary custody to mother", "value": "More common"},
+        {"label": "Primary custody to father", "value": "≈ 16%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $700 /mo"},
+        {"label": "Who receives support", "value": "≈ 80% mothers / 20% fathers"}
+      ],
+      "quirk": "Uses the Melson Formula for support; parenting class & mediation are common requirements.",
+      "disclaimer": "Procedure differs by county; check Family Court self-help for local rules."
+    }
+  },
+
+  "florida": {
+    "name": "Florida",
+    "mini": "/assets/Image/states/mini/florida.png",
+    "agencies": [
+      {"label": "Florida Courts — Family Law (Self-Help)", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts"},
+      {"label": "FL Dept. of Revenue — Child Support", "url": "https://floridarevenue.com/childsupport"}
+    ],
+    "forms": [
+      {"label": "Family Law Forms (including Parenting Plan)", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts/Family-Law-Forms"},
+      {"label": "Child Support Guidelines Worksheet (12.902(e))", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts/Family-Law-Forms"}
+    ],
+    "calculators": [
+      {"label": "Guidelines / Worksheet (official resources)", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts/Family-Law-Forms"}
+    ],
+    "statutes": [
+      {"label": "Time-sharing / parenting — Fla. Stat. §61.13", "url": "http://www.leg.state.fl.us/statutes/"},
+      {"label": "Child support guidelines — Fla. Stat. §61.30", "url": "http://www.leg.state.fl.us/statutes/"}
+    ],
+    "law_library": [
+      {"label": "Florida Statutes (browse)", "url": "http://www.leg.state.fl.us/statutes/"}
+    ],
+    "info": [
+      {"label": "FloridaLawHelp.org", "url": "https://www.floridalawhelp.org/"},
+      {"label": "Florida Courts — Self-Help", "url": "https://www.flcourts.gov/Resources-Services/Self-Help"}
+    ],
+    "bar": {"label": "Florida Bar — Lawyer Referral", "url": "https://lrs.floridabar.org/"},
+    "common_orders": [
+      {"label": "Parent Education & Family Stabilization Course", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts"},
+      {"label": "Mediation (widely required)", "url": "https://www.flcourts.org/Resources-Services/Alternative-Dispute-Resolution"},
+      {"label": "Supervised Visitation Programs", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts"},
+      {"label": "Social Investigation / Custody Evaluation", "url": "https://www.flcourts.gov/Resources-Services/Court-Improvement/Family-Courts"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line", "url": "https://www.crisistextline.org/"},
+      {"label": "211 Florida", "url": "https://www.my211florida.org/"},
+      {"label": "Email Defend Dad", "url": "mailto:CEO@defenddad.com"}
+    ],
+    "infobox": {
+      "title": "Custody in Florida",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests (time-sharing factors in §61.13)",
+        "Each parent’s capacity to co-parent & honor the schedule",
+        "Stability, school/community ties",
+        "Any abuse / substance issues"
+      ],
+      "stats_title": "Florida Snapshot",
+      "stats": [
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Rising"},
+        {"label": "Primary custody to mother", "value": "Still more common"},
+        {"label": "Primary custody to father", "value": "≈ 16%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $750 /mo"},
+        {"label": "Who receives support", "value": "≈ 81% mothers / 19% fathers"}
+      ],
+      "quirk": "Parenting course and mediation are standard; courts increasingly support substantial time-sharing where safe.",
+      "disclaimer": "Outcomes vary by circuit and facts; use the official forms & worksheet."
+    }
+  },
+
+  "georgia": {
+    "name": "Georgia",
+    "mini": "/assets/Image/states/mini/georgia.png",
+    "agencies": [
+      {"label": "GA Courts — Family Law", "url": "https://georgiacourts.gov/self-help/family-law/"},
+      {"label": "Division of Child Support Services (DCSS)", "url": "https://dhs.georgia.gov/child-support"}
+    ],
+    "forms": [
+      {"label": "Parenting Plan (required template)", "url": "https://georgiacourts.gov/rules/wp-content/uploads/sites/47/2020/10/Parenting-Plan.pdf"},
+      {"label": "Unmarried: Legitimation / Custody", "url": "https://georgiacourts.gov/self-help/family-law/"}
+    ],
+    "calculators": [
+      {"label": "Official GA Child Support Calculator", "url": "https://csconlinecalc.georgiacourts.gov/"}
+    ],
+    "statutes": [
+      {"label": "Custody / parenting time — O.C.G.A. §19-9-3", "url": "https://law.justia.com/codes/georgia/"},
+      {"label": "Child support guidelines — O.C.G.A. §19-6-15", "url": "https://law.justia.com/codes/georgia/"}
+    ],
+    "law_library": [
+      {"label": "Georgia Code (browse)", "url": "https://law.justia.com/codes/georgia/"}
+    ],
+    "info": [
+      {"label": "GeorgiaLegalAid.org — Family", "url": "https://www.georgialegalaid.org/"}
+    ],
+    "bar": {"label": "State Bar of Georgia — Find a Lawyer", "url": "https://www.gabar.org/forthepublic/findalawyer.cfm"},
+    "common_orders": [
+      {"label": "Seminar for Parents of Minor Children (many courts)", "url": "https://georgiacourts.gov/self-help/family-law/"},
+      {"label": "Mediation (often required)", "url": "https://georgiacourts.gov/adr/"},
+      {"label": "Supervised Visitation Centers", "url": "https://georgiacourts.gov/self-help/family-law/"},
+      {"label": "Custody Evaluations / Guardian ad Litem", "url": "https://georgiacourts.gov/self-help/family-law/"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line", "url": "https://www.crisistextline.org/"},
+      {"label": "United Way 211 Georgia", "url": "https://211unitedway.org/"},
+      {"label": "Email Defend Dad", "url": "mailto:CEO@defenddad.com"}
+    ],
+    "infobox": {
+      "title": "Custody in Georgia",
+      "factors_title": "What Judges Consider",
+      "factors": [
+        "Best interests (O.C.G.A. §19-9-3)",
+        "Parenting plan quality & co-parenting ability",
+        "Stability & involvement history",
+        "Any family violence / substance concerns"
+      ],
+      "stats_title": "Georgia Snapshot",
+      "stats": [
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Moderate"},
+        {"label": "Primary custody to mother", "value": "More common"},
+        {"label": "Primary custody to father", "value": "≈ 16%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $700 /mo"},
+        {"label": "Who receives support", "value": "≈ 80% mothers / 20% fathers"}
+      ],
+      "quirk": "A Parenting Plan is required; the official online calculator is used statewide for support.",
+      "disclaimer": "Local rules apply; many circuits require parenting seminars and mediation."
+    }
+  }
 }
