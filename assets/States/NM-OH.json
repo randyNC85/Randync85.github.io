@@ -1,0 +1,42 @@
+[
+  {
+    "code": "NM",
+    "name": "New Mexico",
+    "slug": "new_mexico",
+    "mini": "/assets/Image/states/mini/new-mexico.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NY",
+    "name": "New York",
+    "slug": "new_york",
+    "mini": "/assets/Image/states/mini/new-york.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "NC",
+    "name": "North Carolina",
+    "slug": "north_carolina",
+    "mini": "/assets/Image/states/mini/north-carolina.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "ND",
+    "name": "North Dakota",
+    "slug": "north_dakota",
+    "mini": "/assets/Image/states/mini/north-dakota.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "OH",
+    "name": "Ohio",
+    "slug": "ohio",
+    "mini": "/assets/Image/states/mini/ohio.png",
+    "overview": "",
+    "resources": []
+  }
+]
