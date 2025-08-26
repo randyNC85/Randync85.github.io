@@ -1,36 +1,18 @@
 <!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dad’s Library — South</title>
-<style>
-  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
-  h1{margin:0 0 10px;color:var(--gold)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-  .tile{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;text-decoration:none;color:var(--text)}
-  .tile:hover{border-color:var(--gold)}
-  .mini{width:56px;height:56px;object-fit:contain}
-  .muted{color:var(--muted)}
-</style>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Dad’s Library — Mountain / Plains</title>
+<style>/* copy the exact CSS from Northeast */</style>
 </head><body>
+<nav class="dd-nav" role="navigation" aria-label="Primary"> ... </nav>
 <div class="wrap">
-  <h1>South — State Guides</h1>
+  <h1>Mountain / Plains</h1><p class="muted">Pick your state.</p>
   <div id="grid" class="grid" aria-live="polite"></div>
-  <p class="muted" style="margin-top:12px"><a href="/dads-library/">← All regions</a></p>
+  <div class="panel"><h2 style="margin:0 0 10px;color:#3b2bd4">Help Us Reach the Next Goal</h2><div class="embed"><iframe src="/assets/tools/goals.html"></iframe></div></div>
 </div>
 <script>
-  (async ()=>{
-    const res = await fetch('/data/regions.json'); const map = await res.json();
-    const want = (map.regions && map.regions['south']) || [];
-    const sdata = map.states || {};
-    const grid = document.getElementById('grid');
-    want.forEach(code=>{
-      const st = sdata[code]; if(!st) return;
-      const a = document.createElement('a');
-      a.className='tile'; a.href = '/dads-library/state/template.html?code=' + encodeURIComponent(code);
-      a.innerHTML = `<img class="mini" alt="${st.name} mini" src="${st.mini}"><div><div style="font-weight:800">${st.name}</div><div class="muted">${code}</div></div>`;
-      grid.appendChild(a);
-    });
-  })();
+ (function(){const b=document.getElementById('ddToggle'),d=document.getElementById('ddDrawer');if(!b||!d)return;b.addEventListener('click',()=>{const o=d.style.display==='block';d.style.display=o?'none':'block';b.setAttribute('aria-expanded',(!o).toString());});})();
+ const STATES=["Arizona","New Mexico","Colorado","Utah","Idaho","Montana","Wyoming"];
+ const slug=s=>s.toLowerCase().replace(/\s+/g,'-'); const grid=document.getElementById('grid');
+ grid.innerHTML=STATES.map(n=>`<a class="state" href="/dads-library/state/?state=${slug(n)}"><img src="/assets/Image/states/mini/${slug(n)}.png" alt="${n} mini" onerror="this.style.display='none'"/><span>${n}</span></a>`).join('');
 </script>
 </body></html>
