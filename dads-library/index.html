@@ -1,30 +1,106 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Dad’s Library — Find Your Region</title>
+
+<!-- Global minis / buttons styling -->
+<link rel="stylesheet" href="/assets/tools/defenddad.css" />
+
 <style>
-  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
+  :root{
+    --bg:#0e1117; --panel:#161b22; --line:#30363d;
+    --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
+  }
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+  }
   .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
   h1{margin:0 0 10px;color:var(--gold)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;text-decoration:none;color:var(--text)}
-  .card:hover{border-color:var(--gold)}
+  p{line-height:1.6;margin:8px 0}
   .muted{color:var(--muted)}
+
+  /* Region grid (similar vibe to state tiles) */
+  .region-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:12px;
+    margin-top:12px;
+  }
+  .region{
+    display:flex; align-items:center; gap:10px;
+    background:var(--panel); border:1px solid var(--line);
+    border-radius:14px; padding:14px 16px; color:var(--text);
+    text-decoration:none; transition:border-color .2s ease, transform .12s ease;
+  }
+  .region:hover{ border-color:var(--gold); transform:translateY(-2px) }
+  .region img{
+    width:42px; height:42px; object-fit:contain; image-rendering:auto;
+  }
+  .region .label{ font-weight:800 }
+  .region .sub{ display:block; font-size:.9rem; color:var(--muted) }
 </style>
-</head><body>
+</head>
+<body>
 <div class="wrap">
   <h1>Dad’s Library</h1>
-  <p class="muted">Click your region to find state-specific plain-language resources.</p>
+  <p class="muted">Click your region to find state-specific, plain-language resources. You can also browse all states A–Z below.</p>
 
-  <div class="grid">
-    <a class="card" href="/dads-library/regions/northeast/">Northeast</a>
-    <a class="card" href="/dads-library/regions/south/">South</a>
-    <a class="card" href="/dads-library/regions/midwest/">Midwest</a>
-    <a class="card" href="/dads-library/regions/west/">West</a>
-    <a class="card" href="/dads-library/regions/mountain-plains/">Mountain/Plains</a>
-    <a class="card" href="/dads-library/regions/ak-hi/">Alaska & Hawaii</a>
+  <div class="region-grid">
+    <a class="region" href="/dads-library/regions/northeast/">
+      <img src="/assets/Image/regions/northeast.png" alt="Northeast" onerror="this.style.display='none'">
+      <div>
+        <span class="label">Northeast</span>
+        <span class="sub">ME • NH • VT • MA • RI • CT • NY • NJ • PA</span>
+      </div>
+    </a>
+
+    <a class="region" href="/dads-library/regions/midwest/">
+      <img src="/assets/Image/regions/midwest.png" alt="Midwest" onerror="this.style.display='none'">
+      <div>
+        <span class="label">Midwest</span>
+        <span class="sub">OH • MI • IN • IL • WI • MN • IA • MO • ND • SD • NE • KS</span>
+      </div>
+    </a>
+
+    <a class="region" href="/dads-library/regions/south/">
+      <img src="/assets/Image/regions/south.png" alt="South" onerror="this.style.display='none'">
+      <div>
+        <span class="label">South</span>
+        <span class="sub">DE • MD • DC • VA • WV • KY • TN • NC • SC • GA • FL • AL • MS • LA • AR • OK • TX</span>
+      </div>
+    </a>
+
+    <a class="region" href="/dads-library/regions/west/">
+      <img src="/assets/Image/regions/west.png" alt="West" onerror="this.style.display='none'">
+      <div>
+        <span class="label">West</span>
+        <span class="sub">CA • OR • WA</span>
+      </div>
+    </a>
+
+    <a class="region" href="/dads-library/regions/mountain-plains/">
+      <img src="/assets/Image/regions/mountain-plains.png" alt="Mountain/Plains" onerror="this.style.display='none'">
+      <div>
+        <span class="label">Mountain / Plains</span>
+        <span class="sub">MT • WY • CO • NM • ID • UT • AZ • NV • ND/SD/NE/KS (alt grouping if desired)</span>
+      </div>
+    </a>
+
+    <a class="region" href="/dads-library/regions/ak-hi/">
+      <img src="/assets/Image/regions/ak-hi.png" alt="Alaska & Hawaii" onerror="this.style.display='none'">
+      <div>
+        <span class="label">Alaska &amp; Hawaii</span>
+        <span class="sub">AK • HI</span>
+      </div>
+    </a>
   </div>
 
-  <p class="muted" style="margin-top:14px"><a href="/dads-library/state/">Browse A–Z instead</a></p>
+  <p class="muted" style="margin-top:14px">
+    Prefer alphabetical? <a href="/dads-library/state/">Browse A–Z instead</a>
+  </p>
 </div>
-</body></html>
+</body>
+</html>
