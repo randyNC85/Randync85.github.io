@@ -1,1 +1,42 @@
-
+[
+  {
+    "code": "KS",
+    "name": "Kansas",
+    "slug": "kansas",
+    "mini": "/assets/Image/states/mini/kansas.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "KY",
+    "name": "Kentucky",
+    "slug": "kentucky",
+    "mini": "/assets/Image/states/mini/kentucky.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "LA",
+    "name": "Louisiana",
+    "slug": "louisiana",
+    "mini": "/assets/Image/states/mini/louisiana.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "ME",
+    "name": "Maine",
+    "slug": "maine",
+    "mini": "/assets/Image/states/mini/maine.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "MD",
+    "name": "Maryland",
+    "slug": "maryland",
+    "mini": "/assets/Image/states/mini/maryland.png",
+    "overview": "",
+    "resources": []
+  }
+]
