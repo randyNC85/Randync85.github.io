@@ -1,18 +1,41 @@
 {
   "alabama": {
     "name": "Alabama",
+    "mini": "/assets/Image/states/mini/alabama.png",
     "agencies": [
-      {"label": "Alabama Courts – Family Law", "url": "https://judicial.alabama.gov/FamilyCourt"},
-      {"label": "Alabama Legal Help", "url": "https://www.alabamalegalhelp.org/"}
+      {"label": "Alabama Courts — Family Law", "url": "https://judicial.alabama.gov/FamilyCourt"},
+      {"label": "AL Dept. of Human Resources — Child Support", "url": "https://dhr.alabama.gov/child-support/"}
     ],
     "forms": [
-      {"label": "Custody & Visitation Forms", "url": "https://judicial.alabama.gov/FamilyCourt#forms"}
+      {"label": "Custody & Visitation Forms", "url": "https://judicial.alabama.gov/FamilyCourt#forms"},
+      {"label": "Unmarried: Establish Paternity / Custody", "url": "https://judicial.alabama.gov/FamilyCourt#forms"}
+    ],
+    "calculators": [
+      {"label": "Rule 32 Child Support Worksheets (official)", "url": "https://judicial.alabama.gov/Forms/ChildSupport"}
     ],
     "statutes": [
-      "Best interests of the child: Ala. Code §30-3-1",
-      "Joint custody presumption: Ala. Code §30-3-150"
+      {"label": "Best interests of the child — Ala. Code §30-3-1", "url": "https://law.justia.com/codes/alabama/"},
+      {"label": "Joint custody policy — Ala. Code §30-3-150", "url": "https://law.justia.com/codes/alabama/"}
     ],
-    "notes": "Alabama courts generally favor joint custody when both parents are fit.",
+    "law_library": [
+      {"label": "Alabama Code (browse)", "url": "https://law.justia.com/codes/alabama/"}
+    ],
+    "info": [
+      {"label": "Alabama Legal Help (plain-language)", "url": "https://www.alabamalegalhelp.org/"}
+    ],
+    "bar": {"label": "Alabama State Bar — Find a Lawyer", "url": "https://www.alabar.org/for-the-public/find-a-lawyer/"},
+    "common_orders": [
+      {"label": "Parenting Classes", "url": "https://www.alabamalegalhelp.org/resource/parenting-classes"},
+      {"label": "Mediation (Court-Ordered)", "url": "https://alabamaadr.org/"},
+      {"label": "Supervised Visitation Centers", "url": "https://www.dhr.alabama.gov/child-protective-services/"},
+      {"label": "Custody Evaluations / Home Studies", "url": "https://judicial.alabama.gov/FamilyCourt"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline (call/text 988)", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 — Local Services", "url": "https://www.211.org/"},
+      {"label": "Email Defend Dad (we’ll listen)", "url": "mailto:CEO@defenddad.com"}
+    ],
     "infobox": {
       "title": "Custody in Alabama",
       "factors_title": "What Judges Consider",
@@ -20,159 +43,222 @@
         "Child’s age, needs, and safety",
         "Stability of each parent’s home",
         "History of caregiving",
-        "Willingness to foster relationship with other parent"
+        "Willingness to foster the child’s relationship with the other parent"
       ],
       "stats_title": "Alabama Snapshot",
       "stats": [
-        {"label":"Typical time split (mother / father)","value":"≈ 70% / 30%"},
-        {"label":"Equal/shared custody (50/50)","value":"Low–moderate"},
-        {"label":"Primary custody to mother","value":"Most common"},
-        {"label":"Primary custody to father","value":"≈ 15%"},
-        {"label":"Avg child support (2 kids)","value":"≈ $650 /mo"},
-        {"label":"Who receives support","value":"≈ 82% mothers / 18% fathers"}
+        {"label": "Typical time split (mother / father)", "value": "≈ 70% / 30%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Low–moderate"},
+        {"label": "Primary custody to mother", "value": "Most common"},
+        {"label": "Primary custody to father", "value": "≈ 15%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $650 /mo"},
+        {"label": "Who receives support", "value": "≈ 82% mothers / 18% fathers"}
       ],
-      "disclaimer": "Averages only — county judges may differ."
+      "quirk": "No statutory 50/50 presumption; judges may order evaluations, parenting classes, or supervised visits in contested cases.",
+      "disclaimer": "Averages only — county judges and local practice vary."
     }
   },
 
   "alaska": {
     "name": "Alaska",
+    "mini": "/assets/Image/states/mini/alaska.png",
     "agencies": [
-      {"label":"Alaska Court System – Family Law Self Help", "url":"https://courts.alaska.gov/shc/family/family.htm"}
+      {"label": "Alaska Court System — Family Law Self Help", "url": "https://courts.alaska.gov/shc/family/family.htm"},
+      {"label": "Child Support Services (CSSD)", "url": "https://childsupport.alaska.gov/"}
     ],
     "forms": [
-      {"label":"Custody & Parenting Plan Forms","url":"https://courts.alaska.gov/shc/family/forms.htm"}
+      {"label": "Custody & Parenting Plan Forms", "url": "https://courts.alaska.gov/shc/family/forms.htm"},
+      {"label": "Unmarried: Custody / Parentage Packets", "url": "https://courts.alaska.gov/shc/family/forms.htm"}
+    ],
+    "calculators": [
+      {"label": "Rule 90.3 Child Support (guidelines & worksheets)", "url": "https://courts.alaska.gov/shc/family/support.htm"}
     ],
     "statutes": [
-      "Custody: Alaska Stat. §25.20.060",
-      "Child support guidelines: Alaska R. Civ. P. 90.3"
+      {"label": "Custody — Alaska Stat. §25.20.060", "url": "https://www.akleg.gov/basis/statutes.asp"},
+      {"label": "Child support guidelines — Alaska R. Civ. P. 90.3", "url": "https://courts.alaska.gov/rules/civ.htm"}
     ],
-    "notes": "Alaska strongly favors shared custody if practical.",
+    "law_library": [
+      {"label": "Alaska Statutes (browse)", "url": "https://www.akleg.gov/basis/statutes.asp"}
+    ],
+    "info": [
+      {"label": "Alaska Legal Services (ALS)", "url": "https://alsc-law.org/"}
+    ],
+    "bar": {"label": "Alaska Bar — Lawyer Referral", "url": "https://alaskabar.org/for-the-public/find-a-lawyer/"},
+    "common_orders": [
+      {"label": "Parenting Classes", "url": "https://courts.alaska.gov/shc/family/classes.htm"},
+      {"label": "Mediation (Mandatory in some cases)", "url": "https://courts.alaska.gov/shc/family/mediation.htm"},
+      {"label": "Supervised Visitation Centers", "url": "https://courts.alaska.gov/shc/family/visitation.htm"},
+      {"label": "Custody Evaluations", "url": "https://courts.alaska.gov/shc/family/custody-eval.htm"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline (call/text 988)", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 — Local Services", "url": "https://www.211.org/"},
+      {"label": "Email Defend Dad (we’ll listen)", "url": "mailto:CEO@defenddad.com"}
+    ],
     "infobox": {
       "title": "Custody in Alaska",
       "factors_title": "What Judges Consider",
       "factors": [
-        "Child’s best interests",
+        "Best interests of the child",
         "History of domestic violence",
         "Stability and continuity of care",
-        "Parental cooperation"
+        "Parental cooperation and communication"
       ],
       "stats_title": "Alaska Snapshot",
       "stats": [
-        {"label":"Typical time split","value":"≈ 65% / 35%"},
-        {"label":"Equal/shared custody","value":"Moderate"},
-        {"label":"Primary custody to mother","value":"More frequent"},
-        {"label":"Primary custody to father","value":"≈ 17%"},
-        {"label":"Avg child support (2 kids)","value":"≈ $720 /mo"},
-        {"label":"Who receives support","value":"≈ 79% mothers / 21% fathers"}
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Moderate"},
+        {"label": "Primary custody to mother", "value": "More frequent"},
+        {"label": "Primary custody to father", "value": "≈ 17%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $720 /mo"},
+        {"label": "Who receives support", "value": "≈ 79% mothers / 21% fathers"}
       ],
-      "disclaimer": "Alaska emphasizes joint custody but outcomes vary."
+      "quirk": "Alaska requires strict compliance with Rule 90.3 for child support and often orders custody evaluations in disputes.",
+      "disclaimer": "Shared custody favored when safe, but supervision may be ordered if DV or substance abuse is alleged."
     }
   },
 
   "arizona": {
     "name": "Arizona",
+    "mini": "/assets/Image/states/mini/arizona.png",
     "agencies": [
-      {"label":"AZ Courts – Family Law","url":"https://www.azcourts.gov/familylaw"}
+      {"label": "Arizona Courts — Family Law", "url": "https://www.azcourts.gov/familylaw"},
+      {"label": "AZ Dept. of Economic Security — Child Support", "url": "https://des.az.gov/services/child-and-family/child-support"}
     ],
     "forms": [
-      {"label":"Parenting Plan Template","url":"https://www.azcourts.gov/familylaw/forms"}
+      {"label": "Parenting Plan Template", "url": "https://www.azcourts.gov/familylaw/forms"},
+      {"label": "Unmarried: Establish Legal Decision-Making / Parenting Time", "url": "https://www.azcourts.gov/selfservicecenter"}
+    ],
+    "calculators": [
+      {"label": "Arizona Child Support Calculator (official)", "url": "https://www.azcourts.gov/familylaw/Child-Support-Calculator"}
     ],
     "statutes": [
-      "Best interests of the child: A.R.S. §25-403",
-      "Parenting time factors: A.R.S. §25-403.02"
+      {"label": "Best interests — A.R.S. §25-403", "url": "https://www.azleg.gov/arsDetail/?title=25"},
+      {"label": "Parenting time & plans — A.R.S. §25-403.02", "url": "https://www.azleg.gov/arsDetail/?title=25"}
     ],
-    "notes": "Arizona law presumes equal parenting time is best for the child unless proven otherwise.",
+    "law_library": [
+      {"label": "Arizona Revised Statutes (Title 25)", "url": "https://www.azleg.gov/arsDetail/?title=25"}
+    ],
+    "info": [
+      {"label": "AZ Law Help (plain-language)", "url": "https://azlawhelp.org/"}
+    ],
+    "bar": {"label": "State Bar of Arizona — Find a Lawyer", "url": "https://www.azbar.org/for-the-public/find-a-lawyer/"},
+    "common_orders": [
+      {"label": "Parenting Classes (Parent Information Program)", "url": "https://www.azcourts.gov/familylaw/Parent-Information-Program"},
+      {"label": "Mediation / ADR", "url": "https://www.azcourts.gov/adr"},
+      {"label": "Supervised Visitation Centers", "url": "https://www.azcourts.gov/selfservicecenter"},
+      {"label": "Custody Evaluations (Family Court Advisor / Conciliation Services)", "url": "https://www.azcourts.gov/selfservicecenter"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline (call/text 988)", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 — Local Services", "url": "https://www.211.org/"},
+      {"label": "Email Defend Dad (we’ll listen)", "url": "mailto:CEO@defenddad.com"}
+    ],
     "infobox": {
       "title": "Custody in Arizona",
       "factors_title": "What Judges Consider",
       "factors": [
         "Best interests of the child",
-        "Past caregiving and stability",
+        "Past caregiving & stability",
         "Parental cooperation",
-        "History of abuse, neglect, or violence"
+        "History of abuse, neglect, or substance issues"
       ],
       "stats_title": "Arizona Snapshot",
       "stats": [
-        {"label":"Typical time split","value":"≈ 60% / 40%"},
-        {"label":"Equal/shared custody (50/50)","value":"High compared to other states"},
-        {"label":"Primary custody to mother","value":"Still more common"},
-        {"label":"Primary custody to father","value":"≈ 18%"},
-        {"label":"Avg child support (2 kids)","value":"≈ $680 /mo"},
-        {"label":"Who receives support","value":"≈ 78% mothers / 22% fathers"}
+        {"label": "Typical time split", "value": "≈ 60% / 40%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Above average"},
+        {"label": "Primary custody to mother", "value": "Still more common"},
+        {"label": "Primary custody to father", "value": "≈ 18%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $680 /mo"},
+        {"label": "Who receives support", "value": "≈ 78% mothers / 22% fathers"}
       ],
-      "disclaimer": "Arizona is considered one of the most pro-50/50 states."
+      "quirk": "Judges must order both parents into a parenting education class (PIP) when custody is disputed.",
+      "disclaimer": "Arizona is considered one of the most pro-50/50 states; cooperation heavily weighted."
     }
   },
 
   "arkansas": {
     "name": "Arkansas",
+    "mini": "/assets/Image/states/mini/arkansas.png",
     "agencies": [
-      {"label":"Arkansas Judiciary – Domestic Relations","url":"https://arcourts.gov/domestic-relations"}
+      {"label": "Arkansas Judiciary — Domestic Relations", "url": "https://www.arcourts.gov/domestic-relations"},
+      {"label": "Office of Child Support Enforcement (OCSE)", "url": "https://www.dfa.arkansas.gov/child-support/"}
     ],
     "forms": [
-      {"label":"Custody & Visitation Forms","url":"https://arcourts.gov/forms"}
+      {"label": "Custody & Visitation Forms", "url": "https://www.arcourts.gov/forms"},
+      {"label": "Unmarried: Paternity / Custody Packets", "url": "https://www.arcourts.gov/forms"}
+    ],
+    "calculators": [
+      {"label": "Arkansas Child Support Calculator (official)", "url": "https://www.arcourts.gov/child-support-calculator"}
     ],
     "statutes": [
-      "Best interests of the child: Ark. Code §9-13-101",
-      "Presumption of joint custody (2021 law)"
+      {"label": "Best interests — Ark. Code §9-13-101", "url": "https://www.arkleg.state.ar.us/ArkansasCode"},
+      {"label": "Presumption of joint custody (Act 604 of 2021)", "url": "https://www.arkleg.state.ar.us/ArkansasCode"}
     ],
-    "notes": "Arkansas law now presumes joint custody is in the best interest of children.",
+    "law_library": [
+      {"label": "Arkansas Code (browse)", "url": "https://www.arkleg.state.ar.us/ArkansasCode"}
+    ],
+    "info": [
+      {"label": "Arkansas Legal Services / ARLawHelp", "url": "https://www.arlegalservices.org/"}
+    ],
+    "bar": {"label": "Arkansas Bar — Find a Lawyer", "url": "https://www.arkbar.com/for-the-public/find-a-lawyer"},
+    "common_orders": [
+      {"label": "Parenting Classes", "url": "https://www.arcourts.gov/forms"},
+      {"label": "Mediation (Domestic Relations / ADR)", "url": "https://www.arcourts.gov/adr"},
+      {"label": "Supervised Visitation Programs", "url": "https://www.arcourts.gov/domestic-relations"},
+      {"label": "Custody Evaluations / Home Studies", "url": "https://www.arcourts.gov/domestic-relations"}
+    ],
+    "support": [
+      {"label": "988 Suicide & Crisis Lifeline (call/text 988)", "url": "https://988lifeline.org"},
+      {"label": "Crisis Text Line (text HOME to 741741)", "url": "https://www.crisistextline.org/"},
+      {"label": "211 — Local Services", "url": "https://www.211.org/"},
+      {"label": "Email Defend Dad (we’ll listen)", "url": "mailto:CEO@defenddad.com"}
+    ],
     "infobox": {
       "title": "Custody in Arkansas",
       "factors_title": "What Judges Consider",
       "factors": [
         "Best interests of the child",
         "Parental ability to cooperate",
-        "Stability of environment",
-        "Evidence of abuse or neglect"
+        "Stability of the child’s environment",
+        "Any evidence of abuse or neglect"
       ],
       "stats_title": "Arkansas Snapshot",
       "stats": [
-        {"label":"Typical time split","value":"≈ 65% / 35%"},
-        {"label":"Equal/shared custody (50/50)","value":"Increasing since 2021 law"},
-        {"label":"Primary custody to mother","value":"Still more common"},
-        {"label":"Primary custody to father","value":"≈ 14%"},
-        {"label":"Avg child support (2 kids)","value":"≈ $600 /mo"},
-        {"label":"Who receives support","value":"≈ 82% mothers / 18% fathers"}
+        {"label": "Typical time split", "value": "≈ 65% / 35%"},
+        {"label": "Equal/shared custody (50/50)", "value": "Rising since 2021"},
+        {"label": "Primary custody to mother", "value": "Still more common"},
+        {"label": "Primary custody to father", "value": "≈ 14%"},
+        {"label": "Avg child support (2 kids)", "value": "≈ $600 /mo"},
+        {"label": "Who receives support", "value": "≈ 82% mothers / 18% fathers"}
       ],
-      "disclaimer": "Post-2021 law, judges must justify when denying joint custody."
+      "quirk": "Act 604 (2021) created a rebuttable presumption of joint custody — judges must state reasons to deny it. Courts often order mediation if parents cannot agree.",
+      "disclaimer": "Presumption can be rebutted by evidence; results vary by county."
     }
   },
 
   "california": {
     "name": "California",
+    "mini": "/assets/Image/states/mini/california.png",
     "agencies": [
-      {"label":"California Courts – Family Law","url":"https://www.courts.ca.gov/selfhelp-family.htm"},
-      {"label":"California Child Support Services","url":"https://childsupport.ca.gov/"}
+      {"label": "California Courts — Family Law (Self-Help)", "url": "https://www.courts.ca.gov/selfhelp-family.htm"},
+      {"label": "CA Child Support Services", "url": "https://childsupport.ca.gov/"}
     ],
     "forms": [
-      {"label":"Custody & Visitation Forms","url":"https://www.courts.ca.gov/forms.htm?filter=FL"}
+      {"label": "Custody & Visitation Forms (FL)", "url": "https://www.courts.ca.gov/forms.htm?filter=FL"},
+      {"label": "Unmarried: Parentage (Establish/Respond)", "url": "https://www.courts.ca.gov/selfhelp-parentage.htm"}
+    ],
+    "calculators": [
+      {"label": "California Child Support Calculator (official)", "url": "https://childsupport.ca.gov/calculate-child-support/"}
     ],
     "statutes": [
-      "Custody law: Cal. Fam. Code §3011 (best interests of the child)",
-      "Preference for frequent and continuing contact with both parents"
+      {"label": "Best interests — Fam. Code §3011", "url": "https://leginfo.legislature.ca.gov/faces/codes.xhtml"},
+      {"label": "Frequent & continuing contact policy", "url": "https://leginfo.legislature.ca.gov/faces/codes.xhtml"}
     ],
-    "notes": "California emphasizes frequent and continuing contact with both parents, but outcomes vary widely by county.",
-    "infobox": {
-      "title": "Custody in California",
-      "factors_title": "What Judges Consider",
-      "factors": [
-        "Child’s health, safety, and welfare",
-        "History of abuse or substance issues",
-        "Co-parenting ability",
-        "Continuity and stability"
-      ],
-      "stats_title": "California Snapshot",
-      "stats": [
-        {"label":"Typical time split","value":"≈ 65% / 35%"},
-        {"label":"Equal/shared custody (50/50)","value":"Moderate; varies by county"},
-        {"label":"Primary custody to mother","value":"Most common"},
-        {"label":"Primary custody to father","value":"≈ 15%"},
-        {"label":"Avg child support (2 kids)","value":"≈ $850 /mo"},
-        {"label":"Who receives support","value":"≈ 83% mothers / 17% fathers"}
-      ],
-      "disclaimer": "Outcomes differ widely between northern and southern CA."
-    }
-  }
-}
+    "law_library": [
+      {"label": "California Codes — Family Code", "url": "https://leginfo.legislature.ca.gov/faces/codes.xhtml"}
+    ],
+    "info": [
+      {"label": "LawHelpCA (plain-language)", "url": "
