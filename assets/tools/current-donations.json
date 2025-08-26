@@ -1,9 +1,7 @@
 {
-  "raised": 350,
-  "goalTotal": 8000,
+  "raised": 1000,
+  "goalTotal": 1001,
   "milestones": [
-    { "label": "Website Development", "amount": 300 },
-    { "label": "App Development", "amount": 1000 },
-    { "label": "Complete App & Defend Dad AI 1.0", "amount": 8000 }
+
   ]
 }
