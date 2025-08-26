@@ -1,0 +1,42 @@
+[
+  {
+    "code": "HI",
+    "name": "Hawaii",
+    "slug": "hawaii",
+    "mini": "/assets/Image/states/mini/hawaii.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "ID",
+    "name": "Idaho",
+    "slug": "idaho",
+    "mini": "/assets/Image/states/mini/idaho.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "IL",
+    "name": "Illinois",
+    "slug": "illinois",
+    "mini": "/assets/Image/states/mini/illinois.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "IN",
+    "name": "Indiana",
+    "slug": "indiana",
+    "mini": "/assets/Image/states/mini/indiana.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "IA",
+    "name": "Iowa",
+    "slug": "iowa",
+    "mini": "/assets/Image/states/mini/iowa.png",
+    "overview": "",
+    "resources": []
+  }
+]
