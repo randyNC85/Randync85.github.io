@@ -1,0 +1,42 @@
+[
+  {
+    "code": "SD",
+    "name": "South Dakota",
+    "slug": "south_dakota",
+    "mini": "/assets/Image/states/mini/south-dakota.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "TN",
+    "name": "Tennessee",
+    "slug": "tennessee",
+    "mini": "/assets/Image/states/mini/tennessee.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "TX",
+    "name": "Texas",
+    "slug": "texas",
+    "mini": "/assets/Image/states/mini/texas.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "UT",
+    "name": "Utah",
+    "slug": "utah",
+    "mini": "/assets/Image/states/mini/utah.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "VT",
+    "name": "Vermont",
+    "slug": "vermont",
+    "mini": "/assets/Image/states/mini/vermont.png",
+    "overview": "",
+    "resources": []
+  }
+]
