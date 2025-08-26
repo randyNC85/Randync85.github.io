@@ -1,31 +1,163 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dad’s Library — States A–Z</title>
-<style>
-  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
-  .tile{display:flex;gap:10px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;text-decoration:none;color:var(--text)}
-  .tile:hover{border-color:var(--gold)}
-  .mini{width:40px;height:40px;object-fit:contain}
-</style>
-</head><body>
-<div class="wrap">
-  <h1>States A–Z</h1>
-  <div class="grid" id="grid"></div>
-</div>
-<script>
-(async ()=>{
-  const map = await (await fetch('/data/regions.json')).json();
-  const list = Object.entries(map.states).sort((a,b)=>a[1].name.localeCompare(b[1].name));
-  const grid = document.getElementById('grid');
-  list.forEach(([code,st])=>{
-    const a = document.createElement('a');
-    a.className='tile'; a.href = '/dads-library/state/template.html?code=' + code;
-    a.innerHTML = `<img class="mini" src="${st.mini}" alt="${st.name} mini"><div>${st.name} <span style="opacity:.6">(${code})</span></div>`;
-    grid.appendChild(a);
-  });
-})();
-</script>
-</body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Dad’s Library — National & Regions</title>
+  <meta name="description" content="Find plain-language resources for dads: national guidance plus state-specific help organized by U.S. region." />
+
+  <style>
+    /* ===== Light Theme (rebrand) ===== */
+    :root{
+      --bg:#f6f7fb;
+      --panel:#ffffff;
+      --line:#e6e8ef;
+      --text:#1f2430;
+      --muted:#6b7380;
+      --gold:#d4af37;
+      --purple:#5b3df5;
+      --purple-ink:#3324c8;
+    }
+    html,body{margin:0}
+    body{
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg); color:var(--text);
+    }
+    a{color:var(--purple-ink);text-decoration:none}
+    a:hover{color:#2016a8}
+
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 18px}
+
+    /* Page title */
+    .title{font-size:2.2rem; font-weight:900; margin:4px 0 10px; color:var(--purple-ink)}
+    .muted{color:var(--muted)}
+
+    /* Cards */
+    .card{
+      background:var(--panel); border:1px solid var(--line); border-radius:16px;
+      padding:18px; margin:16px 0; box-shadow:0 8px 22px rgba(20,24,40,.06);
+    }
+    .card h2{margin:0 0 8px; color:var(--purple-ink)}
+    .btn{
+      display:inline-block; background:var(--purple); color:#fff; border-radius:10px;
+      padding:10px 14px; font-weight:800; letter-spacing:.2px; box-shadow:0 8px 18px rgba(91,61,245,.18);
+    }
+    .btn:hover{filter:brightness(1.06)}
+
+    /* Map banner with hotspots */
+    .map{
+      position:relative; border-radius:16px; overflow:hidden;
+      border:1px solid var(--line); background:#eceef8; /* gentle fallback */
+      aspect-ratio: 5 / 3; /* responsive height */
+    }
+    .map::before{
+      content:"";
+      position:absolute; inset:0;
+      background:url("/assets/Image/us-regions-blank.png") center/cover no-repeat;
+      opacity:1; /* keep fully visible; image should be text-less */
+    }
+    .hotspot{
+      position:absolute; transform:translate(-50%,-50%);
+      background:rgba(255,255,255,.92); border:1px solid var(--line);
+      padding:8px 12px; border-radius:12px; font-weight:800; white-space:nowrap;
+      box-shadow:0 10px 20px rgba(20,24,40,.08);
+    }
+    .hotspot:hover{background:#fff}
+    .hotspot .sub{display:block; font-weight:600; font-size:.8rem; color:var(--muted)}
+
+    /* Approximate hotspot positions (percentages of the container) */
+    .hs-northeast   { left:83%; top:28%; }
+    .hs-south       { left:63%; top:62%; }
+    .hs-midwest     { left:58%; top:35%; }
+    .hs-west        { left:20%; top:48%; }
+    .hs-mountain    { left:36%; top:42%; }
+    .hs-akhi        { left:17%; top:88%; }
+
+    /* Fallback list under map */
+    .regions{
+      display:grid; gap:12px; grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      margin-top:14px;
+    }
+    .regions a{
+      display:block; padding:12px 14px; border:1px solid var(--line); border-radius:12px;
+      background:#fff; font-weight:800;
+    }
+    .regions a:hover{ background:#efeefe; color:#2016a8 }
+
+    /* “Browse A–Z” link */
+    .az{ margin-top:12px; display:inline-block }
+
+    /* Small ‘building in the open’ notice */
+    .notice{
+      padding:10px 14px; border:1px dashed var(--line); border-radius:12px; background:#fff;
+      color:var(--muted); font-size:.95rem
+    }
+  </style>
+</head>
+<body>
+
+  <!-- If you already include your global nav elsewhere, keep doing that.
+       This page only handles the content below. -->
+
+  <div class="wrap">
+    <h1 class="title">Dad’s Library</h1>
+    <p class="muted">Pick a region to find <strong>state-specific, plain-language</strong> checklists, terms, and motion templates. National guidance is below, with basics that apply everywhere.</p>
+
+    <!-- Building-in-the-open notice (dates are placeholders) -->
+    <div class="notice card">
+      <strong>Welcome to Defend Dad — Building in the open.</strong>
+      <br/>Founded: <em>Aug 25, 2025</em> • First public version: <em>Aug 25, 2025</em>.
+      A more polished, modern UI is shipping soon—thanks for bearing with us while we get helpful content out fast.
+    </div>
+
+    <!-- National card -->
+    <div class="card">
+      <h2>National Guidance (All States)</h2>
+      <p class="muted">Start here for universally helpful info: basic terms, prep checklists, and the “Dad’s Guide” chapters.</p>
+      <div style="display:flex; gap:12px; flex-wrap:wrap">
+        <a class="btn" href="/dads-library/national/">Open National Library</a>
+        <a class="btn" href="/dads-library/national/guide.html">Read “Dad’s Guide”</a>
+      </div>
+    </div>
+
+    <!-- Regions map -->
+    <div class="card">
+      <h2>Choose Your Region</h2>
+
+      <div class="map" role="img" aria-label="U.S. regions map with clickable links">
+        <a class="hotspot hs-northeast" href="/dads-library/northeast/">
+          Northeast <span class="sub">CT • ME • MA • NH • NJ • NY • PA • RI • VT</span>
+        </a>
+        <a class="hotspot hs-south" href="/dads-library/south/">
+          South <span class="sub">AL • AR • DC • DE • FL • GA • KY • LA • MD • MS • NC • OK • SC • TN • TX • VA • WV</span>
+        </a>
+        <a class="hotspot hs-midwest" href="/dads-library/midwest/">
+          Midwest <span class="sub">IL • IN • IA • KS • MI • MN • MO • NE • ND • OH • SD • WI</span>
+        </a>
+        <a class="hotspot hs-mountain" href="/dads-library/mountain-plains/">
+          Mountain/Plains <span class="sub">AZ • CO • ID • MT • NM • NV • UT • WY</span>
+        </a>
+        <a class="hotspot hs-west" href="/dads-library/west/">
+          West <span class="sub">CA • OR • WA</span>
+        </a>
+        <a class="hotspot hs-akhi" href="/dads-library/ak-hi/">
+          Alaska &amp; Hawaii <span class="sub">AK • HI • (DC links also here)</span>
+        </a>
+      </div>
+
+      <!-- Text fallback / SEO links -->
+      <div class="regions">
+        <a href="/dads-library/northeast/">Northeast</a>
+        <a href="/dads-library/south/">South</a>
+        <a href="/dads-library/midwest/">Midwest</a>
+        <a href="/dads-library/mountain-plains/">Mountain/Plains</a>
+        <a href="/dads-library/west/">West</a>
+        <a href="/dads-library/ak-hi/">Alaska &amp; Hawaii</a>
+      </div>
+
+      <a class="az" href="/dads-library/a-z/">Browse A–Z instead</a>
+    </div>
+  </div>
+
+</body>
+</html>
