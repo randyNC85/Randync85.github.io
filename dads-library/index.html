@@ -1,106 +1,177 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Dad’s Library — Find Your Region</title>
+  <meta charset="utf-8" />
+  <title>Dad’s Library — Pick Your Region</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 
-<!-- Global minis / buttons styling -->
-<link rel="stylesheet" href="/assets/tools/defenddad.css" />
+  <style>
+    /* ===== Light Theme (royal purple accent) ===== */
+    :root{
+      --bg:#f6f7fb; --panel:#ffffff; --line:#e6e8ef;
+      --text:#1f2430; --muted:#6b7380;
+      --gold:#d4af37; --purple:#5b3df5; --ink:#3b2bd4;
+    }
+    html,body{margin:0}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .wrap{max-width:1100px;margin:0 auto;padding:20px 14px}
 
-<style>
-  :root{
-    --bg:#0e1117; --panel:#161b22; --line:#30363d;
-    --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37;
-  }
-  body{
-    margin:0; background:var(--bg); color:var(--text);
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-  }
-  .wrap{max-width:980px;margin:0 auto;padding:28px 16px}
-  h1{margin:0 0 10px;color:var(--gold)}
-  p{line-height:1.6;margin:8px 0}
-  .muted{color:var(--muted)}
+    /* ===== Global Navigation (brand v2) — mobile friendly ===== */
+    .dd-nav{position:sticky;top:0;z-index:1000;background:#fff;border-bottom:1px solid var(--line)}
+    .dd-nav__row{max-width:1160px;margin:0 auto;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .dd-brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:800;text-decoration:none}
+    .dd-brand img{width:28px;height:28px}
+    .dd-hamburger{display:inline-block;background:transparent;border:1px solid var(--line);color:var(--text);padding:8px 10px;border-radius:10px}
 
-  /* Region grid (similar vibe to state tiles) */
-  .region-grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
-    gap:12px;
-    margin-top:12px;
-  }
-  .region{
-    display:flex; align-items:center; gap:10px;
-    background:var(--panel); border:1px solid var(--line);
-    border-radius:14px; padding:14px 16px; color:var(--text);
-    text-decoration:none; transition:border-color .2s ease, transform .12s ease;
-  }
-  .region:hover{ border-color:var(--gold); transform:translateY(-2px) }
-  .region img{
-    width:42px; height:42px; object-fit:contain; image-rendering:auto;
-  }
-  .region .label{ font-weight:800 }
-  .region .sub{ display:block; font-size:.9rem; color:var(--muted) }
-</style>
+    .dd-nav__hero{display:none} /* hide banner on phones for speed/space */
+
+    .dd-drawer{display:none;border-top:1px solid var(--line);background:#fff}
+    .dd-drawer a{display:block;padding:12px 16px;border-top:1px solid var(--line);color:var(--ink);text-decoration:none;font-weight:700}
+    .dd-drawer a:hover{background:#efeefe;color:#2016a8}
+
+    @media(min-width:760px){
+      .dd-hamburger{display:none}
+      .dd-nav__hero{display:block}
+      .dd-nav__imgwrap{position:relative;height:110px;overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+      .dd-nav__imgwrap::before{content:"";position:absolute;inset:0;background:url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;background-color:#f3f4fa;filter:saturate(1.05) brightness(1.02)}
+      .dd-nav__imgmask{position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,255,255,.75),rgba(255,255,255,.35) 22%,rgba(255,255,255,.35) 78%,rgba(255,255,255,.75))}
+      .dd-nav__links{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;gap:18px;padding:0 12px}
+      .dd-nav__links a{color:var(--ink);text-decoration:none;font-weight:760;letter-spacing:.2px;font-size:1.02rem;padding:10px 12px;border-radius:10px;white-space:nowrap;transition:background .15s ease,color .15s ease}
+      .dd-nav__links a:hover{background:var(--purple);color:#fff}
+      .dd-nav__links a:focus-visible{outline:2px solid var(--purple);outline-offset:2px}
+    }
+
+    /* ===== Page content ===== */
+    h1{margin:10px 0;color:var(--ink);font-size:clamp(1.6rem,3.8vw,2.1rem)}
+    .muted{color:var(--muted)}
+    .panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px;margin:16px 0;box-shadow:0 2px 10px rgba(27,30,45,.04)}
+
+    /* ===== Clickable Regions Map (phone-first) ===== */
+    .map-wrap{position:relative;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+    .map{
+      position:relative;width:100%;
+      /* Taller on phones so tap targets are big */
+      padding-bottom:80%; /* ~5:4 aspect for better mobile height */
+      background:url("/assets/Image/us-regions-blank.png") center/cover no-repeat;
+      touch-action:manipulation;
+    }
+    /* Big, forgiving tap zones (percent-based) */
+    .region{position:absolute;display:block;text-indent:-9999px;border-radius:12px}
+    .region:focus-visible{box-shadow:0 0 0 4px var(--purple) inset}
+    .region:hover{box-shadow:0 0 0 4px rgba(91,61,245,.25) inset}
+
+    /* Zones tuned for thumbs; adjust anytime */
+    .region.west{left:2.5%; top:26%; width:30%; height:50%;}
+    .region.mountain{left:31.5%; top:36.5%; width:18.5%; height:40%;}
+    .region.midwest{left:50.5%; top:26%; width:18.5%; height:38%;}
+    .region.south{left:45%; top:52%; width:38%; height:38%;}
+    .region.ne{left:77%; top:29%; width:14%; height:21%;}
+    .region.ak{left:6.5%; top:78%; width:18%; height:20%;}
+    .region.hi{left:28%; top:84%; width:12%; height:14%;}
+
+    /* Fallback button list (shows under map; great on phones & for screen readers) */
+    .region-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:12px}
+    .region-list a{
+      display:block;text-align:center;padding:12px;border:1px solid var(--line);border-radius:10px;
+      text-decoration:none;color:var(--ink);font-weight:800;background:#fff
+    }
+    .region-list a:hover{border-color:var(--purple);box-shadow:0 1px 0 0 var(--purple) inset}
+    @media(min-width:860px){ .region-list{grid-template-columns:repeat(6,minmax(0,1fr))} }
+
+    /* Donation tracker embed (short) */
+    .embed{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+    .embed iframe{width:100%;height:640px;border:0;display:block}
+    @media (max-width:720px){ .embed iframe{height:760px} }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <h1>Dad’s Library</h1>
-  <p class="muted">Click your region to find state-specific, plain-language resources. You can also browse all states A–Z below.</p>
 
-  <div class="region-grid">
-    <a class="region" href="/dads-library/regions/northeast/">
-      <img src="/assets/Image/regions/northeast.png" alt="Northeast" onerror="this.style.display='none'">
-      <div>
-        <span class="label">Northeast</span>
-        <span class="sub">ME • NH • VT • MA • RI • CT • NY • NJ • PA</span>
-      </div>
-    </a>
+  <!-- Global Navigation -->
+  <nav class="dd-nav" role="navigation" aria-label="Primary">
+    <div class="dd-nav__row">
+      <a class="dd-brand" href="/">
+        <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
+        <span>Defend Dad</span>
+      </a>
+      <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">Menu</button>
+    </div>
 
-    <a class="region" href="/dads-library/regions/midwest/">
-      <img src="/assets/Image/regions/midwest.png" alt="Midwest" onerror="this.style.display='none'">
-      <div>
-        <span class="label">Midwest</span>
-        <span class="sub">OH • MI • IN • IL • WI • MN • IA • MO • ND • SD • NE • KS</span>
+    <!-- Banner only on tablet/desktop (hidden on phones for space) -->
+    <div class="dd-nav__hero" aria-hidden="true">
+      <div class="dd-nav__imgwrap">
+        <div class="dd-nav__imgmask"></div>
+        <div class="dd-nav__links">
+          <a href="/">Home</a>
+          <a href="/toolbox">Dad’s Toolbox</a>
+          <a href="/dads-library">Dad’s Library</a>
+          <a href="/progress">Progress</a>
+          <a href="/transparency">Transparency</a>
+          <a href="/storefront">Dad’s Storefront</a>
+        </div>
       </div>
-    </a>
+    </div>
 
-    <a class="region" href="/dads-library/regions/south/">
-      <img src="/assets/Image/regions/south.png" alt="South" onerror="this.style.display='none'">
-      <div>
-        <span class="label">South</span>
-        <span class="sub">DE • MD • DC • VA • WV • KY • TN • NC • SC • GA • FL • AL • MS • LA • AR • OK • TX</span>
-      </div>
-    </a>
+    <div class="dd-drawer" id="ddDrawer">
+      <a href="/">Home</a>
+      <a href="/toolbox">Dad’s Toolbox</a>
+      <a href="/dads-library">Dad’s Library</a>
+      <a href="/progress">Progress</a>
+      <a href="/transparency">Transparency</a>
+      <a href="/storefront">Dad’s Storefront</a>
+    </div>
+  </nav>
 
-    <a class="region" href="/dads-library/regions/west/">
-      <img src="/assets/Image/regions/west.png" alt="West" onerror="this.style.display='none'">
-      <div>
-        <span class="label">West</span>
-        <span class="sub">CA • OR • WA</span>
-      </div>
-    </a>
+  <div class="wrap">
+    <div class="panel">
+      <h1>Dad’s Library</h1>
+      <p class="muted">Tap your region to find state-specific, plain-language resources. Prefer alphabetical? <a href="/dads-library/state/">Browse A–Z instead</a>.</p>
 
-    <a class="region" href="/dads-library/regions/mountain-plains/">
-      <img src="/assets/Image/regions/mountain-plains.png" alt="Mountain/Plains" onerror="this.style.display='none'">
-      <div>
-        <span class="label">Mountain / Plains</span>
-        <span class="sub">MT • WY • CO • NM • ID • UT • AZ • NV • ND/SD/NE/KS (alt grouping if desired)</span>
+      <!-- Clickable regions map -->
+      <div class="map-wrap" aria-labelledby="regionsTitle">
+        <div class="map" id="regionsMap">
+          <a class="region west"      href="/dads-library/regions/west/"            aria-label="West"></a>
+          <a class="region mountain"  href="/dads-library/regions/mountain-plains/" aria-label="Mountain & Plains"></a>
+          <a class="region midwest"   href="/dads-library/regions/midwest/"         aria-label="Midwest"></a>
+          <a class="region south"     href="/dads-library/regions/south/"           aria-label="South"></a>
+          <a class="region ne"        href="/dads-library/regions/northeast/"       aria-label="Northeast"></a>
+          <a class="region ak"        href="/dads-library/regions/ak-hi/"           aria-label="Alaska"></a>
+          <a class="region hi"        href="/dads-library/regions/ak-hi/"           aria-label="Hawaii"></a>
+        </div>
       </div>
-    </a>
 
-    <a class="region" href="/dads-library/regions/ak-hi/">
-      <img src="/assets/Image/regions/ak-hi.png" alt="Alaska & Hawaii" onerror="this.style.display='none'">
-      <div>
-        <span class="label">Alaska &amp; Hawaii</span>
-        <span class="sub">AK • HI</span>
+      <!-- Fallback / assistive quick links -->
+      <div class="region-list" aria-label="Quick region links">
+        <a href="/dads-library/regions/northeast/">Northeast</a>
+        <a href="/dads-library/regions/midwest/">Midwest</a>
+        <a href="/dads-library/regions/south/">South</a>
+        <a href="/dads-library/regions/west/">West</a>
+        <a href="/dads-library/regions/mountain-plains/">Mountain/Plains</a>
+        <a href="/dads-library/regions/ak-hi/">Alaska & Hawaii</a>
       </div>
-    </a>
+    </div>
+
+    <!-- Donation Tracker (small) -->
+    <div class="panel">
+      <h2 style="margin:0 0 8px;color:var(--ink)">Help Us Reach the Next Goal</h2>
+      <div class="embed">
+        <!-- uses your small/basic tracker page -->
+        <iframe src="/assets/tools/goals.html" title="Defend Dad Donation Tracker"></iframe>
+      </div>
+    </div>
   </div>
 
-  <p class="muted" style="margin-top:14px">
-    Prefer alphabetical? <a href="/dads-library/state/">Browse A–Z instead</a>
-  </p>
-</div>
+  <!-- Mobile nav toggle -->
+  <script>
+    (function(){
+      const btn = document.getElementById('ddToggle');
+      const drawer = document.getElementById('ddDrawer');
+      if(!btn || !drawer) return;
+      btn.addEventListener('click', ()=>{
+        const open = drawer.style.display === 'block';
+        drawer.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', (!open).toString());
+      });
+    })();
+  </script>
 </body>
 </html>
