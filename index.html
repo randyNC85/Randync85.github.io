@@ -56,8 +56,8 @@
     .dev-link {
       display:block;
       margin:20px auto;
-      width:48px; /* small size */
-      opacity:0.55; /* subtle so casual users overlook */
+      width:48px;
+      opacity:0.55;
       transition:opacity 0.2s ease;
     }
     .dev-link:hover { opacity:1; }
@@ -95,7 +95,7 @@
       <div class="countdown-title">Welcome to Defend Dad — Building in the Open</div>
       <p><strong>Founded:</strong> August 28, 2025 • <em>Live the same day, just hours later!</em></p>
       <p>
-        We wanted to get information out fast, so we launched a working page.  
+        We wanted to get information out fast, so we launched a working page.
         But our <strong>beautiful update</strong>, more user-friendly and modern, is coming soon.
       </p>
       <h2 style="margin-top:14px;">⏳ Update Launches In:</h2>
@@ -166,11 +166,11 @@
       <img class="shield" src="/defend-dad-logo-shield.png.PNG" alt="Defend Dad shield logo" />
     </div>
 
-    <!-- 7) Embed the custom goal tracker page -->
+    <!-- 7) Embed the **basic** goal tracker (active one) -->
     <div class="panel" id="ai-goal-panel">
       <h2>Defend Dad AI</h2>
       <div class="embed">
-        <iframe src="/assets/ai-goal/index.html" title="Defend Dad AI"></iframe>
+        <iframe src="/assets/ai-goal/index.html" title="Defend Dad Goals"></iframe>
       </div>
     </div>
 
@@ -193,7 +193,7 @@
   <!-- Countdown Script -->
   <script>
     (function(){
-      // Target time: Aug 28, 2025 3:00 PM MST (UTC-6 or -7)
+      // Target: Aug 28, 2025 3:00 PM MST
       const endDate = new Date("August 28, 2025 15:00:00 GMT-0600").getTime();
       const cd = document.getElementById("countdown");
       function update(){
