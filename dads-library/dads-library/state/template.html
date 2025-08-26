@@ -1,68 +1,10 @@
-<!doctype html><html lang="en"><head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dad’s Library — State Guide</title>
-<style>
-  :root{--bg:#0e1117;--panel:#161b22;--line:#30363d;--text:#e6edf3;--muted:#9aa4b2;--gold:#d4af37}
-  body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:920px;margin:0 auto;padding:24px 16px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
-  h1{margin:0 0 8px;color:var(--gold)}
-  .head{display:flex;gap:12px;align-items:center}
-  .mini{width:72px;height:72px;object-fit:contain}
-  details{border:1px solid var(--line);border-radius:12px;background:#0f141c;margin:12px 0}
-  summary{cursor:pointer;list-style:none;padding:12px 14px;font-weight:800}
-  summary::-webkit-details-marker{display:none}
-  details[open] summary{border-bottom:1px solid var(--line)}
-  .body{padding:12px 14px;color:var(--text)}
-  pre{background:#0d1117;border:1px solid var(--line);border-radius:10px;padding:10px;overflow:auto}
-  a{color:#86b7ff;text-decoration:none}
-  .muted{color:var(--muted)}
-</style>
-</head><body>
-<div class="wrap" id="app">
-  <div class="card">
-    <div class="head">
-      <img id="mini" class="mini" alt="">
-      <div>
-        <h1 id="title">State Guide</h1>
-        <div id="subtitle" class="muted">Plain-language help for dads</div>
-      </div>
-    </div>
-  </div>
-
-  <details open><summary>1) Basic Terms</summary><div class="body" id="sec-terms"></div></details>
-  <details><summary>2) How to Prepare</summary><div class="body" id="sec-prepare"></div></details>
-  <details><summary>3) Common Motions + Simple Template</summary><div class="body" id="sec-motions"></div></details>
-  <details><summary>4) State Resources</summary><div class="body" id="sec-resources"></div></details>
-</div>
-
-<script>
-(async ()=>{
-  const q = new URLSearchParams(location.search);
-  const code = (q.get('code') || '').toUpperCase();
-  if(!code) { document.getElementById('title').textContent = 'Pick a state'; return; }
-
-  const map = await (await fetch('/data/regions.json')).json();
-  const meta = map.states[code];
-  if(!meta){ document.getElementById('title').textContent = 'Unknown state'; return; }
-
-  document.title = `Dad’s Library — ${meta.name}`;
-  document.getElementById('mini').src = meta.mini;
-  document.getElementById('mini').alt = meta.name + ' mini';
-  document.getElementById('title').textContent = meta.name + ' — Defend Dad Mini';
-
-  const data = await (await fetch(meta.data + '?cb=' + Date.now())).json();
-
-  // Render sections
-  const el = (id, html) => document.getElementById(id).innerHTML = html;
-
-  el('sec-terms', (data.terms || []).map(x=>`<p>${x}</p>`).join(''));
-  el('sec-prepare', (data.prepare || []).map(x=>`<p>${x}</p>`).join(''));
-  el('sec-motions', `
-    ${(data.motions || []).map(x=>`<p><strong>${x.title}:</strong> ${x.desc||''}</p>`).join('')}
-    ${data.template ? `<pre>${data.template}</pre>` : ''}
-  `);
-  el('sec-resources', (data.resources || []).map(x=>`<p><a href="${x.url}" target="_blank" rel="noopener">${x.title}</a></p>`).join(''));
-})();
-</script>
-</body></html>
+/assets/States/AL-CA.json
+/assets/States/CO-GA.json
+/assets/States/HI-IA.json
+/assets/States/KS-MD.json
+/assets/States/MA-MO.json
+/assets/States/MT-NJ.json
+/assets/States/NM-OH.json
+/assets/States/OK-SC.json
+/assets/States/SD-VT.json
+/assets/States/VA-WY.json
