@@ -1,1 +1,59 @@
-
+{
+  "states": [
+    {
+      "code": "CO",
+      "name": "Colorado",
+      "region": "mountain-plains",
+      "mini": "/assets/Image/states/mini/colorado.png",
+      "resources": {
+        "basics": "/resources/colorado/basics.html",
+        "motions": "/resources/colorado/motions.html",
+        "templates": "/resources/colorado/templates.html"
+      }
+    },
+    {
+      "code": "CT",
+      "name": "Connecticut",
+      "region": "northeast",
+      "mini": "/assets/Image/states/mini/connecticut.png",
+      "resources": {
+        "basics": "/resources/connecticut/basics.html",
+        "motions": "/resources/connecticut/motions.html",
+        "templates": "/resources/connecticut/templates.html"
+      }
+    },
+    {
+      "code": "DE",
+      "name": "Delaware",
+      "region": "northeast",
+      "mini": "/assets/Image/states/mini/delaware.png",
+      "resources": {
+        "basics": "/resources/delaware/basics.html",
+        "motions": "/resources/delaware/motions.html",
+        "templates": "/resources/delaware/templates.html"
+      }
+    },
+    {
+      "code": "FL",
+      "name": "Florida",
+      "region": "south",
+      "mini": "/assets/Image/states/mini/florida.png",
+      "resources": {
+        "basics": "/resources/florida/basics.html",
+        "motions": "/resources/florida/motions.html",
+        "templates": "/resources/florida/templates.html"
+      }
+    },
+    {
+      "code": "GA",
+      "name": "Georgia",
+      "region": "south",
+      "mini": "/assets/Image/states/mini/georgia.png",
+      "resources": {
+        "basics": "/resources/georgia/basics.html",
+        "motions": "/resources/georgia/motions.html",
+        "templates": "/resources/georgia/templates.html"
+      }
+    }
+  ]
+}
