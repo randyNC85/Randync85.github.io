@@ -1,132 +1,188 @@
-<!-- Defend Dad — Hero Banner Nav (buttons on the banner) -->
-<style>
-  :root{
-    /* Rebrand palette */
-    --bg:#f6f7fb;
-    --panel:#ffffff;
-    --line:#e6e8ef;
-    --text:#1f2430;
-    --muted:#6b7380;
-    --gold:#d4af37;
-    --purple:#5b3df5;
-    --purple-ink:#3b2bd4;
-  }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Dad’s Library — Pick Your Region</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
 
-  /* shell (sticky so it stays visible) */
-  .dd-nav{position:sticky; top:0; z-index:1000; background:var(--panel); border-bottom:1px solid var(--line)}
+  <style>
+    /* ===== Light Theme (royal purple accent) ===== */
+    :root{
+      --bg:#f6f7fb;           /* page background */
+      --panel:#ffffff;        /* cards/panels */
+      --line:#e6e8ef;         /* borders/dividers */
+      --text:#1f2430;         /* primary text */
+      --muted:#6b7380;        /* secondary text */
+      --gold:#d4af37;         /* brand gold accent */
+      --purple:#5b3df5;       /* royal purple */
+      --purple-ink:#3b2bd4;
+    }
 
-  /* compact row with brand + mobile toggle */
-  .dd-nav__row{
-    max-width:1160px; margin:0 auto; padding:10px 12px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-  }
-  .dd-brand{
-    color:var(--purple-ink); font-weight:900; text-decoration:none; letter-spacing:.2px; font-size:1.25rem;
-  }
-  .dd-hamburger{
-    display:none; background:transparent; border:1px solid var(--line); color:var(--text);
-    padding:8px 12px; border-radius:10px;
-  }
+    html,body{margin:0}
+    body{
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .wrap{max-width:1100px;margin:0 auto;padding:28px 16px}
 
-  /* hero banner (textless image) */
-  .dd-hero{
-    position:relative;
-    max-width:1160px; margin:0 auto; padding:0 16px;
-  }
-  .dd-hero__img{
-    position:relative; height:220px; overflow:hidden;
-    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
-    border-radius:14px; background:#f3f4fa;
-  }
-  .dd-hero__img::before{
-    content:""; position:absolute; inset:0;
-    background:url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
-    filter:saturate(1.06) brightness(1.02);
-  }
-  /* soft mask for readability */
-  .dd-hero__mask{ position:absolute; inset:0;
-    background:linear-gradient(90deg,rgba(255,255,255,.75),rgba(255,255,255,.35) 22%,rgba(255,255,255,.35) 78%,rgba(255,255,255,.75));
-    pointer-events:none;
-  }
+    /* ===== Global Navigation (brand v2) — light tune ===== */
+    .dd-nav { position: sticky; top:0; z-index:1000; background:#fff; border-bottom:1px solid var(--line) }
+    .dd-nav__row { max-width:1160px; margin:0 auto; padding:10px 12px; display:flex; align-items:center; justify-content:space-between; gap:12px }
+    .dd-brand{ display:flex; align-items:center; gap:10px; color:var(--purple-ink); font-weight:800; text-decoration:none }
+    .dd-brand img{ width:28px; height:28px }
+    .dd-hamburger{ display:none; background:transparent; border:1px solid var(--line); color:var(--text); padding:8px 10px; border-radius:10px }
+    .dd-nav__hero{ position:relative; max-width:1160px; margin:0 auto; padding:0 16px; }
+    .dd-nav__imgwrap{ position:relative; height:120px; overflow:hidden; border-bottom:1px solid var(--line); border-top:1px solid var(--line) }
+    .dd-nav__imgwrap::before{
+      content:"";
+      position:absolute; inset:0;
+      background:url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
+      background-color:#f3f4fa;
+      filter:saturate(1.05) brightness(1.02);
+    }
+    .dd-nav__imgmask{ position:absolute; inset:0; background:linear-gradient(90deg, rgba(255,255,255,.75), rgba(255,255,255,.35) 22%, rgba(255,255,255,.35) 78%, rgba(255,255,255,.75)) }
+    .dd-nav__links{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; gap:18px; padding:0 12px }
+    .dd-nav__links a{
+      color: var(--purple-ink);
+      text-decoration:none; font-weight:760; letter-spacing:.2px; font-size:1.02rem;
+      padding:10px 12px; border-radius:10px; white-space:nowrap;
+      transition: background .15s ease, color .15s ease, transform .05s ease;
+    }
+    .dd-nav__links a:hover{ background:var(--purple); color:#fff }
+    .dd-nav__links a:focus-visible{ outline:2px solid var(--purple); outline-offset:2px }
+    @media (max-width:760px){
+      .dd-hamburger{ display:block }
+      .dd-nav__imgwrap{ height:96px }
+      .dd-nav__links{ display:none }
+    }
+    .dd-drawer{ display:none; border-top:1px solid var(--line); background:#fff }
+    .dd-drawer a{ display:block; padding:12px 16px; border-top:1px solid var(--line); color:var(--purple-ink); text-decoration:none; font-weight:700 }
+    .dd-drawer a:hover{ background:#efeefe; color:#2016a8 }
 
-  /* the rounded “button bar” sitting on the banner */
-  .dd-rail{
-    position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
-    display:flex; align-items:center; gap:16px; padding:12px 18px;
-    background:#3c4152; border:1px solid rgba(0,0,0,.25); color:#fff;
-    border-radius:18px; box-shadow:0 12px 24px rgba(0,0,0,.18);
-  }
-  .dd-rail a{
-    color:#fff; text-decoration:none; font-weight:800; letter-spacing:.2px;
-    padding:8px 12px; border-radius:10px; white-space:nowrap;
-    transition:background .15s ease, transform .05s ease;
-  }
-  .dd-rail a:hover{ background:var(--purple); }
-  .dd-rail a:focus-visible{ outline:2px solid var(--gold); outline-offset:2px }
+    /* ===== Page content ===== */
+    h1{margin:0 0 10px;color:var(--purple-ink);font-size:2rem}
+    .muted{color:var(--muted)}
+    .panel{
+      background:var(--panel); border:1px solid var(--line); border-radius:14px;
+      padding:20px; margin:18px 0; box-shadow:0 2px 10px rgba(27,30,45,.04);
+    }
 
-  /* mobile: hide the rail on the image, show a drawer list instead */
-  @media (max-width:760px){
-    .dd-hero__img{ height:150px }
-    .dd-rail{ display:none }
-    .dd-hamburger{ display:block }
-  }
+    /* ===== Clickable Regions Map ===== */
+    .map-wrap{
+      position:relative;
+      border:1px solid var(--line);
+      border-radius:14px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 4px 16px rgba(27,30,45,.05);
+    }
+    /* Responsive aspect box (image is 1536x1024 in your upload = 3:2-ish; tune ratio here) */
+    .map{
+      position:relative;
+      width:100%;
+      padding-bottom:62.5%; /* ~16:10 look that fits your art well */
+      background:url("/assets/Image/us-regions-blank.png") center/cover no-repeat;
+    }
+    .region{
+      position:absolute; display:block; text-indent:-9999px; outline:none; border-radius:8px;
+    }
+    .region:focus-visible{ box-shadow:0 0 0 3px var(--purple) inset }
+    /* Rough hit-zones (percentages) — tweak anytime */
+    .region.west{left:3%; top:26%; width:28%; height:48%;}
+    .region.mountain{left:30.5%; top:35%; width:18.5%; height:39%;}
+    .region.midwest{left:49.5%; top:25%; width:18%; height:38%;}
+    .region.south{left:46%; top:50%; width:35%; height:36%;}
+    .region.ne{left:76.5%; top:28%; width:14%; height:20%;}
+    .region.ak{left:8%; top:77%; width:16%; height:18%;}
+    .region.hi{left:28%; top:82%; width:10%; height:12%;}
+    /* Hover hint ring */
+    .region:hover{ box-shadow:0 0 0 3px rgba(91,61,245,.35) inset }
 
-  .dd-drawer{
-    display:none; border-top:1px solid var(--line); background:var(--panel);
-  }
-  .dd-drawer a{
-    display:block; padding:12px 16px; border-top:1px solid var(--line);
-    text-decoration:none; color:var(--purple-ink); font-weight:800;
-  }
-  .dd-drawer a:hover{ background:#efeefe }
-</style>
+    /* Donation tracker embed */
+    .embed{
+      border:1px solid var(--line); border-radius:14px; overflow:hidden; background:#fff;
+    }
+    .embed iframe{ width:100%; height:740px; border:0; display:block }
+    @media (max-width:720px){ .embed iframe{ height:880px } }
+  </style>
+</head>
+<body>
 
-<nav class="dd-nav" role="navigation" aria-label="Primary">
-  <!-- Brand row -->
-  <div class="dd-nav__row">
-    <!-- (logo image intentionally removed to avoid the broken box) -->
-    <a class="dd-brand" href="/">Defend Dad</a>
-    <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">Menu</button>
-  </div>
+  <!-- Global Navigation -->
+  <nav class="dd-nav" role="navigation" aria-label="Primary">
+    <div class="dd-nav__row">
+      <a class="dd-brand" href="/">
+        <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
+        <span>Defend Dad</span>
+      </a>
+      <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">Menu</button>
+    </div>
 
-  <!-- Banner with integrated button bar -->
-  <div class="dd-hero">
-    <div class="dd-hero__img">
-      <div class="dd-hero__mask"></div>
+    <div class="dd-nav__hero">
+      <div class="dd-nav__imgwrap">
+        <div class="dd-nav__imgmask"></div>
+        <div class="dd-nav__links">
+          <a href="/">Home</a>
+          <a href="/toolbox">Dad’s Toolbox</a>
+          <a href="/dads-library">Dad’s Library</a>
+          <a href="/progress">Progress</a>
+          <a href="/transparency">Transparency</a>
+          <a href="/storefront">Dad’s Storefront</a>
+        </div>
+      </div>
+    </div>
 
-      <!-- the on-banner nav buttons -->
-      <div class="dd-rail" aria-label="Site">
-        <a href="/">Home</a>
-        <a href="/toolbox">Dad’s Toolbox</a>
-        <a href="/dads-library">Dad’s Library</a>
-        <a href="/progress">Progress</a>
-        <a href="/transparency">Transparency</a>
-        <a href="/storefront">Dad’s Storefront</a>
+    <div class="dd-drawer" id="ddDrawer">
+      <a href="/">Home</a>
+      <a href="/toolbox">Dad’s Toolbox</a>
+      <a href="/dads-library">Dad’s Library</a>
+      <a href="/progress">Progress</a>
+      <a href="/transparency">Transparency</a>
+      <a href="/storefront">Dad’s Storefront</a>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <div class="panel">
+      <h1>Dad’s Library</h1>
+      <p class="muted">Click your region to find state-specific, plain-language resources. Prefer alphabetical? <a href="/dads-library/state/">Browse A–Z instead</a>.</p>
+
+      <!-- Clickable regions map -->
+      <div class="map-wrap">
+        <div class="map">
+          <a class="region west"      href="/dads-library/regions/west/"           aria-label="West"></a>
+          <a class="region mountain"  href="/dads-library/regions/mountain-plains/" aria-label="Mountain/Plains"></a>
+          <a class="region midwest"   href="/dads-library/regions/midwest/"        aria-label="Midwest"></a>
+          <a class="region south"     href="/dads-library/regions/south/"          aria-label="South"></a>
+          <a class="region ne"        href="/dads-library/regions/northeast/"      aria-label="Northeast"></a>
+          <a class="region ak"        href="/dads-library/regions/ak-hi/"          aria-label="Alaska"></a>
+          <a class="region hi"        href="/dads-library/regions/ak-hi/"          aria-label="Hawaii"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Donation Tracker (small) -->
+    <div class="panel">
+      <h2 style="margin:0 0 8px;color:var(--purple-ink)">Help Us Reach the Next Goal</h2>
+      <div class="embed">
+        <iframe src="/assets/tools/goals.html" title="Defend Dad Donation Tracker"></iframe>
       </div>
     </div>
   </div>
 
-  <!-- Mobile drawer -->
-  <div class="dd-drawer" id="ddDrawer">
-    <a href="/">Home</a>
-    <a href="/toolbox">Dad’s Toolbox</a>
-    <a href="/dads-library">Dad’s Library</a>
-    <a href="/progress">Progress</a>
-    <a href="/transparency">Transparency</a>
-    <a href="/storefront">Dad’s Storefront</a>
-  </div>
-</nav>
-
-<script>
-  // Mobile toggle for the drawer
-  (function(){
-    const btn = document.getElementById('ddToggle');
-    const drawer = document.getElementById('ddDrawer');
-    if(!btn || !drawer) return;
-    btn.addEventListener('click', ()=>{
-      const open = drawer.style.display === 'block';
-      drawer.style.display = open ? 'none' : 'block';
-      btn.setAttribute('aria-expanded', (!open).toString());
-    });
-  })();
-</script>
+  <!-- Mobile nav toggle -->
+  <script>
+    (function(){
+      const btn = document.getElementById('ddToggle');
+      const drawer = document.getElementById('ddDrawer');
+      if(!btn || !drawer) return;
+      btn.addEventListener('click', ()=>{
+        const open = drawer.style.display === 'block';
+        drawer.style.display = open ? 'none' : 'block';
+        btn.setAttribute('aria-expanded', (!open).toString());
+      });
+    })();
+  </script>
+</body>
+</html>
