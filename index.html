@@ -61,6 +61,17 @@
       transition:opacity 0.2s ease;
     }
     .dev-link:hover { opacity:1; }
+
+    /* Countdown styles */
+    .countdown-panel {
+      border:2px solid var(--gold);
+      text-align:center;
+      padding:20px;
+      border-radius:14px;
+      margin-bottom:20px;
+    }
+    .countdown-title { color:var(--gold); font-size:1.6rem; font-weight:800; margin-bottom:8px; }
+    .countdown-timer { font-size:1.8rem; font-weight:800; color:var(--gold); margin-top:6px; }
   </style>
 </head>
 <body>
@@ -78,6 +89,18 @@
   </nav>
 
   <div class="wrap">
+
+    <!-- Countdown Announcement -->
+    <div class="panel countdown-panel">
+      <div class="countdown-title">Welcome to Defend Dad — Building in the Open</div>
+      <p><strong>Founded:</strong> August 28, 2025 • <em>Live the same day, just hours later!</em></p>
+      <p>
+        We wanted to get information out fast, so we launched a working page.  
+        But our <strong>beautiful update</strong>, more user-friendly and modern, is coming soon.
+      </p>
+      <h2 style="margin-top:14px;">⏳ Update Launches In:</h2>
+      <div id="countdown" class="countdown-timer"></div>
+    </div>
 
     <!-- 1) LOGO (circle) -->
     <div class="center">
@@ -166,6 +189,31 @@
     </div>
 
   </div> <!-- /.wrap -->
+
+  <!-- Countdown Script -->
+  <script>
+    (function(){
+      // Target time: Aug 28, 2025 3:00 PM MST (UTC-6 or -7)
+      const endDate = new Date("August 28, 2025 15:00:00 GMT-0600").getTime();
+      const cd = document.getElementById("countdown");
+      function update(){
+        const now = new Date().getTime();
+        const dist = endDate - now;
+        if(dist <= 0){
+          cd.textContent = "🎉 The Update Has Launched!";
+          clearInterval(timer);
+          return;
+        }
+        const d = Math.floor(dist/(1000*60*60*24));
+        const h = Math.floor((dist%(1000*60*60*24))/(1000*60*60));
+        const m = Math.floor((dist%(1000*60*60))/(1000*60));
+        const s = Math.floor((dist%(1000*60))/1000);
+        cd.textContent = `${d}d ${h}h ${m}m ${s}s`;
+      }
+      update();
+      const timer = setInterval(update,1000);
+    })();
+  </script>
 
 </body>
 </html>
