@@ -1,10 +1,213 @@
-/assets/States/AL-CA.json
-/assets/States/CO-GA.json
-/assets/States/HI-IA.json
-/assets/States/KS-MD.json
-/assets/States/MA-MO.json
-/assets/States/MT-NJ.json
-/assets/States/NM-OH.json
-/assets/States/OK-SC.json
-/assets/States/SD-VT.json
-/assets/States/VA-WY.json
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Dad’s Library — State</title>
+<style>
+  :root{ --bg:#0e1117; --panel:#161b22; --line:#30363d; --text:#e6edf3; --muted:#9aa4b2; --gold:#d4af37; }
+  *{ box-sizing:border-box }
+  body{ margin:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif }
+  .wrap{ max-width:980px; margin:0 auto; padding:28px 16px }
+  .hdr{ display:flex; align-items:center; gap:12px; margin-bottom:10px }
+  .mini{ width:52px; height:52px; object-fit:contain; image-rendering:auto; border-radius:8px; background:#0f1420; border:1px solid var(--line) }
+  h1{ margin:0; color:var(--gold); font-size:1.7rem }
+  .muted{ color:var(--muted) }
+
+  .panel{ background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; margin:14px 0 }
+  .panel h2{ margin:0 0 10px; font-size:1.05rem; color:var(--gold); letter-spacing:.3px; text-transform:uppercase }
+  .kvs{ display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px }
+  .k{ border:1px solid var(--line); border-radius:10px; padding:10px; background:#0f1420 }
+  .k b{ color:var(--gold) }
+
+  ul.linklist{ margin:8px 0 0 18px }
+  ul.linklist li{ margin:6px 0 }
+  a{ color:#86b7ff; text-decoration:none }
+  a:hover{ text-decoration:underline }
+
+  .pill{ display:inline-block; border:1px solid var(--gold); color:var(--gold); padding:4px 8px; border-radius:999px; font-weight:700; }
+
+  .cta-row{ display:flex; flex-wrap:wrap; gap:10px }
+  .btn{ display:inline-block; padding:10px 12px; border-radius:10px; font-weight:700; text-decoration:none }
+  .btn.gold{ background:var(--gold); color:#0e1117; border:1px solid var(--gold) }
+  .btn.ghost{ border:1px solid var(--line); color:var(--text) }
+  .hr{ height:1px; background:var(--line); border:0; margin:16px 0 }
+  .warn{ color:#ffcf7a }
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <!-- Header -->
+  <div class="hdr">
+    <img id="mini" class="mini" alt="">
+    <h1 id="title">Loading…</h1>
+  </div>
+  <p class="muted" id="subtitle">State custody & support resources.</p>
+
+  <!-- Dynamic content panels -->
+  <div id="panels"></div>
+
+  <hr class="hr" />
+  <div class="muted">Spotted an error or missing link? Email <a href="mailto:info@defenddad.org">info@defenddad.org</a>.</div>
+</div>
+
+<script>
+/* ---- 1) Resolve state from ?state= ---- */
+const qs = new URLSearchParams(location.search);
+const slug = (qs.get('state') || '').toLowerCase().replace(/[^a-z\- ]/g,'').replace(/\s+/g,'-');
+if(!slug){
+  document.getElementById('title').textContent = 'Pick a state';
+  document.getElementById('subtitle').innerHTML = 'Go back to <a href="/dads-library/">Dad’s Library</a> and choose your state.';
+  throw new Error('no state');
+}
+
+/* ---- 2) Map state → bundle filename & canonical key ----
+   Keys in JSON are lowercased state names (e.g., "alabama").
+*/
+const BUNDLES = {
+  // AL–CA
+  alabama: 'AL-CA', alaska: 'AL-CA', arizona: 'AL-CA', arkansas: 'AL-CA', california: 'AL-CA',
+  // CO–GA
+  colorado: 'CO-GA', connecticut: 'CO-GA', delaware: 'CO-GA', florida: 'CO-GA', georgia: 'CO-GA',
+  // HI–IA
+  hawaii: 'HI-IA', idaho: 'HI-IA', illinois: 'HI-IA', indiana: 'HI-IA', iowa: 'HI-IA',
+  // KS–MD
+  kansas: 'KS-MD', kentucky: 'KS-MD', louisiana:'KS-MD', maine:'KS-MD', maryland:'KS-MD',
+  // MA–MO
+  massachusetts:'MA-MO', michigan:'MA-MO', minnesota:'MA-MO', mississippi:'MA-MO', missouri:'MA-MO',
+  // MT–NJ
+  montana:'MT-NJ', nebraska:'MT-NJ', nevada:'MT-NJ', new-hampshire:'MT-NJ', new-jersey:'MT-NJ',
+  // NM–OH
+  new-mexico:'NM-OH', new-york:'NM-OH', north-carolina:'NM-OH', north-dakota:'NM-OH', ohio:'NM-OH',
+  // OK–SC
+  oklahoma:'OK-SC', oregon:'OK-SC', pennsylvania:'OK-SC', rhode-island:'OK-SC', south-carolina:'OK-SC',
+  // SD–VT
+  south-dakota:'SD-VT', tennessee:'SD-VT', texas:'SD-VT', utah:'SD-VT', vermont:'SD-VT',
+  // VA–WY
+  virginia:'VA-WY', washington:'VA-WY', west-virginia:'VA-WY', wisconsin:'VA-WY', wyoming:'VA-WY'
+};
+
+// simple alias map if the user types abbreviations
+const ALIASES = {
+  al:'alabama', ak:'alaska', az:'arizona', ar:'arkansas', ca:'california', co:'colorado',
+  ct:'connecticut', de:'delaware', fl:'florida', ga:'georgia', hi:'hawaii', id:'idaho',
+  il:'illinois', in:'indiana', ia:'iowa', ks:'kansas', ky:'kentucky', la:'louisiana',
+  me:'maine', md:'maryland', ma:'massachusetts', mi:'michigan', mn:'minnesota',
+  ms:'mississippi', mo:'missouri', mt:'montana', ne:'nebraska', nv:'nevada',
+  nh:'new-hampshire', nj:'new-jersey', nm:'new-mexico', ny:'new-york', nc:'north-carolina',
+  nd:'north-dakota', oh:'ohio', ok:'oklahoma', or:'oregon', pa:'pennsylvania',
+  ri:'rhode-island', sc:'south-carolina', sd:'south-dakota', tn:'tennessee',
+  tx:'texas', ut:'utah', vt:'vermont', va:'virginia', wa:'washington',
+  wv:'west-virginia', wi:'wisconsin', wy:'wyoming'
+};
+const key = ALIASES[slug] || slug;
+const bundle = BUNDLES[key];
+if(!bundle){
+  document.getElementById('title').textContent = 'Unknown state';
+  document.getElementById('subtitle').innerHTML = 'Try <a href="/dads-library/">Dad’s Library</a> again.';
+  throw new Error('unknown state');
+}
+
+/* ---- 3) Load bundle JSON & render ---- */
+(async function(){
+  try{
+    const res = await fetch(`/assets/States/${bundle}.json?cb=${Date.now()}`);
+    const json = await res.json();
+    const data = json[key];
+    if(!data) throw new Error('state key missing in bundle');
+
+    // Title + mini
+    document.getElementById('title').textContent = data.name || key.replace(/-/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    document.getElementById('subtitle').textContent = 'Plain-language links and pointers for dads.';
+
+    const mini = document.getElementById('mini');
+    mini.src = `/assets/Image/states/mini/${key}.png`;
+    mini.alt = `${data.name} mini`;
+    mini.onerror = ()=>{ mini.style.display='none'; };
+
+    const panels = document.getElementById('panels');
+
+    // helper: list renderer
+    const list = (arr)=> arr && arr.length
+      ? `<ul class="linklist">${arr.map(x=>`<li><a href="${x.url}" target="_blank" rel="noopener">${x.label}</a></li>`).join('')}</ul>`
+      : '';
+
+    // Agencies / Forms / Statutes / Calculators / Bar / Support
+    if(data.agencies?.length) panels.insertAdjacentHTML('beforeend',
+      `<div class="panel"><h2>Courts & Help</h2>${list(data.agencies)}</div>`);
+
+    if(data.forms?.length) panels.insertAdjacentHTML('beforeend',
+      `<div class="panel"><h2>Forms & Packets</h2>${list(data.forms)}</div>`);
+
+    if(data.statutes?.length || data.custodyLaw?.length) panels.insertAdjacentHTML('beforeend',
+      `<div class="panel"><h2>Custody Laws</h2>${
+        data.custodyLaw?.length ? list(data.custodyLaw) : ''
+      }${
+        data.statutes?.length ? `<ul class="linklist">${data.statutes.map(s=>`<li>${s}</li>`).join('')}</ul>` : ''
+      }</div>`);
+
+    if(data.childSupport?.length || data.supportCalc?.length || data.supportNotes){
+      panels.insertAdjacentHTML('beforeend', `<div class="panel"><h2>Child Support</h2>
+        ${data.supportNotes ? `<p>${data.supportNotes}</p>` : ''}
+        ${data.childSupport?.length ? list(data.childSupport) : ''}
+        ${data.supportCalc?.length ? `<h3 style="margin:10px 0 6px">Calculators</h3>${list(data.supportCalc)}` : ''}
+      </div>`);
+    }
+
+    if(data.stateBar?.length || data.findLawyer?.length){
+      panels.insertAdjacentHTML('beforeend', `<div class="panel"><h2>Find a Lawyer</h2>
+        ${data.stateBar?.length ? list(data.stateBar) : ''}
+        ${data.findLawyer?.length ? list(data.findLawyer) : ''}
+      </div>`);
+    }
+
+    if(data.supportGroups?.length){
+      panels.insertAdjacentHTML('beforeend', `<div class="panel"><h2>Dad & Community Support</h2>${list(data.supportGroups)}</div>`);
+    }
+
+    if(data.courtOrders?.length){
+      panels.insertAdjacentHTML('beforeend', `<div class="panel"><h2>Common Court Orders & Where to Start</h2>${list(data.courtOrders)}</div>`);
+    }
+
+    if(data.crisis?.length || data.crisisText || data.crisisNote){
+      panels.insertAdjacentHTML('beforeend', `<div class="panel"><h2>Crisis & Mental Health</h2>
+        ${data.crisisNote ? `<p class="warn">${data.crisisNote}</p>` : ''}
+        ${data.crisis?.length ? list(data.crisis) : ''}
+        ${data.crisisText ? `<p class="warn">${data.crisisText}</p>` : ''}
+      </div>`);
+    }
+
+    // “What Judges Consider” + Stats
+    const k1 = (data.infobox?.factors||[]).length;
+    const k2 = (data.infobox?.stats||[]).length;
+    if(k1 || k2){
+      let html = `<div class="panel"><h2>${data.infobox?.title || 'Custody — What to Expect'}</h2><div class="kvs">`;
+      if(k1){
+        html += `<div class="k"><b>${data.infobox?.factors_title||'What Judges Consider'}</b><ul class="linklist">` +
+                data.infobox.factors.map(x=>`<li>${x}</li>`).join('') + `</ul></div>`;
+      }
+      if(k2){
+        html += `<div class="k"><b>${data.infobox?.stats_title||'Snapshot'}</b><ul class="linklist">` +
+                data.infobox.stats.map(x=>`<li><b>${x.label}:</b> ${x.value}</li>`).join('') + `</ul></div>`;
+      }
+      html += `</div>${data.infobox?.disclaimer ? `<p class="muted" style="margin-top:8px">${data.infobox.disclaimer}</p>`:''}</div>`;
+      panels.insertAdjacentHTML('beforeend', html);
+    }
+
+    // Quick CTAs
+    panels.insertAdjacentHTML('beforeend', `<div class="panel">
+      <div class="cta-row">
+        <a class="btn gold" href="/storefront/index.html">Donate or Shop</a>
+        <a class="btn ghost" href="/dads-library/">Back to Dad’s Library</a>
+      </div>
+    </div>`);
+
+  }catch(err){
+    document.getElementById('title').textContent = 'We hit a snag';
+    document.getElementById('subtitle').innerHTML = 'Try again later or email <a href="mailto:info@defenddad.org">info@defenddad.org</a>.';
+    console.error(err);
+  }
+})();
+</script>
+</body>
+</html>
