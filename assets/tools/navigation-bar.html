@@ -1,125 +1,101 @@
-<!-- Defend Dad - Global Navigation (brand v2) -->
+<!-- Defend Dad — Hero Banner Nav (buttons on the banner) -->
 <style>
   :root{
-    /* Brand v2 */
-    --bg:#0d0f14;           /* deeper backdrop */
-    --panel:#141923;        /* panels/cards */
-    --line:#2a3240;         /* subtle borders */
-    --text:#e9edf4;         /* primary text */
-    --muted:#9aa6b2;        /* secondary text */
-    --gold:#e6c258;         /* brand gold (softer) */
-    --accent:#6fd2c7;       /* teal accent for hovers/focus */
+    /* Rebrand palette */
+    --bg:#f6f7fb;
+    --panel:#ffffff;
+    --line:#e6e8ef;
+    --text:#1f2430;
+    --muted:#6b7380;
+    --gold:#d4af37;
+    --purple:#5b3df5;
+    --purple-ink:#3b2bd4;
   }
 
-  /* Top bar shell */
-  .dd-nav {
-    position: sticky; top: 0; z-index: 1000;
-    background: var(--panel);
-    border-bottom: 1px solid var(--line);
+  /* shell (sticky so it stays visible) */
+  .dd-nav{position:sticky; top:0; z-index:1000; background:var(--panel); border-bottom:1px solid var(--line)}
+
+  /* compact row with brand + mobile toggle */
+  .dd-nav__row{
+    max-width:1160px; margin:0 auto; padding:10px 12px;
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+  }
+  .dd-brand{
+    color:var(--purple-ink); font-weight:900; text-decoration:none; letter-spacing:.2px; font-size:1.25rem;
+  }
+  .dd-hamburger{
+    display:none; background:transparent; border:1px solid var(--line); color:var(--text);
+    padding:8px 12px; border-radius:10px;
   }
 
-  /* Banner area */
-  .dd-nav__hero {
-    position: relative;
-    max-width: 1160px; margin: 0 auto;
-    padding: 0 16px;
-    background:
-      linear-gradient(180deg, rgba(13,15,20,0.0) 0%, rgba(13,15,20,0.25) 100%);
+  /* hero banner (textless image) */
+  .dd-hero{
+    position:relative;
+    max-width:1160px; margin:0 auto; padding:0 16px;
   }
-  .dd-nav__imgwrap {
-    position: relative;
-    height: 92px;  /* adjust to taste */
-    overflow: hidden;
-    border-bottom: 1px solid var(--line);
+  .dd-hero__img{
+    position:relative; height:220px; overflow:hidden;
+    border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+    border-radius:14px; background:#f3f4fa;
   }
-  /* Text-less banner image */
-  .dd-nav__imgwrap::before{
-    content:"";
-    position:absolute; inset:0;
-    background: url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
-    /* Fallback if image missing: */
-    background-color: #101521;
+  .dd-hero__img::before{
+    content:""; position:absolute; inset:0;
+    background:url("/assets/Image/nav-banner-blank.PNG") center/cover no-repeat;
+    filter:saturate(1.06) brightness(1.02);
   }
-  /* Soft mask so HTML links read clearly */
-  .dd-nav__imgmask{
-    position:absolute; inset:0;
-    background: linear-gradient(90deg, rgba(16,21,33,.36), rgba(16,21,33,.16) 20%, rgba(16,21,33,.16) 80%, rgba(16,21,33,.36));
+  /* soft mask for readability */
+  .dd-hero__mask{ position:absolute; inset:0;
+    background:linear-gradient(90deg,rgba(255,255,255,.75),rgba(255,255,255,.35) 22%,rgba(255,255,255,.35) 78%,rgba(255,255,255,.75));
     pointer-events:none;
   }
 
-  /* Link row */
-  .dd-nav__links {
-    position:absolute; inset:0;
-    display:flex; align-items:center; justify-content:center;
-    gap: 18px; padding: 0 12px;
+  /* the rounded “button bar” sitting on the banner */
+  .dd-rail{
+    position:absolute; left:50%; bottom:16px; transform:translateX(-50%);
+    display:flex; align-items:center; gap:16px; padding:12px 18px;
+    background:#3c4152; border:1px solid rgba(0,0,0,.25); color:#fff;
+    border-radius:18px; box-shadow:0 12px 24px rgba(0,0,0,.18);
   }
-  .dd-nav__links a{
-    color: var(--text);
-    text-decoration:none;
-    font-weight: 760;
-    letter-spacing:.2px;
-    font-size: 1.02rem;
-    padding: 10px 12px;
-    border-radius: 10px;
-    transition: color .15s ease, background .15s ease, transform .05s ease;
-    white-space:nowrap;
+  .dd-rail a{
+    color:#fff; text-decoration:none; font-weight:800; letter-spacing:.2px;
+    padding:8px 12px; border-radius:10px; white-space:nowrap;
+    transition:background .15s ease, transform .05s ease;
   }
-  .dd-nav__links a:hover{
-    color:#0b0f14; background:var(--gold);
-  }
-  .dd-nav__links a:focus-visible{
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  .dd-rail a:hover{ background:var(--purple); }
+  .dd-rail a:focus-visible{ outline:2px solid var(--gold); outline-offset:2px }
 
-  /* Compact / mobile */
-  .dd-nav__row {
-    max-width: 1160px; margin: 0 auto; padding: 8px 12px 10px;
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-  }
-  .dd-brand {
-    display:flex; align-items:center; gap:10px; color:var(--gold); font-weight:800;
-    text-decoration:none;
-  }
-  .dd-brand img{ width:28px; height:28px }
-  .dd-hamburger{
-    display:none; background:transparent; border:1px solid var(--line); color:var(--text);
-    padding:8px 10px; border-radius:10px;
-  }
-
-  @media (max-width: 760px){
-    .dd-nav__imgwrap{ height: 84px; }
-    .dd-nav__links{ display:none }
+  /* mobile: hide the rail on the image, show a drawer list instead */
+  @media (max-width:760px){
+    .dd-hero__img{ height:150px }
+    .dd-rail{ display:none }
     .dd-hamburger{ display:block }
   }
 
   .dd-drawer{
-    display:none;
-    border-top:1px solid var(--line);
-    background: var(--panel);
+    display:none; border-top:1px solid var(--line); background:var(--panel);
   }
   .dd-drawer a{
     display:block; padding:12px 16px; border-top:1px solid var(--line);
-    color:var(--text); text-decoration:none; font-weight:700;
+    text-decoration:none; color:var(--purple-ink); font-weight:800;
   }
-  .dd-drawer a:hover{ background:#0f1420; color:var(--gold) }
+  .dd-drawer a:hover{ background:#efeefe }
 </style>
 
 <nav class="dd-nav" role="navigation" aria-label="Primary">
+  <!-- Brand row -->
   <div class="dd-nav__row">
-    <a class="dd-brand" href="/">
-      <img src="/assets/Image/defend-dad-logo-shield.png" alt="Defend Dad">
-      <span>Defend Dad</span>
-    </a>
-    <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">
-      Menu
-    </button>
+    <!-- (logo image intentionally removed to avoid the broken box) -->
+    <a class="dd-brand" href="/">Defend Dad</a>
+    <button class="dd-hamburger" id="ddToggle" aria-expanded="false" aria-controls="ddDrawer">Menu</button>
   </div>
 
-  <div class="dd-nav__hero">
-    <div class="dd-nav__imgwrap">
-      <div class="dd-nav__imgmask"></div>
-      <div class="dd-nav__links" aria-hidden="false">
+  <!-- Banner with integrated button bar -->
+  <div class="dd-hero">
+    <div class="dd-hero__img">
+      <div class="dd-hero__mask"></div>
+
+      <!-- the on-banner nav buttons -->
+      <div class="dd-rail" aria-label="Site">
         <a href="/">Home</a>
         <a href="/toolbox">Dad’s Toolbox</a>
         <a href="/dads-library">Dad’s Library</a>
@@ -130,6 +106,7 @@
     </div>
   </div>
 
+  <!-- Mobile drawer -->
   <div class="dd-drawer" id="ddDrawer">
     <a href="/">Home</a>
     <a href="/toolbox">Dad’s Toolbox</a>
@@ -141,6 +118,7 @@
 </nav>
 
 <script>
+  // Mobile toggle for the drawer
   (function(){
     const btn = document.getElementById('ddToggle');
     const drawer = document.getElementById('ddDrawer');
