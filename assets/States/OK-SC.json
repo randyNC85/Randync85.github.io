@@ -1,0 +1,42 @@
+[
+  {
+    "code": "OK",
+    "name": "Oklahoma",
+    "slug": "oklahoma",
+    "mini": "/assets/Image/states/mini/oklahoma.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "OR",
+    "name": "Oregon",
+    "slug": "oregon",
+    "mini": "/assets/Image/states/mini/oregon.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "PA",
+    "name": "Pennsylvania",
+    "slug": "pennsylvania",
+    "mini": "/assets/Image/states/mini/pennsylvania.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "RI",
+    "name": "Rhode Island",
+    "slug": "rhode_island",
+    "mini": "/assets/Image/states/mini/rhode-island.png",
+    "overview": "",
+    "resources": []
+  },
+  {
+    "code": "SC",
+    "name": "South Carolina",
+    "slug": "south_carolina",
+    "mini": "/assets/Image/states/mini/south-carolina.png",
+    "overview": "",
+    "resources": []
+  }
+]
