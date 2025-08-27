@@ -4,125 +4,82 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Defend Dad — Donation Tracker</title>
+<link rel="stylesheet" href="/assets/tools/global.css">
 <style>
-  /* === Rebrand theme (light + royal purple) === */
-  :root{
-    --bg:#f6f7fb;
-    --panel:#11161f;          /* dark card for contrast */
-    --line:#2a3240;
-    --text:#e9edf4;
-    --muted:#9aa6b2;
-    --gold:#e6c258;
-    --purple:#5b3df5;
-    --bar-h:22px;             /* knob to size everything */
+  /* Slim progress bar */
+  .dd-bar-wrap{position:relative;padding:20px 16px}
+  .dd-bar{
+    height:12px;  /* thinner */
+    border:1px solid var(--line);
+    background:#0b0e13;
+    border-radius:14px;
+    overflow:hidden;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .wrap{max-width:960px;margin:0 auto;padding:28px 16px}
-
-  .tracker{
-    position:relative;background:var(--panel);
-    border:1px solid var(--line);border-radius:16px;padding:18px 18px 22px;
-    box-shadow:0 10px 24px rgba(20,20,40,.18);
-  }
-  .title{margin:0 0 8px;font-size:1.6rem;color:var(--gold);font-weight:800;letter-spacing:.2px}
-
-  .meta{display:flex;justify-content:space-between;gap:10px;font-weight:700;margin:8px 0 12px;flex-wrap:wrap}
-  .pill{
-    display:inline-block;border:1px solid #263042;background:#0d131c;border-radius:999px;
-    padding:6px 12px;font-size:.95rem;color:var(--muted)
-  }
-  .raised{
-    color:#0ed88b;border-color:#0ed88b33;background:#062015;
-    animation:pulse 3s infinite;
-  }
-  @keyframes pulse{
-    0%{box-shadow:0 0 0 0 rgba(14,216,139,.45)}
-    70%{box-shadow:0 0 0 12px rgba(14,216,139,0)}
-    100%{box-shadow:0 0 0 0 rgba(14,216,139,0)}
-  }
-
-  /* Progress bar */
-  .bar-wrap{position:relative;padding:30px 16px 18px}
-  .bar{
-    height:var(--bar-h);border:1px solid var(--line);
-    background:#0b0e13;border-radius:14px;overflow:hidden;
-  }
-  .fill{
+  .dd-fill{
     position:absolute;inset:0 0 0 0;width:0%;
     background:linear-gradient(90deg,var(--gold),#f6d773);
     transition:width .8s ease;
   }
 
-  /* Mascots (scaled from bar) */
-  .push-dad{
-    position:absolute;left:-4px;bottom:calc(var(--bar-h) * -0.35);
-    height:calc(var(--bar-h) * 3.3);pointer-events:none;user-select:none;
+  /* Mascots */
+  .dd-push-dad{
+    position:absolute;left:-4px;bottom:-16px;
+    height:50px;pointer-events:none;user-select:none;
   }
-  .kids{
-    position:absolute;right:-4px;bottom:calc(var(--bar-h) * -0.25);
-    height:calc(var(--bar-h) * 3.0);pointer-events:none;user-select:none;
+  .dd-kids{
+    position:absolute;right:-4px;bottom:-12px;
+    height:46px;pointer-events:none;user-select:none;
   }
-
-  /* Clickable coin-dad; lowered & nudged left so it doesn’t cover the pill */
-  .coin-dad-link{
-    position:absolute;left:46%;top:8px;transform:translate(-50%,-50%);display:block;
+  .dd-coin-dad-link{
+    position:absolute;left:46%;top:-10px;transform:translate(-50%,-50%);display:block;
   }
-  .coin-dad{
-    height:calc(var(--bar-h) * 3.0);display:block;
+  .dd-coin-dad{
+    height:50px;display:block;
     filter:drop-shadow(0 6px 8px rgba(0,0,0,.25));
     transition:transform .2s ease;
   }
-  .coin-dad-link:hover .coin-dad{ transform:translateY(-2px) }
+  .dd-coin-dad-link:hover .dd-coin-dad{ transform:translateY(-2px) }
 
-  /* Goal marker */
-  .goal-dad{
-    position:absolute;bottom:calc(var(--bar-h) * 2.5);
-    height:calc(var(--bar-h) * 2.4);
-    transform:translateX(-50%);left:0%;
+  /* Goal marker dad */
+  .dd-goal-dad{
+    position:absolute;bottom:22px;
+    height:42px;transform:translateX(-50%);left:0%;
     transition:left .8s cubic-bezier(.22,.8,.26,1);
     pointer-events:none;
   }
 
-  /* Milestone ticks (clean, no overlap) */
-  .ticks{
+  /* Milestone ticks */
+  .dd-ticks{
     position:relative;height:48px;margin-top:10px;font-size:.9rem;color:var(--muted);
-    z-index:1; pointer-events:none;  /* prevents odd overlay touches */
+    z-index:1; pointer-events:none;
   }
-  .tick{
+  .dd-tick{
     position:absolute;top:0;transform:translateX(-50%);
-    text-align:center;white-space:nowrap;letter-spacing:normal;
+    text-align:center;white-space:nowrap;
   }
-  .tick::before{
+  .dd-tick::before{
     content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);
     width:1px;height:12px;background:#2b3442;
   }
-  .amt{display:block;color:#e6edf3;font-weight:800;text-shadow:none}
-  .lbl{display:block;color:var(--muted);max-width:140px}
+  .dd-amt{display:block;color:var(--ink);font-weight:800}
+  .dd-lbl{display:block;color:var(--muted);max-width:140px}
 
-  .hint{margin-top:14px;color:var(--muted);font-size:1rem}
+  .dd-hint{margin-top:14px;color:var(--muted);font-size:1rem}
   .gold{color:var(--gold)}
 
-  /* Inline CTA under bar */
-  .cta{ margin-top:12px;text-align:center }
-  .cta a{
+  .dd-cta{ margin-top:12px;text-align:center }
+  .dd-cta a{
     display:inline-block;background:var(--purple);color:#fff;text-decoration:none;
-    padding:8px 12px;border-radius:10px;font-weight:800;letter-spacing:.2px;
+    padding:8px 12px;border-radius:10px;font-weight:800;
     box-shadow:0 8px 18px rgba(91,61,245,.22);
   }
-  .cta a:hover{ filter:brightness(1.06) }
-
-  @media (max-width:560px){
-    .title{font-size:1.35rem}
-    .lbl{max-width:110px}
-    .ticks{height:54px}
-  }
+  .dd-cta a:hover{ filter:brightness(1.06) }
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="dd-wrap">
 
-  <div class="tracker" id="dd-tracker">
+  <div class="dd-panel" id="dd-tracker">
     <h2 class="title">On Our Way to the Next Milestone</h2>
 
     <div class="meta">
@@ -130,49 +87,44 @@
       <div>Total Goal: <span class="pill" id="goal-pill">$0</span></div>
     </div>
 
-    <div class="bar-wrap">
-      <!-- coin dad (clickable to storefront) -->
-      <a class="coin-dad-link" href="/storefront/index.html" title="Support Defend Dad">
-        <img class="coin-dad"
+    <div class="dd-bar-wrap">
+      <!-- coin dad -->
+      <a class="dd-coin-dad-link" href="/storefront/index.html" title="Support Defend Dad">
+        <img class="dd-coin-dad"
              src="/assets/Image/dad-coins.png"
-             alt="Dad dropping coin (click to support)"
-             onerror="this.style.display='none'"/>
+             alt="Dad dropping coin (click to support)"/>
       </a>
 
-      <!-- push dad (fallback to hold if missing) -->
-      <img class="push-dad"
+      <!-- push dad -->
+      <img class="dd-push-dad"
            src="/assets/Image/dad-push.png"
-           alt="Dad pushing progress"
-           onerror="this.onerror=null; this.src='/assets/Image/dad-hold.png'"/>
+           alt="Dad pushing progress"/>
 
-      <div class="bar" aria-label="Goal progress"><div class="fill" id="fill"></div></div>
+      <div class="dd-bar" aria-label="Goal progress"><div class="dd-fill" id="fill"></div></div>
 
-      <!-- kids cheering -->
-      <img class="kids"
+      <!-- kids -->
+      <img class="dd-kids"
            src="/assets/Image/team-dad-kids.png"
-           alt="Kids cheering"
-           onerror="this.style.display='none'"/>
+           alt="Kids cheering"/>
 
       <!-- goal marker -->
-      <img class="goal-dad" id="goal-dad"
-           src="/assets/Image/dad-hold.png"
-           alt="Goal marker"
-           onerror="this.style.display='none'"/>
+      <img class="dd-goal-dad" id="goal-dad"
+           src="/assets/Image/dad-goal.png"
+           alt="Goal marker"/>
     </div>
 
     <!-- Milestones -->
-    <div class="ticks" id="ticks"></div>
+    <div class="dd-ticks" id="ticks"></div>
 
     <!-- CTA -->
-    <div class="cta">
-      <span class="hint">💪 Want to push us forward?</span>
+    <div class="dd-cta">
+      <span class="dd-hint">💪 Want to push us forward?</span>
       &nbsp;<a href="/storefront/index.html">Donate or Shop →</a>
     </div>
 
-    <p class="hint" style="margin-top:10px">
+    <p class="dd-hint" style="margin-top:10px">
       Defend Dad is building practical tools so everyday dads are treated fairly with their kids.
-      We don’t pay ourselves—donations cover development, hosting and other real costs only.
-      Your support moves us from milestone to milestone. <span class="gold">Thank you.</span>
+      Donations cover development, hosting and tools only. <span class="gold">Thank you.</span>
     </p>
   </div>
 
@@ -188,7 +140,7 @@
 
   const usd = n => '$' + Number(n||0).toLocaleString('en-US',{maximumFractionDigits:0});
 
-  // Load live numbers (cache-busted)
+  // Load live numbers
   let data = {raised:0, goalTotal:1, milestones:[]};
   try{
     const res = await fetch('/assets/tools/current-donations.json?cb=' + Date.now());
@@ -213,14 +165,14 @@
   M.forEach(ms=>{
     const p = Math.min(100, (ms.amount/GOAL)*100);
     const el = document.createElement('div');
-    el.className = 'tick';
+    el.className = 'dd-tick';
     el.style.left = p + '%';
     el.title = ms.label + ' — ' + usd(ms.amount);
-    el.innerHTML = `<span class="amt">${usd(ms.amount)}</span><span class="lbl">${ms.label}</span>`;
+    el.innerHTML = `<span class="dd-amt">${usd(ms.amount)}</span><span class="dd-lbl">${ms.label}</span>`;
     ticks.appendChild(el);
   });
 
-  // Goal-dad at last completed milestone (so $300 with your JSON)
+  // Goal-dad snaps to last completed milestone
   let last = {amount:0, label:''};
   for(const ms of M){ if(ms.amount <= RAISED){ last = ms; } else { break; } }
   const gp = Math.min(100, (last.amount/GOAL)*100);
